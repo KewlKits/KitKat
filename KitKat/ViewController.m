@@ -28,6 +28,10 @@
             
         }
     }];
+    
+    [BackendAPIManager addSongToPool:@"5b4d0af735012e00043c91a2" uri:@"1118" title:@"Sunflower" artist:@"Rex OC" album:@"Sunflower - Single" albumArtUrlString:@"googleit" withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        NSLog(@"%@", response.body);
+    }];
 }
 
 
