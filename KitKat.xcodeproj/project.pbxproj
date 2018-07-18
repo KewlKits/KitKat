@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
+		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
 		E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482020FFAFF300962B4D /* AppDelegate.m */; };
 		E8C9482420FFAFF300962B4D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482320FFAFF300962B4D /* ViewController.m */; };
@@ -20,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1982EC4320FFBB0400336246 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		1982EC4420FFBB0400336246 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		1982EC4620FFBB1400336246 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
+		1982EC4720FFBB1400336246 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
 		97B709FF732FA2C63C67C79E /* Pods-KitKat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.release.xcconfig"; sourceTree = "<group>"; };
 		E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KitKat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +68,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		1982EC4220FFBAE200336246 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1982EC4320FFBB0400336246 /* Song.h */,
+				1982EC4420FFBB0400336246 /* Song.m */,
+				1982EC4620FFBB1400336246 /* Party.h */,
+				1982EC4720FFBB1400336246 /* Party.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		314750A7B29659F83F010B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +111,7 @@
 		E8C9481E20FFAFF300962B4D /* KitKat */ = {
 			isa = PBXGroup;
 			children = (
+				1982EC4220FFBAE200336246 /* Models */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482220FFAFF300962B4D /* ViewController.h */,
@@ -199,9 +217,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1982EC4520FFBB0400336246 /* Song.m in Sources */,
 				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
+				1982EC4820FFBB1400336246 /* Party.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
