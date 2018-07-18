@@ -17,6 +17,7 @@
 		E8D9210E20FFB35400CB5994 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */; };
 		E8D9210F20FFB35400CB5994 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210C20FFB35400CB5994 /* SpotifyAuthentication.framework */; };
 		E8D9211020FFB35400CB5994 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210D20FFB35400CB5994 /* SpotifyMetadata.framework */; };
+		E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		E8D9210C20FFB35400CB5994 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		E8D9210D20FFB35400CB5994 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackendAPIManager.h; sourceTree = "<group>"; };
+		E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackendAPIManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,7 @@
 		E8C9481E20FFAFF300962B4D /* KitKat */ = {
 			isa = PBXGroup;
 			children = (
+				E8D9211120FFBA1300CB5994 /* Util */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482220FFAFF300962B4D /* ViewController.h */,
@@ -105,6 +109,15 @@
 				E8C9482E20FFAFF500962B4D /* main.m */,
 			);
 			path = KitKat;
+			sourceTree = "<group>";
+		};
+		E8D9211120FFBA1300CB5994 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */,
+				E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +215,7 @@
 				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
+				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
