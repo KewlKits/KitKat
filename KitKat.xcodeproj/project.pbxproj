@@ -10,6 +10,11 @@
 		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
 		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
 		678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0E020FFB55E000CD978 /* Main.storyboard */; };
+		678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E220FFB611000CD978 /* SearchViewController.m */; };
+		678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E720FFB63C000CD978 /* SearchCell.m */; };
+		678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */; };
+		678AC0F220FFBB1C000CD978 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678AC0F120FFBB1B000CD978 /* AVFoundation.framework */; };
+		678AC0F420FFBB29000CD978 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */; };
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
 		E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482020FFAFF300962B4D /* AppDelegate.m */; };
 		E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C9482820FFAFF500962B4D /* Assets.xcassets */; };
