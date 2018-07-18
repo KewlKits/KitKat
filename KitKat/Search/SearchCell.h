@@ -12,4 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 
-@end//
+@end

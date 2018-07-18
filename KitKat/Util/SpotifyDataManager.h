@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface SpotifyDataManager : NSObject
-+(void)searchSpotify:query withCompletion:(void(^)(NSDictionary *response))completion;
-
++(void)searchSpotify:(NSString *)query type:(NSString *)type withCompletion:(void(^)(NSDictionary *response))completion;
 @end
