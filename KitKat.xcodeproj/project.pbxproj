@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
+		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
 		678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0E020FFB55E000CD978 /* Main.storyboard */; };
 		678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E220FFB611000CD978 /* SearchViewController.m */; };
 		678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E720FFB63C000CD978 /* SearchCell.m */; };
@@ -21,9 +23,14 @@
 		E8D9210E20FFB35400CB5994 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */; };
 		E8D9210F20FFB35400CB5994 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210C20FFB35400CB5994 /* SpotifyAuthentication.framework */; };
 		E8D9211020FFB35400CB5994 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D9210D20FFB35400CB5994 /* SpotifyMetadata.framework */; };
+		E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1982EC4320FFBB0400336246 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		1982EC4420FFBB0400336246 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		1982EC4620FFBB1400336246 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
+		1982EC4720FFBB1400336246 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
 		678AC0E020FFB55E000CD978 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		678AC0E220FFB611000CD978 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		678AC0E320FFB612000CD978 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -46,6 +53,8 @@
 		E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		E8D9210C20FFB35400CB5994 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		E8D9210D20FFB35400CB5994 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BackendAPIManager.h; sourceTree = "<group>"; };
+		E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BackendAPIManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +81,17 @@
 				A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1982EC4220FFBAE200336246 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1982EC4320FFBB0400336246 /* Song.h */,
+				1982EC4420FFBB0400336246 /* Song.m */,
+				1982EC4620FFBB1400336246 /* Party.h */,
+				1982EC4720FFBB1400336246 /* Party.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		314750A7B29659F83F010B5C /* Frameworks */ = {
@@ -128,6 +148,8 @@
 		E8C9481E20FFAFF300962B4D /* KitKat */ = {
 			isa = PBXGroup;
 			children = (
+				1982EC4220FFBAE200336246 /* Models */,
+				E8D9211120FFBA1300CB5994 /* Util */,
 				678AC0F020FFB794000CD978 /* Util */,
 				678AC0EB20FFB66B000CD978 /* Search */,
 				678AC0E020FFB55E000CD978 /* Main.storyboard */,
@@ -139,6 +161,15 @@
 				E8C9482E20FFAFF500962B4D /* main.m */,
 			);
 			path = KitKat;
+			sourceTree = "<group>";
+		};
+		E8D9211120FFBA1300CB5994 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */,
+				E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,11 +264,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1982EC4520FFBB0400336246 /* Song.m in Sources */,
+				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
 				678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */,
 				678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */,
 				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
+				1982EC4820FFBB1400336246 /* Party.m in Sources */,
+				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
