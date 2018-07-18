@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
 		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
+		678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0E020FFB55E000CD978 /* Main.storyboard */; };
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
 		E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482020FFAFF300962B4D /* AppDelegate.m */; };
-		E8C9482420FFAFF300962B4D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482320FFAFF300962B4D /* ViewController.m */; };
-		E8C9482720FFAFF300962B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C9482520FFAFF300962B4D /* Main.storyboard */; };
 		E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C9482820FFAFF500962B4D /* Assets.xcassets */; };
 		E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */; };
 		E8C9482F20FFAFF500962B4D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482E20FFAFF500962B4D /* main.m */; };
@@ -27,15 +26,21 @@
 		1982EC4420FFBB0400336246 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		1982EC4620FFBB1400336246 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
 		1982EC4720FFBB1400336246 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		678AC0E020FFB55E000CD978 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		678AC0E220FFB611000CD978 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		678AC0E320FFB612000CD978 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		678AC0E720FFB63C000CD978 /* SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCell.m; sourceTree = "<group>"; };
+		678AC0E820FFB63C000CD978 /* SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCell.h; sourceTree = "<group>"; };
+		678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifyDataManager.m; sourceTree = "<group>"; };
+		678AC0ED20FFB724000CD978 /* SpotifyDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyDataManager.h; sourceTree = "<group>"; };
+		678AC0F120FFBB1B000CD978 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		97B709FF732FA2C63C67C79E /* Pods-KitKat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.release.xcconfig"; sourceTree = "<group>"; };
 		E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KitKat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8C9481C20FFAFF300962B4D /* KitKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KitKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8C9481F20FFAFF300962B4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8C9482020FFAFF300962B4D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E8C9482220FFAFF300962B4D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E8C9482320FFAFF300962B4D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E8C9482620FFAFF300962B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8C9482820FFAFF500962B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8C9482B20FFAFF500962B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8C9482D20FFAFF500962B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				678AC0F420FFBB29000CD978 /* SystemConfiguration.framework in Frameworks */,
+				678AC0F220FFBB1C000CD978 /* AVFoundation.framework in Frameworks */,
 				E8D9211020FFB35400CB5994 /* SpotifyMetadata.framework in Frameworks */,
 				DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */,
 				E8D9210F20FFB35400CB5994 /* SpotifyAuthentication.framework in Frameworks */,
@@ -85,12 +92,34 @@
 		314750A7B29659F83F010B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */,
+				678AC0F120FFBB1B000CD978 /* AVFoundation.framework */,
 				E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */,
 				E8D9210C20FFB35400CB5994 /* SpotifyAuthentication.framework */,
 				E8D9210D20FFB35400CB5994 /* SpotifyMetadata.framework */,
 				E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		678AC0EB20FFB66B000CD978 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				678AC0E320FFB612000CD978 /* SearchViewController.h */,
+				678AC0E220FFB611000CD978 /* SearchViewController.m */,
+				678AC0E820FFB63C000CD978 /* SearchCell.h */,
+				678AC0E720FFB63C000CD978 /* SearchCell.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		678AC0F020FFB794000CD978 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				678AC0ED20FFB724000CD978 /* SpotifyDataManager.h */,
+				678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		E8C9481320FFAFF300962B4D = {
@@ -116,11 +145,11 @@
 			children = (
 				1982EC4220FFBAE200336246 /* Models */,
 				E8D9211120FFBA1300CB5994 /* Util */,
+				678AC0F020FFB794000CD978 /* Util */,
+				678AC0EB20FFB66B000CD978 /* Search */,
+				678AC0E020FFB55E000CD978 /* Main.storyboard */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
-				E8C9482220FFAFF300962B4D /* ViewController.h */,
-				E8C9482320FFAFF300962B4D /* ViewController.m */,
-				E8C9482520FFAFF300962B4D /* Main.storyboard */,
 				E8C9482820FFAFF500962B4D /* Assets.xcassets */,
 				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				E8C9482D20FFAFF500962B4D /* Info.plist */,
@@ -198,7 +227,7 @@
 			files = (
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
-				E8C9482720FFAFF300962B4D /* Main.storyboard in Resources */,
+				678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +262,9 @@
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
 				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
+				678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */,
+				678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */,
+				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
 				1982EC4820FFBB1400336246 /* Party.m in Sources */,
 				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
@@ -242,14 +274,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E8C9482520FFAFF300962B4D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E8C9482620FFAFF300962B4D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -386,6 +410,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kewlkits.KitKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -407,6 +432,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kewlkits.KitKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

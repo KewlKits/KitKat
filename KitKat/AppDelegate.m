@@ -2,50 +2,105 @@
 //  AppDelegate.m
 //  KitKat
 //
-//  Created by Miles Olson on 7/18/18.
-//  Copyright © 2018 kewlkits. All rights reserved.
+//  Created by Natalie Ghidali on 7/16/18.
+//  Copyright © 2018 Natalie Ghidali. All rights reserved.
 //
 
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) SPTAuth *auth;
+@property (nonatomic, strong) SPTAudioStreamingController *player;
+@property (nonatomic, strong) UIViewController *authViewController;
+
 @end
 
 @implementation AppDelegate
 
-
+//opens the default browser and presents the user with the Spotify authorization dialog, before calling back into the application.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.auth = [SPTAuth defaultInstance];
+    self.player = [SPTAudioStreamingController sharedInstance];
+    // The client ID you got from the developer site
+    self.auth.clientID = @"ec30b68d8b244721a5571f71a519f42c";
+    // The redirect URL as you entered it at the developer site
+    self.auth.redirectURL = [NSURL URLWithString:@"kool-kits-login://callback"];
+    // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
+    self.auth.sessionUserDefaultsKey = @"current session";
+    // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
+    self.auth.requestedScopes = @[SPTAuthStreamingScope];
+    
+    // Become the streaming controller delegate
+    self.player.delegate = self;
+    
+    // Start up the streaming controller.
+    NSError *audioStreamingInitError;
+    if (![self.player startWithClientId:self.auth.clientID error:&audioStreamingInitError]) {
+        NSLog(@"There was a problem starting the Spotify SDK: %@", audioStreamingInitError.description);
+    }
+    
+    // Start authenticating when the app is finished launching
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self startAuthenticationFlow];
+    });
+    
     return YES;
 }
 
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+//checks if the token is. If it is not, this procedure opens a request in a SFSafariViewController.
+- (void)startAuthenticationFlow
+{
+    // Check if we could use the access token we already have
+    if ([self.auth.session isValid]) {
+        // Use it to log in
+        [self.player loginWithAccessToken:self.auth.session.accessToken];
+    } else {
+        // Get the URL to the Spotify authorization portal
+        NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
+        // Present in a SafariViewController
+        self.authViewController = [[SFSafariViewController alloc] initWithURL:authURL];
+        [self.window.rootViewController presentViewController:self.authViewController animated:YES completion:nil];
+    }
 }
 
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+/*When the user has finished the authorization process, the authorization service closes the SFSafariViewController and triggers this method. In the method SPTAuth checks if the provided URL is a Spotify authentication callback. If so, to get an access token, the procedure calls the token swap service (see the Readme in the download package). When the access token is generated, this procedure calls -loginWithAccessToken: to login the player.
+ */
+// Handle auth callback
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary *)options
+{
+    // If the incoming url is what we expect we handle it
+    if ([self.auth canHandleURL:url]) {
+        // Close the authentication window
+        [self.authViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        self.authViewController = nil;
+        // Parse the incoming url to a session object
+        [self.auth handleAuthCallbackWithTriggeredAuthURL:url callback:^(NSError *error, SPTSession *session) {
+            if (session) {
+                // login to the player
+                [self.player loginWithAccessToken:self.auth.session.accessToken];
+                NSLog(@"ACCESS TOKEN: ");
+                NSLog(@"%@", self.auth.session.accessToken);
+                NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
+            }
+        }];
+        
+        return YES;
+    }
+    return NO;
 }
 
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//this procedure is called when the SDK is logged into. This procedure takes a track URI and plays it.
+- (void)audioStreamingDidLogin:(SPTAudioStreamingController *)audioStreaming {
+    [self.player playSpotifyURI:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp" startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
+        if (error != nil) {
+            NSLog(@"*** failed to play: %@", error);
+            return;
+        }
+    }];
 }
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
 
 @end
