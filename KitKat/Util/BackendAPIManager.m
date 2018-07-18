@@ -11,7 +11,8 @@
 @implementation BackendAPIManager
 + (void)getAllParties:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
-        [simpleRequest setUrl:@"https://kk-backend.herokuapp.com/party"];
+        NSLog(@"here");
+        [simpleRequest setUrl:@"https://kk-backend.herokuapp.com/party/"];
     }] asJsonAsync:completion];
 }
 @end

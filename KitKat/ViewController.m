@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "Party.h"
+#import "BackendAPIManager.h"
 
 @interface ViewController ()
-
+@property (strong, nonatomic) Party *party;
 @end
 
 @implementation ViewController
@@ -17,6 +19,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error.description);
+        }
+        else {
+            NSLog(@"%@", response.body.array[0][@"name"]);
+            
+        }
+    }];
 }
 
 
