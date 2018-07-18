@@ -11,4 +11,8 @@
 
 @interface BackendAPIManager : NSObject
 + (void)getAllParties:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+
++ (void)makeParty: (NSString *) partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
++ (void) getAParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
++(void) deleteParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 @end
