@@ -2,13 +2,16 @@
 //  AppDelegate.h
 //  KitKat
 //
-//  Created by Miles Olson on 7/18/18.
-//  Copyright © 2018 kewlkits. All rights reserved.
+//  Created by Natalie Ghidali on 7/16/18.
+//  Copyright © 2018 Natalie Ghidali. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <SpotifyAuthentication/SpotifyAuthentication.h>
+#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+#import <SafariServices/SafariServices.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, SPTAudioStreamingDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
