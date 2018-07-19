@@ -31,10 +31,11 @@
 
 - (IBAction)createPartyButtonPressed:(id)sender {
     NSString *partyName = self.textField.text;
-    [BackendAPIManager makeParty:partyName longitude:@-122.16 latitude:@37.48 withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+    [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         Party *party =  [[Party alloc] initWithDictionary: response.body.object];
         NSLog(@"%@", party);
     }];
+    
 }
 
 /*
@@ -44,7 +45,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
- JoinPartyViewController *joinPartyVC = [segue destinationViewController]; 
+ JoinPartyViewController *joinPartyVC = [segue destinationViewController];
     // in here, pass a selected object; if we are pulling a list of parties do we need to?
 }
 

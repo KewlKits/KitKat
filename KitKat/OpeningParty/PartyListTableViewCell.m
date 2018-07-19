@@ -20,4 +20,10 @@
     // Configure the view for the selected state
 }
 
+
+-(void) setParty:(Party *)party{
+    _party= party;
+    NSLog(@"%@", party.name);
+    self.nameOfPartyLabel.text = party.name;
+}
 @end

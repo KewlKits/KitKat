@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7Tx-mj-Ghj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,9 +20,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIi-GJ-qv2">
-                                <rect key="frame" x="179" y="348" width="46" height="30"/>
+                                <rect key="frame" x="149" y="348" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Let's gooooooo"/>
                                 <connections>
                                     <action selector="createPartyButtonPressed:" destination="dxP-kJ-7mB" eventType="touchUpInside" id="i3k-bc-Yze"/>
                                 </connections>
@@ -55,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="927.20000000000005" y="137.18140929535232"/>
         </scene>
-        <!--Join Party View Controller-->
+        <!--JOIN THE FUN-->
         <scene sceneID="A1L-LZ-v4h">
             <objects>
-                <viewController id="Ya0-OS-c7Q" customClass="JoinPartyViewController" sceneMemberID="viewController">
+                <viewController title="JOIN THE FUN" id="Ya0-OS-c7Q" customClass="JoinPartyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="faz-vP-LrH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,21 +69,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="76" id="V5v-CO-jAO" customClass="PartyListTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="76"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="partyCell" rowHeight="91" id="V5v-CO-jAO" customClass="PartyListTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5v-CO-jAO" id="5AL-Re-Qm9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name of Party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
-                                                    <rect key="frame" x="61" y="11" width="253" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
+                                                    <rect key="frame" x="61" y="11" width="253" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="46" id="G7c-Gd-Mnd"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="26" id="SlW-G2-ior"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="topMargin" id="UYG-Oi-scK"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leadingMargin" constant="46" id="XsX-7k-9W0"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameOfPartyLabel" destination="kAW-6t-3Vd" id="YRE-T6-UWz"/>
@@ -94,6 +100,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="RxV-aA-ZYd"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="khV-M6-RgB" id="fdM-Qi-vF7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vud-a1-Iad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

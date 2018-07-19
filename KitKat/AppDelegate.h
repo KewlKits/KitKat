@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) Party *party;
+// @property (strong, nonatomic) Party *party;
 
 @end
 

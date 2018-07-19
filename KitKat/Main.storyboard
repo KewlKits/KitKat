@@ -24,7 +24,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="4TC-kd-IZP" kind="show" id="XQC-13-pCc"/>
+                                    <segue destination="UUC-h0-4fn" kind="show" id="VcP-j4-qn0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -34,7 +34,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="42" y="93"/>
+            <point key="canvasLocation" x="-362" y="13"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="okj-yW-Hhq">
@@ -386,6 +386,14 @@
             </objects>
             <point key="canvasLocation" x="1824.8" y="118.29085457271366"/>
         </scene>
+        <!--OpenParty-->
+        <scene sceneID="wbd-7I-h3z">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OpenParty" id="UUC-h0-4fn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="guI-yN-lGK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="-849"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="7gw-ml-fxR">
             <objects>
@@ -393,6 +401,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="LMG-9a-8KN"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bzM-72-8F0">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -410,7 +419,4 @@
         <image name="downicon.png" width="200" height="200"/>
         <image name="upicon.png" width="200" height="200"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Cis-Hf-0RZ"/>
-    </inferredMetricsTieBreakers>
 </document>
