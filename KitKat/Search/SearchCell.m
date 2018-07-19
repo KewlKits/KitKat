@@ -41,7 +41,6 @@
     //set album cover photo
     self.albumCover.image = nil;
     NSURL *url = [NSURL URLWithString:track[@"album"][@"images"][0][@"url"]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.albumCover setImageWithURL:url];
 }
 @end

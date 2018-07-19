@@ -155,7 +155,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="4TC-kd-IZP" kind="relationship" relationship="rootViewController" id="Cis-Hf-0RZ"/>
+                        <segue destination="ft4-Vh-v3u" kind="relationship" relationship="rootViewController" id="1b0-lh-93q"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Y6-zq-AR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -393,12 +393,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="LMG-9a-8KN"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bzM-72-8F0">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="p1P-65-r7E" kind="relationship" relationship="viewControllers" id="b7I-Cl-yms"/>
-                        <segue destination="Zab-Kx-raL" kind="relationship" relationship="viewControllers" id="sb6-U7-haA"/>
+                        <segue destination="Zab-Kx-raL" kind="relationship" relationship="viewControllers" id="Kv7-rX-Ge6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ak-yu-7rG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -410,7 +411,4 @@
         <image name="downicon.png" width="200" height="200"/>
         <image name="upicon.png" width="200" height="200"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Cis-Hf-0RZ"/>
-    </inferredMetricsTieBreakers>
 </document>
