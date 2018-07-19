@@ -19,7 +19,7 @@
     return sharedManager;
 }
 
-+ (void)getAllParties:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
++ (void)getAllParties:(void (^_Nonnull)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:@"https://kk-backend.herokuapp.com/party/"];
     }] asJsonAsync:completion];
