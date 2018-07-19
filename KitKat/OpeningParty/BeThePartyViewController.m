@@ -9,6 +9,7 @@
 #import "BeThePartyViewController.h"
 #import "Party.h"
 #import "BackendAPIManager.h"
+#import "JoinPartyViewController.h"
 
 @interface BeThePartyViewController ()
 
@@ -43,7 +44,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+ JoinPartyViewController *joinPartyVC = [segue destinationViewController]; 
+    // in here, pass a selected object; if we are pulling a list of parties do we need to?
 }
+
 */
 
 @end
