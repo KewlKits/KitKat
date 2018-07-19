@@ -13,6 +13,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
     // Initialization code
 }
 
@@ -23,7 +24,7 @@
 }
 
 -(void)setAttributes:(NSDictionary *)track{
-    
+    self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
     //set title
     self.songTitleLabel.text = track[@"name"];
     
