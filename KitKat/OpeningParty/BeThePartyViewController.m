@@ -34,6 +34,8 @@
     [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         Party *party =  [[Party alloc] initWithDictionary: response.body.object];
         NSLog(@"%@", party);
+        [BackendAPIManager shared].party = party;
+        NSLog(@"%@", [BackendAPIManager shared].party);
     }];
     
 }
