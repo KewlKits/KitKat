@@ -21,11 +21,8 @@
         [request setUrl:@"https://api.spotify.com/v1/search"];
         [request setParameters:parameters];
         [request setHeaders:headers];
-        // Converting NSDictionary to JSON:
     }] asJson];
-    //NSLog(@"%@", response.body.object);
     completion(response.body.object);
-    //return response.body.object[0];
 }
 
 @end

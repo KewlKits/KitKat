@@ -7,5 +7,6 @@ target 'KitKat' do
 
   # Pods for KitKat
   pod 'Unirest'
+  pod 'AFNetworking'
 
 end

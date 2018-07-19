@@ -28,7 +28,6 @@
 }
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
     [SpotifyDataManager searchSpotify:query type:type withCompletion:^(NSDictionary *response) {
-        NSLog(@"%@", response);
         if([type isEqualToString:@"artist"]){
             self.searchResults = response[@"artists"][@"items"];
         }
@@ -45,15 +44,8 @@
     }];
 }
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    NSString* typeFilter = [[self.searchBar scopeButtonTitles] objectAtIndex:self.searchBar.selectedScopeButtonIndex];
-    [self fetchSearchResults:self.searchBar.text type:typeFilter];
+    [self fetchSearchResults:self.searchBar.text type:@"track"];
 }
-
--(void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope{
-    NSString* typeFilter = [[self.searchBar scopeButtonTitles] objectAtIndex:selectedScope];
-    [self fetchSearchResults:self.searchBar.text type:typeFilter];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -61,7 +53,8 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
-    searchCell.songTitleLabel.text = self.searchResults[indexPath.row][@"name"];
+    NSDictionary * track = self.searchResults[indexPath.row];
+    [searchCell setAttributes:track];
     return searchCell;
 }
 

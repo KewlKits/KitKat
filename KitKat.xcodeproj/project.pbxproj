@@ -13,6 +13,7 @@
 		678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */; };
 		678AC0F220FFBB1C000CD978 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678AC0F120FFBB1B000CD978 /* AVFoundation.framework */; };
 		678AC0F420FFBB29000CD978 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */; };
+		678AC0F620FFFE9D000CD978 /* fox.png in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0F520FFFE9D000CD978 /* fox.png */; };
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
 		E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482020FFAFF300962B4D /* AppDelegate.m */; };
 		E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8C9482820FFAFF500962B4D /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		678AC0ED20FFB724000CD978 /* SpotifyDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifyDataManager.h; sourceTree = "<group>"; };
 		678AC0F120FFBB1B000CD978 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		678AC0F520FFFE9D000CD978 /* fox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fox.png; sourceTree = "<group>"; };
 		97B709FF732FA2C63C67C79E /* Pods-KitKat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.release.xcconfig"; sourceTree = "<group>"; };
 		E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KitKat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,7 @@
 				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				E8C9482D20FFAFF500962B4D /* Info.plist */,
 				E8C9482E20FFAFF500962B4D /* main.m */,
+				678AC0F520FFFE9D000CD978 /* fox.png */,
 			);
 			path = KitKat;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
 				678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */,
+				678AC0F620FFFE9D000CD978 /* fox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
