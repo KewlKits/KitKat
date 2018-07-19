@@ -10,6 +10,15 @@
 
 @implementation BackendAPIManager
 
+//+ (id)sharedManager {
+//    static BackendAPIManager *sharedMyManager = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        sharedMyManager = [[self alloc] init];
+//    });
+//    return sharedMyManager;
+//}
+
 + (void)getAllParties:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:@"https://kk-backend.herokuapp.com/party/"];
