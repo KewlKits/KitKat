@@ -76,22 +76,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
-                                                    <rect key="frame" x="61" y="11" width="253" height="43"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Party" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
+                                                    <rect key="frame" x="40" y="21" width="295" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="46" id="G7c-Gd-Mnd"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="26" id="SlW-G2-ior"/>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="topMargin" id="UYG-Oi-scK"/>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leadingMargin" constant="46" id="XsX-7k-9W0"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="topMargin" constant="10" id="H7P-og-xai"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="10" id="ZmL-wW-xRx"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leadingMargin" constant="25" id="t22-VA-JAm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="25" id="vNW-8i-By7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameOfPartyLabel" destination="kAW-6t-3Vd" id="YRE-T6-UWz"/>
+                                            <segue destination="90f-qU-mqR" kind="show" id="Jw1-gQ-Fwu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -107,6 +108,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vud-a1-Iad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1880.8" y="143.47826086956522"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="z9r-7D-mJF">
+            <objects>
+                <viewControllerPlaceholder id="90f-qU-mqR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RWX-o6-Qdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="26"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dS0-Vn-MhO">
