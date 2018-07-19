@@ -14,10 +14,10 @@
     
     self.name = dictionary[@"name"];
     self.location = dictionary[@"location"];
-    self.pool = dictionary[@"poolList"];
-    self.queue = dictionary[@"queueList"];
+    self.pool = dictionary[@"pool"];
+    self.queue = dictionary[@"queue"];
     
-    self.identity = dictionary[@"id"];
+    self.identity = dictionary[@"_id"];
     self.createdAt = dictionary[@"createdAt"];
     
     return self;

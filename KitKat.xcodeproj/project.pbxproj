@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19626384210006C80064BC6A /* OpenParty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19626383210006C80064BC6A /* OpenParty.storyboard */; };
+		19626387210007150064BC6A /* BeThePartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19626386210007150064BC6A /* BeThePartyViewController.m */; };
+		1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196263892100F8CA0064BC6A /* JoinPartyViewController.m */; };
+		1962638E2100FC420064BC6A /* PartyListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1962638C2100FC410064BC6A /* PartyListTableViewCell.m */; };
 		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
 		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
@@ -34,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19626383210006C80064BC6A /* OpenParty.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenParty.storyboard; sourceTree = "<group>"; };
+		19626385210007150064BC6A /* BeThePartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeThePartyViewController.h; sourceTree = "<group>"; };
+		19626386210007150064BC6A /* BeThePartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeThePartyViewController.m; sourceTree = "<group>"; };
+		196263882100F8CA0064BC6A /* JoinPartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinPartyViewController.h; sourceTree = "<group>"; };
+		196263892100F8CA0064BC6A /* JoinPartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JoinPartyViewController.m; sourceTree = "<group>"; };
+		1962638C2100FC410064BC6A /* PartyListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PartyListTableViewCell.m; path = /Users/leahxiao/Desktop/KitKat/KitKat/OpeningParty/PartyListTableViewCell.m; sourceTree = "<absolute>"; };
+		1962638D2100FC420064BC6A /* PartyListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PartyListTableViewCell.h; path = /Users/leahxiao/Desktop/KitKat/KitKat/OpeningParty/PartyListTableViewCell.h; sourceTree = "<absolute>"; };
 		1982EC4320FFBB0400336246 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		1982EC4420FFBB0400336246 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		1982EC4620FFBB1400336246 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
@@ -99,6 +110,20 @@
 				A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		1962638B2100FBF60064BC6A /* OpeningParty */ = {
+			isa = PBXGroup;
+			children = (
+				1962638D2100FC420064BC6A /* PartyListTableViewCell.h */,
+				1962638C2100FC410064BC6A /* PartyListTableViewCell.m */,
+				19626383210006C80064BC6A /* OpenParty.storyboard */,
+				19626385210007150064BC6A /* BeThePartyViewController.h */,
+				19626386210007150064BC6A /* BeThePartyViewController.m */,
+				196263882100F8CA0064BC6A /* JoinPartyViewController.h */,
+				196263892100F8CA0064BC6A /* JoinPartyViewController.m */,
+			);
+			path = OpeningParty;
 			sourceTree = "<group>";
 		};
 		1982EC4220FFBAE200336246 /* Models */ = {
@@ -171,6 +196,8 @@
 		678AC0F020FFB794000CD978 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */,
+				E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */,
 				678AC0ED20FFB724000CD978 /* SpotifyDataManager.h */,
 				678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */,
 			);
@@ -212,17 +239,9 @@
 				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				E8C9482D20FFAFF500962B4D /* Info.plist */,
 				E8C9482E20FFAFF500962B4D /* main.m */,
+				1962638B2100FBF60064BC6A /* OpeningParty */,
 			);
 			path = KitKat;
-			sourceTree = "<group>";
-		};
-		E8D9211120FFBA1300CB5994 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				E8D9211220FFBA4200CB5994 /* BackendAPIManager.h */,
-				E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
+				19626384210006C80064BC6A /* OpenParty.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
 				678606DE2101012D003EA77F /* downicon.png in Resources */,
 				678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */,
@@ -323,6 +343,7 @@
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
 				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				678606D02100FEE0003EA77F /* PoolViewController.m in Sources */,
+				19626387210007150064BC6A /* BeThePartyViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
 				678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */,
 				678606D62100FF27003EA77F /* QueueCell.m in Sources */,
@@ -330,6 +351,8 @@
 				678606D92100FF35003EA77F /* PoolCell.m in Sources */,
 				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
+				1962638E2100FC420064BC6A /* PartyListTableViewCell.m in Sources */,
+				1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */,
 				1982EC4820FFBB1400336246 /* Party.m in Sources */,
 				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
 				678606D32100FF03003EA77F /* QueueViewController.m in Sources */,

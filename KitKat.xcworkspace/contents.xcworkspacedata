@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/leahxiao/Desktop/KitKat/KitKat/OpeningParty/PartyListTableViewCell.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/leahxiao/Desktop/KitKat/KitKat/OpeningParty/PartyListTableViewCell.m">
+   </FileRef>
+   <FileRef
       location = "group:KitKat.xcodeproj">
    </FileRef>
    <FileRef
