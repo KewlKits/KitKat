@@ -11,8 +11,9 @@
 #import <Unirest/UNIRest.h>
 #import "SpotifyDataManager.h"
 
-@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSArray * searchResults;
 
 @end
@@ -22,35 +23,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [SpotifyDataManager searchSpotify:@"Bound 2" withCompletion:^(NSDictionary *response) {
-        NSLog(@"%@", response);
+    self.tableView.dataSource = self;    
+    self.searchBar.delegate = self;
+}
+-(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
+    [SpotifyDataManager searchSpotify:query type:type withCompletion:^(NSDictionary *response) {
+        if([type isEqualToString:@"artist"]){
+            self.searchResults = response[@"artists"][@"items"];
+        }
+        else if ([type isEqualToString:@"album"]){
+            self.searchResults = response[@"albums"][@"items"];
+        }
+        else if ([type isEqualToString:@"playlist"]){
+            self.searchResults = response[@"playlists"][@"items"];
+        }
+        else if ([type isEqualToString:@"track"]){
+            self.searchResults = response[@"tracks"][@"items"];
+        }
+        [self.tableView reloadData];
     }];
 }
-
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self fetchSearchResults:self.searchBar.text type:@"track"];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
-    //searchCell.songTitleLabel =
+    NSDictionary * track = self.searchResults[indexPath.row];
+    [searchCell setAttributes:track];
     return searchCell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [self.searchResults count];
 }
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
