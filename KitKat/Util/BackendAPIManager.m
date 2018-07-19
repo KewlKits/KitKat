@@ -55,7 +55,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -68,7 +70,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -81,7 +85,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -94,7 +100,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -107,7 +115,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -120,7 +130,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 
@@ -133,7 +145,9 @@
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
-        completion(jsonResponse, error);
+        if(completion) {
+            completion(jsonResponse, error);
+        }
     }];
 }
 @end
