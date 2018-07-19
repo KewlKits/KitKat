@@ -27,6 +27,7 @@
     
     // Do any additional setup after loading the view.
     
+    //[BackendAPIManager shared].party = party;
     
     // call the get all parties list.
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
