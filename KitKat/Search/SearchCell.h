@@ -16,5 +16,5 @@
 
 -(void)setAttributes:(NSDictionary *)track;
 @property (weak, nonatomic) IBOutlet UIImageView *albumCover;
-
+@property NSDictionary * track;
 @end

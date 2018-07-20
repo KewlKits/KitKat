@@ -10,6 +10,7 @@
 #import "SearchCell.h"
 #import <Unirest/UNIRest.h>
 #import "SpotifyDataManager.h"
+#import "BackendAPIManager.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -46,6 +47,7 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self fetchSearchResults:self.searchBar.text type:@"track"];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -8,6 +8,7 @@
 
 #import "SearchCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "BackendAPIManager.h"
 
 @implementation SearchCell
 
@@ -15,6 +16,13 @@
     [super awakeFromNib];
     self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
     // Initialization code
+}
+- (IBAction)addButtonClicked:(id)sender {
+    [[BackendAPIManager shared] addSongToPool:@"5b50c529c865c50004ae6a35" uri:self.track[@"album"][@"images"][0][@"url"] title:self.track[@"name"] artist:self.artistLabel.text album:self.track[@"album"][@"name"] albumArtUrlString:self.track[@"album"][@"images"][0][@"url"] withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+        if(response){
+            NSLog(@"success!");
+        }
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,6 +33,7 @@
 
 -(void)setAttributes:(NSDictionary *)track{
     self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
+    self.track = track;
     //set title
     self.songTitleLabel.text = track[@"name"];
     

@@ -14,7 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *albumLabel;
 
--(void)setAttributes:(NSDictionary *)track;
+- (void) setAttributes: (NSDictionary *) track;
+
 @property (weak, nonatomic) IBOutlet UIImageView *albumCover;
 
 @end
