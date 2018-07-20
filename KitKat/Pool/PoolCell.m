@@ -7,6 +7,7 @@
 //
 
 #import "PoolCell.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @implementation PoolCell
 
@@ -21,4 +22,20 @@
     // Configure the view for the selected state
 }
 
+-(void)setAttributes:(NSDictionary *)track{
+    self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
+    //set title
+    self.songTitleLabel.text = track[@"title"];
+    
+    //set artist
+    self.artistLabel.text = track[@"artist"];
+    
+    //set album name
+    self.albumLabel.text = track[@"album"];
+    
+    //set album cover photo
+    self.albumCover.image = nil;
+    NSURL *url = [NSURL URLWithString:track[@"uri"]];
+    [self.albumCover setImageWithURL:url];
+}
 @end

@@ -19,6 +19,7 @@
 		678606D92100FF35003EA77F /* PoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D82100FF35003EA77F /* PoolCell.m */; };
 		678606DC21010124003EA77F /* upicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 678606DB21010124003EA77F /* upicon.png */; };
 		678606DE2101012D003EA77F /* downicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 678606DD2101012D003EA77F /* downicon.png */; };
+		678606E821014092003EA77F /* gray-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 678606E721014092003EA77F /* gray-circle.png */; };
 		678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0E020FFB55E000CD978 /* Main.storyboard */; };
 		678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E220FFB611000CD978 /* SearchViewController.m */; };
 		678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678AC0E720FFB63C000CD978 /* SearchCell.m */; };
@@ -59,6 +60,7 @@
 		678606D82100FF35003EA77F /* PoolCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolCell.m; sourceTree = "<group>"; };
 		678606DB21010124003EA77F /* upicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upicon.png; sourceTree = "<group>"; };
 		678606DD2101012D003EA77F /* downicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downicon.png; sourceTree = "<group>"; };
+		678606E721014092003EA77F /* gray-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray-circle.png"; sourceTree = "<group>"; };
 		678AC0E020FFB55E000CD978 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		678AC0E220FFB611000CD978 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		678AC0E320FFB612000CD978 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				678AC0F520FFFE9D000CD978 /* fox.png */,
 				678606DB21010124003EA77F /* upicon.png */,
 				678606DD2101012D003EA77F /* downicon.png */,
+				678606E721014092003EA77F /* gray-circle.png */,
 			);
 			path = "Image Assets";
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				19626384210006C80064BC6A /* OpenParty.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
 				678606DE2101012D003EA77F /* downicon.png in Resources */,
+				678606E821014092003EA77F /* gray-circle.png in Resources */,
 				678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */,
 				678AC0F620FFFE9D000CD978 /* fox.png in Resources */,
 				678606DC21010124003EA77F /* upicon.png in Resources */,
@@ -341,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
-				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				678606D02100FEE0003EA77F /* PoolViewController.m in Sources */,
 				19626387210007150064BC6A /* BeThePartyViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,

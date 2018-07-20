@@ -10,4 +10,12 @@
 
 @interface PoolCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
+@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
+
+- (void) setAttributes: (NSDictionary *) track;
+
+@property (weak, nonatomic) IBOutlet UIImageView *albumCover;
+
 @end
