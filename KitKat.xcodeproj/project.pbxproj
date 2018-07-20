@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1925E15021024EF100BB7D25 /* QPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1925E14F21024EF000BB7D25 /* QPlaceholderViewController.m */; };
 		19626384210006C80064BC6A /* OpenParty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19626383210006C80064BC6A /* OpenParty.storyboard */; };
 		19626387210007150064BC6A /* BeThePartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19626386210007150064BC6A /* BeThePartyViewController.m */; };
 		1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196263892100F8CA0064BC6A /* JoinPartyViewController.m */; };
@@ -38,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1925E14E21024EF000BB7D25 /* QPlaceholderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPlaceholderViewController.h; sourceTree = "<group>"; };
+		1925E14F21024EF000BB7D25 /* QPlaceholderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QPlaceholderViewController.m; sourceTree = "<group>"; };
 		19626383210006C80064BC6A /* OpenParty.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenParty.storyboard; sourceTree = "<group>"; };
 		19626385210007150064BC6A /* BeThePartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeThePartyViewController.h; sourceTree = "<group>"; };
 		19626386210007150064BC6A /* BeThePartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeThePartyViewController.m; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				19626386210007150064BC6A /* BeThePartyViewController.m */,
 				196263882100F8CA0064BC6A /* JoinPartyViewController.h */,
 				196263892100F8CA0064BC6A /* JoinPartyViewController.m */,
+				1925E14E21024EF000BB7D25 /* QPlaceholderViewController.h */,
+				1925E14F21024EF000BB7D25 /* QPlaceholderViewController.m */,
 			);
 			path = OpeningParty;
 			sourceTree = "<group>";
@@ -226,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				1982EC4220FFBAE200336246 /* Models */,
-				E8D9211120FFBA1300CB5994 /* Util */,
 				678606DA2101010B003EA77F /* Image Assets */,
 				678606CD2100FEC1003EA77F /* Queue */,
 				678606CC2100FEA9003EA77F /* Pool */,
@@ -341,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
-				E8C9482420FFAFF300962B4D /* ViewController.m in Sources */,
 				678606D02100FEE0003EA77F /* PoolViewController.m in Sources */,
 				19626387210007150064BC6A /* BeThePartyViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
@@ -351,6 +354,7 @@
 				678606D92100FF35003EA77F /* PoolCell.m in Sources */,
 				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
+				1925E15021024EF100BB7D25 /* QPlaceholderViewController.m in Sources */,
 				1962638E2100FC420064BC6A /* PartyListTableViewCell.m in Sources */,
 				1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */,
 				1982EC4820FFBB1400336246 /* Party.m in Sources */,

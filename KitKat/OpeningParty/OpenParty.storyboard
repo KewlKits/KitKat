@@ -92,7 +92,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameOfPartyLabel" destination="kAW-6t-3Vd" id="YRE-T6-UWz"/>
-                                            <segue destination="90f-qU-mqR" kind="show" id="Jw1-gQ-Fwu"/>
+                                            <segue destination="dcm-4s-1Dt" kind="show" id="H6C-gy-Fpt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -109,13 +109,29 @@
             </objects>
             <point key="canvasLocation" x="1880.8" y="143.47826086956522"/>
         </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="z9r-7D-mJF">
+        <!--Placeholder View Controller-->
+        <scene sceneID="CQn-8M-okI">
             <objects>
-                <viewControllerPlaceholder id="90f-qU-mqR" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RWX-o6-Qdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="dcm-4s-1Dt" customClass="QPlaceholderViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="W0k-eF-fww">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is the q for this party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIr-kS-SwR">
+                                <rect key="frame" x="144" y="138" width="196" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="le0-sw-WMA"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l64-cH-gfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2569" y="26"/>
+            <point key="canvasLocation" x="2697" y="131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dS0-Vn-MhO">

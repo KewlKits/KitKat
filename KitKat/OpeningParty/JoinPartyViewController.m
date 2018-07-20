@@ -8,6 +8,7 @@
 
 #import "JoinPartyViewController.h"
 #import "BackendAPIManager.h"
+#import "QPlaceholderViewController.h"
 
 
 
@@ -53,15 +54,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.destinationViewController isKindOfClass:[QPlaceholderViewController class] ]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Party *party = self.partyList[indexPath.row];
+        QPlaceholderViewController *QVC = [segue destinationViewController];
+        QVC.party = party;
+    }
 }
-*/
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PartyListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"partyCell" forIndexPath:indexPath];
