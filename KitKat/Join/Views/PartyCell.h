@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "Party.h"
 
-@interface PartyListTableViewCell : UITableViewCell
+@interface PartyCell: UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameOfPartyLabel;
 
 @property (strong, nonatomic) Party *party;

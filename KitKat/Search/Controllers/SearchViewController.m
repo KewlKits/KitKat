@@ -11,6 +11,7 @@
 #import <Unirest/UNIRest.h>
 #import "SpotifyDataManager.h"
 #import "BackendAPIManager.h"
+#import "Song.h"
 
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -28,19 +29,24 @@
     self.searchBar.delegate = self;
 }
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
+    
     [SpotifyDataManager searchSpotify:query type:type withCompletion:^(NSDictionary *response) {
+        NSArray *temporary = [[NSArray alloc] init];
+        
         if([type isEqualToString:@"artist"]){
-            self.searchResults = response[@"artists"][@"items"];
+            temporary = response[@"artists"][@"items"];
         }
         else if ([type isEqualToString:@"album"]){
-            self.searchResults = response[@"albums"][@"items"];
+            temporary = response[@"albums"][@"items"];
         }
         else if ([type isEqualToString:@"playlist"]){
-            self.searchResults = response[@"playlists"][@"items"];
+            temporary = response[@"playlists"][@"items"];
         }
         else if ([type isEqualToString:@"track"]){
-            self.searchResults = response[@"tracks"][@"items"];
+            temporary = response[@"tracks"][@"items"];
         }
+        
+        self.searchResults = [Song songsWithSpotifyArray:temporary];
         [self.tableView reloadData];
     }];
 }
@@ -55,7 +61,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
-    NSDictionary * track = self.searchResults[indexPath.row];
+    Song * track = self.searchResults[indexPath.row];
     [searchCell setAttributes:track];
     return searchCell;
 }

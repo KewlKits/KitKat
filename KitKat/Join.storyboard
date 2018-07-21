@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRd-Eq-cgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927.20000000000005" y="137.18140929535232"/>
+            <point key="canvasLocation" x="929" y="143"/>
         </scene>
         <!--JOIN THE FUN-->
         <scene sceneID="A1L-LZ-v4h">
@@ -69,7 +69,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="partyCell" rowHeight="91" id="V5v-CO-jAO" customClass="PartyListTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PartyCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PartyCell" rowHeight="91" id="V5v-CO-jAO" customClass="PartyCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5v-CO-jAO" id="5AL-Re-Qm9">
@@ -109,13 +109,13 @@
             </objects>
             <point key="canvasLocation" x="1880.8" y="143.47826086956522"/>
         </scene>
-        <!--Storyboard Reference-->
+        <!--Main-->
         <scene sceneID="z9r-7D-mJF">
             <objects>
-                <viewControllerPlaceholder id="90f-qU-mqR" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Main" id="90f-qU-mqR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWX-o6-Qdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2569" y="26"/>
+            <point key="canvasLocation" x="2613" y="143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dS0-Vn-MhO">
@@ -133,7 +133,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySJ-Tp-5OA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-12" y="137.18140929535232"/>
+            <point key="canvasLocation" x="-12" y="143"/>
         </scene>
     </scenes>
 </document>

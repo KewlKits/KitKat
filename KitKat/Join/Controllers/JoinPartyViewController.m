@@ -64,13 +64,12 @@
 */
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PartyListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"partyCell" forIndexPath:indexPath];
+    PartyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PartyCell" forIndexPath:indexPath];
     [cell setParty: self.partyList[indexPath.row]];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%lu", self.partyList.count);
     return self.partyList.count;
 }
 

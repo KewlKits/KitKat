@@ -93,14 +93,4 @@
     return NO;
 }
 
-//this procedure is called when the SDK is logged into. This procedure takes a track URI and plays it.
-- (void)audioStreamingDidLogin:(SPTAudioStreamingController *)audioStreaming {
-    [self.player playSpotifyURI:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp" startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
-        if (error != nil) {
-            NSLog(@"*** failed to play: %@", error);
-            return;
-        }
-    }];
-}
-
 @end

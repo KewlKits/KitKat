@@ -18,5 +18,7 @@
 @property (nonatomic, strong) NSString *songAlbumArt;
 @property (nonatomic, strong) NSDate *createdAt;
 
-
+- (id)initWithDictionary:(NSDictionary *)dictionary;
++ (NSArray *)songsWithSpotifyArray:(NSArray *)dicts;
++ (NSArray *)songsWithDatabaseArray:(NSArray *)dicts;
 @end

@@ -41,7 +41,7 @@
             [[BackendAPIManager shared] getAParty:self.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 if(response){
                     NSLog(@"%@",response);
-                    self.poolSongs = response.body.object[@"pool"];
+                    self.poolSongs = [Song songsWithDatabaseArray:response.body.object[@"pool"]];
                     //[self.tableView reloadData];
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
@@ -53,7 +53,7 @@
 }
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
-    NSDictionary * track = self.poolSongs[indexPath.row];
+    Song * track = self.poolSongs[indexPath.row];
     [poolCell setAttributes: track];
     return poolCell;
 }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Party.h"
-#import "PartyListTableViewCell.h"
+#import "PartyCell.h"
 
 @interface JoinPartyViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

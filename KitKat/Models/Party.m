@@ -7,6 +7,7 @@
 //
 
 #import "Party.h"
+#import "Song.h"
 
 @implementation Party
 - (id)initWithDictionary:(NSDictionary *)dictionary {
@@ -14,8 +15,8 @@
     
     self.name = dictionary[@"name"];
     self.location = dictionary[@"location"];
-    self.pool = dictionary[@"pool"];
-    self.queue = dictionary[@"queue"];
+    self.pool = [Song songsWithDatabaseArray:dictionary[@"pool"]];
+    self.queue = [Song songsWithDatabaseArray:dictionary[@"queue"]];
     
     self.identity = dictionary[@"_id"];
     self.createdAt = dictionary[@"createdAt"];

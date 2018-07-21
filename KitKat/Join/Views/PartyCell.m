@@ -5,9 +5,9 @@
 //  Created by Leah Xiao on 7/19/18.
 //
 
-#import "PartyListTableViewCell.h"
+#import "PartyCell.h"
 
-@implementation PartyListTableViewCell
+@implementation PartyCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
