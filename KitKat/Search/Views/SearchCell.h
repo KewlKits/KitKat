@@ -10,8 +10,4 @@
 #import "AbstractSongCell.h"
 
 @interface SearchCell : AbstractSongCell
-@property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
-@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *albumCover;
 @end

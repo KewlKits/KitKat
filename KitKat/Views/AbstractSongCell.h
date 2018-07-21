@@ -11,8 +11,7 @@
 
 @interface AbstractSongCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
-@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistAlbumLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *albumCover;
 -(void)setAttributes:(Song *) song;
 @property Song * song;
