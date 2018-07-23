@@ -14,7 +14,7 @@
 @interface QueueViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property(strong, nonatomic) NSArray<Song *> *queue;
+@property(strong, nonatomic) NSMutableArray<Song *> *queue;
 
 @end
 
@@ -25,6 +25,8 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
+    [self.tableView setEditing:YES animated:YES];
     
     [self populateQueue];
 }
@@ -37,7 +39,7 @@
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
-            self.queue = [Song songsWithDatabaseArray:response.body.object[@"queue"]];
+            self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
             NSLog(@"%@", self.queue);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
@@ -64,6 +66,25 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.queue.count;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    Song *selected = self.queue[sourceIndexPath.row];
+    [self.queue removeObject:selected];
+    [self.queue insertObject:selected atIndex:destinationIndexPath.row];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[BackendAPIManager shared] moveSongWithinQueue:[BackendAPIManager shared].party.partyId index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self.tableView reloadData];
+            });
+        }];
+    });
 }
 
 @end
