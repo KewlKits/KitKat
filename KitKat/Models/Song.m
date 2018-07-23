@@ -19,7 +19,7 @@
     self.songAlbum = dictionary[@"album"];
     self.songAlbumArt = dictionary[@"albumArtUrl"];
 
-    self.songID = dictionary[@"_id"];
+    self.songId = dictionary[@"_id"];
     self.createdAt = dictionary[@"createdAt"];
     
     return self;
@@ -29,7 +29,7 @@
     self = [super init];
     
     self.songTitle = dictionary[@"name"];
-    self.songURI = dictionary[@"album"][@"images"][0][@"url"];
+    self.songURI = dictionary[@"uri"];
     NSString * artists = dictionary[@"artists"][0][@"name"];
     for (int i = 1; i< [dictionary[@"artists"] count]; i++){
         artists = [artists stringByAppendingString:@" and "];
@@ -39,13 +39,13 @@
     self.songAlbum = dictionary[@"album"][@"name"];
     self.songAlbumArt = dictionary[@"album"][@"images"][0][@"url"];
     
-    self.songID = dictionary[@"id"];
+    self.songId = dictionary[@"id"];
     //self.createdAt = dictionary[@"createdAt"];
     
     return self;
 }
 
-+ (NSArray *)songsWithSpotifyArray:(NSArray *)dicts {
++ (NSArray<Song *> *)songsWithSpotifyArray:(NSArray *)dicts {
     NSMutableArray *output = [NSMutableArray new];
     for (NSDictionary *dict in dicts) {
         [output addObject:[[Song alloc] initWithSpotifyDictionary:dict]];
@@ -53,7 +53,7 @@
     return output;
 }
 
-+ (NSArray *)songsWithDatabaseArray:(NSArray *)dicts {
++ (NSArray<Song *> *)songsWithDatabaseArray:(NSArray *)dicts {
     NSMutableArray *output = [NSMutableArray new];
     for (NSDictionary *dict in dicts) {
         [output addObject:[[Song alloc] initWithDictionary:dict]];

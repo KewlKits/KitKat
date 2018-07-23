@@ -26,7 +26,7 @@
     self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
     self.song = song;
     //set title
-    self.songTitleLabel.text = @"Miles is";//song.songTitle;
+    self.songTitleLabel.text = song.songTitle;
 
     //set artist
     self.artistLabel.text = song.songArtist;

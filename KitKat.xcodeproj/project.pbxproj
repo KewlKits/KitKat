@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19626384210006C80064BC6A /* Join.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19626383210006C80064BC6A /* Join.storyboard */; };
+		19626384210006C80064BC6A /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19626383210006C80064BC6A /* Entry.storyboard */; };
 		19626387210007150064BC6A /* BeThePartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19626386210007150064BC6A /* BeThePartyViewController.m */; };
 		1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196263892100F8CA0064BC6A /* JoinPartyViewController.m */; };
 		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
@@ -40,7 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		19626383210006C80064BC6A /* Join.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Join.storyboard; sourceTree = "<group>"; };
+		19626383210006C80064BC6A /* Entry.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Entry.storyboard; sourceTree = "<group>"; };
 		19626385210007150064BC6A /* BeThePartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeThePartyViewController.h; sourceTree = "<group>"; };
 		19626386210007150064BC6A /* BeThePartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeThePartyViewController.m; sourceTree = "<group>"; };
 		196263882100F8CA0064BC6A /* JoinPartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoinPartyViewController.h; sourceTree = "<group>"; };
@@ -117,13 +117,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		1962638B2100FBF60064BC6A /* Join */ = {
+		1962638B2100FBF60064BC6A /* Entry */ = {
 			isa = PBXGroup;
 			children = (
 				E897D50821027F5B00BF33AD /* Controllers */,
 				E897D50721027EFC00BF33AD /* Views */,
 			);
-			path = Join;
+			path = Entry;
 			sourceTree = "<group>";
 		};
 		1982EC4220FFBAE200336246 /* Models */ = {
@@ -309,16 +309,16 @@
 				678606CD2100FEC1003EA77F /* Queue */,
 				678606CC2100FEA9003EA77F /* Pool */,
 				678AC0F020FFB794000CD978 /* Util */,
+				1962638B2100FBF60064BC6A /* Entry */,
 				678AC0EB20FFB66B000CD978 /* Search */,
+				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
+				19626383210006C80064BC6A /* Entry.storyboard */,
 				678AC0E020FFB55E000CD978 /* Main.storyboard */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482820FFAFF500962B4D /* Assets.xcassets */,
-				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				E8C9482D20FFAFF500962B4D /* Info.plist */,
 				E8C9482E20FFAFF500962B4D /* main.m */,
-				19626383210006C80064BC6A /* Join.storyboard */,
-				1962638B2100FBF60064BC6A /* Join */,
 			);
 			path = KitKat;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
-				19626384210006C80064BC6A /* Join.storyboard in Resources */,
+				19626384210006C80064BC6A /* Entry.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
 				678606DE2101012D003EA77F /* downicon.png in Resources */,
 				678606E821014092003EA77F /* gray-circle.png in Resources */,

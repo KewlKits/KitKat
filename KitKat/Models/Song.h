@@ -10,7 +10,7 @@
 
 @interface Song : NSObject
 
-@property (nonatomic, strong) NSString *songID;
+@property (nonatomic, strong) NSString *songId;
 @property (nonatomic, strong) NSString *songURI;
 @property (nonatomic, strong) NSString *songTitle;
 @property (nonatomic, strong) NSString *songArtist;
@@ -19,6 +19,6 @@
 @property (nonatomic, strong) NSDate *createdAt;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-+ (NSArray *)songsWithSpotifyArray:(NSArray *)dicts;
-+ (NSArray *)songsWithDatabaseArray:(NSArray *)dicts;
++ (NSArray<Song *> *)songsWithSpotifyArray:(NSArray *)dicts;
++ (NSArray<Song *> *)songsWithDatabaseArray:(NSArray *)dicts;
 @end

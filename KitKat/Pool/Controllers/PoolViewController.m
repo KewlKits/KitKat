@@ -14,8 +14,7 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSString * partyId;
-@property NSArray * poolSongs;
+@property NSArray<Song*> * poolSongs;
 @end
 
 @implementation PoolViewController
@@ -25,7 +24,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    self.partyId = @"5b50c529c865c50004ae6a35";
     [self populatePool];
     // Do any additional setup after loading the view.
 }
@@ -37,12 +35,9 @@
 -(void)populatePool{
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
-            //NSLog(@"%@",response);
-            [[BackendAPIManager shared] getAParty:self.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+            [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 if(response){
-                    NSLog(@"%@",response);
                     self.poolSongs = [Song songsWithDatabaseArray:response.body.object[@"pool"]];
-                    //[self.tableView reloadData];
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
                     });

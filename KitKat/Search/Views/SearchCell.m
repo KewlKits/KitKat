@@ -18,10 +18,7 @@
     // Initialization code
 }
 - (IBAction)addButtonClicked:(id)sender {
-    [[BackendAPIManager shared] addSongToPool:@"5b50c529c865c50004ae6a35" uri:self.song.songURI title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
-        if(response){
-            NSLog(@"success!");
-        }
+    [[BackendAPIManager shared] addSongToPool:[BackendAPIManager shared].party.partyId uri:self.song.songURI title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
     }];
 }
 

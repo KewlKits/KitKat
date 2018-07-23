@@ -16,7 +16,7 @@
 @interface SearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSArray * searchResults;
+@property NSArray<Song *> * searchResults;
 
 @end
 
