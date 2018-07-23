@@ -10,8 +10,5 @@
 #import "AbstractSongCell.h"
 
 @interface SearchCell : AbstractSongCell
-<<<<<<< HEAD
 
-=======
->>>>>>> 7a691dbee0ad3e3d06c19a185cc38c19d4b07503
 @end
