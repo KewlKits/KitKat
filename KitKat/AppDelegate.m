@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SpotifySingleton.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) SPTAuth *auth;
@@ -83,8 +83,9 @@
                 [self.player loginWithAccessToken:self.auth.session.accessToken];
                 NSLog(@"ACCESS TOKEN: ");
                 NSLog(@"%@", self.auth.session.accessToken);
-                NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
+                SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
+                [spotifySingleton setAuth:self.auth];
+                [spotifySingleton setPlayer:self.player];
             }
         }];
         
