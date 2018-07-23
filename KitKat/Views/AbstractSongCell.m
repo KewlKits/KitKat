@@ -28,11 +28,8 @@
     //set title
     self.songTitleLabel.text = song.songTitle;
 
-    //set artist
-    self.artistLabel.text = song.songArtist;
-
-    //set album name
-    self.albumLabel.text = song.songAlbum;
+    //set artist and album name
+    self.artistAlbumLabel.text = [[song.songArtist stringByAppendingString:@" ● "] stringByAppendingString:song.songAlbum];
 
     //set album cover photo
     self.albumCover.image = nil;
