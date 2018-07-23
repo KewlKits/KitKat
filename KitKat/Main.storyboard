@@ -138,6 +138,7 @@
         <!--Queue-->
         <scene sceneID="6wE-Er-awq">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Y6-zq-AR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Queue" id="RVL-R6-j6u" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="JTT-yA-2tD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SbO-Ek-Okb">
@@ -148,7 +149,6 @@
                         <segue destination="ft4-Vh-v3u" kind="relationship" relationship="rootViewController" id="1b0-lh-93q"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Y6-zq-AR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="886" y="1588"/>
         </scene>
@@ -232,8 +232,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Fn-mu-Zy2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NYS-ET-zOz">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Ugp-mE-DhI"/>
+                    <navigationItem key="navigationItem" id="41d-IN-5Zx">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="kBF-Jd-vQ6">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RCi-Z4-ewA">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="onEditTapped:" destination="ft4-Vh-v3u" eventType="touchUpInside" id="Q3R-hx-t3b"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="o8N-3x-4JG" id="BFf-WV-nP2"/>
@@ -242,21 +251,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPm-iO-kLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2764" y="1586.3568215892055"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="yyT-HU-PKV">
-            <objects>
-                <viewController id="OTo-vE-ypy" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ck7-cg-IM1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="ctH-tn-fcl"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b0e-Ed-VSV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3564" y="1587"/>
         </scene>
         <!--Pool-->
         <scene sceneID="ahD-JL-IqP">

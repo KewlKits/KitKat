@@ -25,8 +25,6 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-
-    [self.tableView setEditing:YES animated:YES];
     
     [self populateQueue];
 }
@@ -35,12 +33,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)onEditTapped:(id)sender {
+    [self.tableView setEditing:!self.tableView.isEditing animated:YES];
+}
 
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
             self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
-            NSLog(@"%@", self.queue);
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
             });
@@ -73,6 +73,20 @@
     return YES;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(editingStyle == UITableViewCellEditingStyleDelete) {
+        [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:self.queue[indexPath.row].songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [self.tableView reloadData];
+            });
+        }];
+        
+        [self.queue removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     Song *selected = self.queue[sourceIndexPath.row];
     [self.queue removeObject:selected];
@@ -80,6 +94,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[BackendAPIManager shared] moveSongWithinQueue:[BackendAPIManager shared].party.partyId index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
             });
