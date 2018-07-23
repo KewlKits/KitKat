@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface BeThePartyViewController : UIViewController
+@interface BeThePartyViewController : UIViewController <CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
+
+@property (strong, nonatomic) CLLocationManager *locationMan;
+@property (strong, nonatomic) CLLocation *thisPartyLoc;
 
 
 @end

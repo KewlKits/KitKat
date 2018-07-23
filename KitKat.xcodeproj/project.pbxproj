@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		194916552106443A004BF270 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194916542106443A004BF270 /* CoreLocation.framework */; };
 		19626384210006C80064BC6A /* Entry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19626383210006C80064BC6A /* Entry.storyboard */; };
 		19626387210007150064BC6A /* BeThePartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19626386210007150064BC6A /* BeThePartyViewController.m */; };
 		1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196263892100F8CA0064BC6A /* JoinPartyViewController.m */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		194916542106443A004BF270 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		19626383210006C80064BC6A /* Entry.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Entry.storyboard; sourceTree = "<group>"; };
 		19626385210007150064BC6A /* BeThePartyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeThePartyViewController.h; sourceTree = "<group>"; };
 		19626386210007150064BC6A /* BeThePartyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeThePartyViewController.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194916552106443A004BF270 /* CoreLocation.framework in Frameworks */,
 				678AC0F420FFBB29000CD978 /* SystemConfiguration.framework in Frameworks */,
 				678AC0F220FFBB1C000CD978 /* AVFoundation.framework in Frameworks */,
 				E8D9211020FFB35400CB5994 /* SpotifyMetadata.framework in Frameworks */,
@@ -140,6 +143,7 @@
 		314750A7B29659F83F010B5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				194916542106443A004BF270 /* CoreLocation.framework */,
 				678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */,
 				678AC0F120FFBB1B000CD978 /* AVFoundation.framework */,
 				E8D9210B20FFB35400CB5994 /* SpotifyAudioPlayback.framework */,

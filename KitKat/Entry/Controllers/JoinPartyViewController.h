@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Party.h"
 #import "PartyCell.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface JoinPartyViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface JoinPartyViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+
+
+@property (strong, nonatomic) CLLocationManager *locationMan;
+@property (strong, nonatomic) CLLocation *thisSessLoc;
 
 @end

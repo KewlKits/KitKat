@@ -10,6 +10,8 @@
 #import "Party.h"
 #import "BackendAPIManager.h"
 #import "JoinPartyViewController.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 @interface BeThePartyViewController ()
 
@@ -19,8 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.locationMan = [CLLocationManager new];
+    self.locationMan.delegate = self;
+    [self.locationMan requestWhenInUseAuthorization];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -31,11 +37,32 @@
 
 - (IBAction)createPartyButtonPressed:(id)sender {
     NSString *partyName = self.textField.text;
-    [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+    
+//    [self.locationMan startUpdatingLocation];
+//    [self.locationMan requestLocation];
+//    NSLog(@"%@", [self.locationMan location]);
+    
+    [self.locationMan requestLocation];
+    self.thisPartyLoc = [self.locationMan location];
+    NSLog(@"%@", [self.locationMan location]);
+    NSNumber *partyLong = [NSNumber numberWithDouble: self.thisPartyLoc.coordinate.longitude];
+    NSNumber *partyLat = [NSNumber numberWithDouble: self.thisPartyLoc.coordinate.latitude];
+    NSLog(@"LONGITUDE %@", partyLong);
+   NSLog(@"LATITUDE %@", partyLat);
+   // [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+     [[BackendAPIManager shared] makeParty:partyName longitude:partyLong latitude:partyLat withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         Party *party =  [[Party alloc] initWithDictionary: response.body.object];
         [BackendAPIManager shared].party = party;
     }];
     
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    NSLog(@"location update failed: %@", error);
+}
+
+-(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    NSLog(@"location logged");
 }
 
 /*

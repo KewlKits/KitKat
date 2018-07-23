@@ -25,20 +25,49 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    // Do any additional setup after loading the view.
     
-    //[BackendAPIManager shared].party = party;
-    
+    //get the current session's location and set the location to a location object
+    self.locationMan = [CLLocationManager new];
+    self.locationMan.delegate = self;
+    [self.locationMan requestWhenInUseAuthorization];
+    [self.locationMan requestLocation];
+    self.thisSessLoc = [self.locationMan location];
+
     // call the get all parties list.
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
         NSMutableArray *temp = [NSMutableArray new];
         for (NSDictionary *dict in response.body.array) {
             Party *party = [[Party alloc] initWithDictionary:dict];
-            [temp addObject:party];
+            double partyLat = [party.location[1] doubleValue];
+            double partyLong = [party.location[0] doubleValue];
+            CLLocation *thisPartyLoc = [[CLLocation alloc] initWithLatitude:partyLat longitude:partyLong];
+            float distanceVal = [self.thisSessLoc distanceFromLocation: thisPartyLoc];
+            //get all of the parties within a kilometer radius
+            if (distanceVal <= 1000){
+                [temp addObject:party];
+            }
+
+
         }
         self.partyList = temp;
         
     }];
+  
+    
+    /*
+     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
+     NSMutableArray *temp = [NSMutableArray new];
+     for (NSDictionary *dict in response.body.array) {
+     Party *party = [[Party alloc] initWithDictionary:dict];
+     
+     [temp addObject:party];
+     }
+     self.partyList = temp;
+     
+     }];
+     */
+     
+    
      [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
     [self.tableView reloadData];
 }
@@ -76,4 +105,12 @@
     return self.partyList.count;
 }
 
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    NSLog(@"location update failed: %@", error);
+}
+
+-(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
+    NSLog(@"location logged");
+}
 @end
