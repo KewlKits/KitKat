@@ -13,10 +13,12 @@
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import <SpotifyAuthentication/SpotifyAuthentication.h>
 #import <SpotifyMetadata/SpotifyMetadata.h>
+#import <UIKit/UIKit.h>
 
 @interface SpotifyDataManager : NSObject
 
-@property (strong,nonatomic) SPTPlaylistSnapshot* playlist;
+@property (strong,nonatomic) SPTPlaylistSnapshot * playlist;
 +(void)searchSpotify:(NSString *)query type:(NSString *)type withCompletion:(void(^)(NSDictionary *response))completion;
-+(void)createPlaylist;
+-(void)createPlaylist;
+
 @end

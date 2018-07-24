@@ -20,9 +20,9 @@
 -(void)setPlayer: (SPTAudioStreamingController*)player;
 -(SPTAudioStreamingController*)getPlayer;
 
--(void)setAuth: (SPTAuth *)auth;
+/*-(void)setAuth: (SPTAuth *)auth;
 -(NSString*) getAccessToken;
--(NSString*) getUsername;
-//-(NSString*) getUserId;
+-(NSString*) getUsername;*/
+
 
 @end

@@ -83,9 +83,13 @@
                 [self.player loginWithAccessToken:self.auth.session.accessToken];
                 NSLog(@"ACCESS TOKEN: ");
                 NSLog(@"%@", self.auth.session.accessToken);
+                
                 SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
-                [spotifySingleton setAuth:self.auth];
                 [spotifySingleton setPlayer:self.player];
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:self.auth.session.canonicalUsername forKey:@"username"];
+                [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
             }
         }];
         

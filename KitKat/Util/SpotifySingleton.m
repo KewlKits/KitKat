@@ -19,18 +19,15 @@ static SpotifySingleton *spotifySingletonInstance;
     return spotifySingletonInstance;
 }
 
--(void)setAuth: (SPTAuth *)authentication{
+/*-(void)setAuth: (SPTAuth *)authentication{
     _auth = authentication;
 }
 -(NSString*) getAccessToken{
     return _auth.session.accessToken;
 }
-/*-(NSString*) getUserId{
-    return _auth.clientID;
-}*/
 -(NSString*) getUsername{
     return _auth.session.canonicalUsername;
-}
+}*/
 
 -(void)setPlayer: (SPTAudioStreamingController*)audioPlayer{
     _player = audioPlayer;
