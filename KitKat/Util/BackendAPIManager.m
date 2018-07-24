@@ -7,7 +7,7 @@
 //
 
 #import "BackendAPIManager.h"
-
+#import "SpotifyDataManager.h"
 @implementation BackendAPIManager
 
 + (instancetype)shared {
@@ -33,6 +33,7 @@
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
+            [SpotifyDataManager createPlaylist];
         }
         if(completion) {
             completion(jsonResponse, error);

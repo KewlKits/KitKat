@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface NowPlayingViewController : UIViewController
+#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+@interface NowPlayingViewController : UIViewController <SPTAudioStreamingDelegate>
 
 @end

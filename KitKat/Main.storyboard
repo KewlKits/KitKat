@@ -138,9 +138,8 @@
         <!--Queue-->
         <scene sceneID="6wE-Er-awq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1Y6-zq-AR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Queue" id="RVL-R6-j6u" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JTT-yA-2tD"/>
+                    <tabBarItem key="tabBarItem" title="Queue" id="JTT-yA-2tD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SbO-Ek-Okb">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -149,8 +148,9 @@
                         <segue destination="ft4-Vh-v3u" kind="relationship" relationship="rootViewController" id="1b0-lh-93q"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Y6-zq-AR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="1588"/>
+            <point key="canvasLocation" x="1825" y="1646"/>
         </scene>
         <!--Queue View Controller-->
         <scene sceneID="kMq-v7-lDF">
@@ -262,22 +262,22 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="p4V-g0-rhp" kind="relationship" relationship="rootViewController" id="Eg4-qD-f7O"/>
+                        <segue destination="jPS-iO-xHW" kind="relationship" relationship="rootViewController" id="Daa-Fh-hhD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nm-pd-GEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="868"/>
+            <point key="canvasLocation" x="30" y="886"/>
         </scene>
         <!--NowPlayingStoryboard-->
-        <scene sceneID="CSK-Hm-y7Z">
+        <scene sceneID="T7F-Z9-LJY">
             <objects>
-                <viewControllerPlaceholder storyboardName="NowPlayingStoryboard" id="p4V-g0-rhp" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="5sJ-d5-BQy"/>
+                <viewControllerPlaceholder storyboardName="NowPlayingStoryboard" id="jPS-iO-xHW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mMn-ym-whO"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="va5-UE-wiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TcG-QS-Lio" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875" y="1359"/>
+            <point key="canvasLocation" x="29" y="1443"/>
         </scene>
         <!--Pool-->
         <scene sceneID="ahD-JL-IqP">
@@ -447,6 +447,7 @@
                         <segue destination="p1P-65-r7E" kind="relationship" relationship="viewControllers" id="b7I-Cl-yms"/>
                         <segue destination="Zab-Kx-raL" kind="relationship" relationship="viewControllers" id="Kv7-rX-Ge6"/>
                         <segue destination="91K-EF-uOg" kind="relationship" relationship="viewControllers" id="vqO-LZ-nE6"/>
+                        <segue destination="RVL-R6-j6u" kind="relationship" relationship="viewControllers" id="FId-Ge-dom"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ak-yu-7rG" userLabel="First Responder" sceneMemberID="firstResponder"/>

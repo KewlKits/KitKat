@@ -22,4 +22,7 @@
 
 -(void)setAuth: (SPTAuth *)auth;
 -(NSString*) getAccessToken;
+-(NSString*) getUsername;
+//-(NSString*) getUserId;
+
 @end

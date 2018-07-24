@@ -9,9 +9,13 @@
 #import "NowPlayingViewController.h"
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import "SpotifySingleton.h"
+#import "BackendAPIManager.h"
+#import "Song.h"
 
 @interface NowPlayingViewController ()
 @property (nonatomic, strong) SPTAudioStreamingController *player;
+@property NSMutableArray * queue;
+
 @end
 
 @implementation NowPlayingViewController
@@ -20,14 +24,44 @@
     [super viewDidLoad];
     SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
     self.player = [spotifySingleton getPlayer];
-    [self.player playSpotifyURI:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp" startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
+    
+    // Become the streaming controller delegate
+    self.player.delegate = self;
+    [self playSong:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp"];
+}
+
+-(void)startSongManager{
+    //play the first song
+    if(self.queue.count != 0){
+        Song * firstSong = self.queue[0];
+        [self playSong:firstSong.songURI];
+        //remove song from queue
+        [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:firstSong.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
+        }];
+        
+        [self.queue removeObjectAtIndex:0];
+    }
+    while(self.queue.count > 0){
+        
+    }
+}
+
+-(void)playSong: (NSString *)spotifyURI{
+    [self.player playSpotifyURI:spotifyURI startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
         if (error != nil) {
             NSLog(@"*** failed to play: %@", error);
             return;
         }
-        NSLog(@"Playing Music");
+        NSLog(@"Playing Music: %@",spotifyURI);
     }];
-    // Do any additional setup after loading the view.
+}
+- (void)populateQueue {
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+        if(response){
+            self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

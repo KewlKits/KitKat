@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BackendAPIManager.h"
+#import <UNIRest.h>
+#import "SpotifySingleton.h"
+#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+#import <SpotifyAuthentication/SpotifyAuthentication.h>
+#import <SpotifyMetadata/SpotifyMetadata.h>
 
 @interface SpotifyDataManager : NSObject
+
+@property (strong,nonatomic) SPTPlaylistSnapshot* playlist;
 +(void)searchSpotify:(NSString *)query type:(NSString *)type withCompletion:(void(^)(NSDictionary *response))completion;
++(void)createPlaylist;
 @end
