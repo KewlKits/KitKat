@@ -13,6 +13,9 @@
 		1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 196263892100F8CA0064BC6A /* JoinPartyViewController.m */; };
 		1982EC4520FFBB0400336246 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4420FFBB0400336246 /* Song.m */; };
 		1982EC4820FFBB1400336246 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982EC4720FFBB1400336246 /* Party.m */; };
+		6708BC9D2106451A00EC1231 /* NowPlayingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6708BC9C2106451A00EC1231 /* NowPlayingStoryboard.storyboard */; };
+		6708BCA02106459F00EC1231 /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */; };
+		6708BCA32106571000EC1231 /* SpotifySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCA22106571000EC1231 /* SpotifySingleton.m */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
 		678606D32100FF03003EA77F /* QueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D22100FF03003EA77F /* QueueViewController.m */; };
 		678606D62100FF27003EA77F /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D52100FF27003EA77F /* QueueCell.m */; };
@@ -51,6 +54,11 @@
 		1982EC4420FFBB0400336246 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		1982EC4620FFBB1400336246 /* Party.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Party.h; sourceTree = "<group>"; };
 		1982EC4720FFBB1400336246 /* Party.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Party.m; sourceTree = "<group>"; };
+		6708BC9C2106451A00EC1231 /* NowPlayingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NowPlayingStoryboard.storyboard; sourceTree = "<group>"; };
+		6708BC9E2106459F00EC1231 /* NowPlayingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NowPlayingViewController.h; path = NowPlaying/NowPlayingViewController.h; sourceTree = "<group>"; };
+		6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NowPlayingViewController.m; path = NowPlaying/NowPlayingViewController.m; sourceTree = "<group>"; };
+		6708BCA12106571000EC1231 /* SpotifySingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifySingleton.h; sourceTree = "<group>"; };
+		6708BCA22106571000EC1231 /* SpotifySingleton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifySingleton.m; sourceTree = "<group>"; };
 		678606CE2100FEE0003EA77F /* PoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoolViewController.h; sourceTree = "<group>"; };
 		678606CF2100FEE0003EA77F /* PoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolViewController.m; sourceTree = "<group>"; };
 		678606D12100FF03003EA77F /* QueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueueViewController.h; sourceTree = "<group>"; };
@@ -199,6 +207,8 @@
 				E8D9211320FFBA4200CB5994 /* BackendAPIManager.m */,
 				678AC0ED20FFB724000CD978 /* SpotifyDataManager.h */,
 				678AC0EC20FFB724000CD978 /* SpotifyDataManager.m */,
+				6708BCA12106571000EC1231 /* SpotifySingleton.h */,
+				6708BCA22106571000EC1231 /* SpotifySingleton.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -318,6 +328,9 @@
 				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				19626383210006C80064BC6A /* Entry.storyboard */,
 				678AC0E020FFB55E000CD978 /* Main.storyboard */,
+				6708BC9C2106451A00EC1231 /* NowPlayingStoryboard.storyboard */,
+				6708BC9E2106459F00EC1231 /* NowPlayingViewController.h */,
+				6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482820FFAFF500962B4D /* Assets.xcassets */,
@@ -388,6 +401,7 @@
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				19626384210006C80064BC6A /* Entry.storyboard in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
+				6708BC9D2106451A00EC1231 /* NowPlayingStoryboard.storyboard in Resources */,
 				678606DE2101012D003EA77F /* downicon.png in Resources */,
 				678606E821014092003EA77F /* gray-circle.png in Resources */,
 				678AC0E120FFB55E000CD978 /* Main.storyboard in Resources */,
@@ -425,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
+				6708BCA02106459F00EC1231 /* NowPlayingViewController.m in Sources */,
 				678606D02100FEE0003EA77F /* PoolViewController.m in Sources */,
 				19626387210007150064BC6A /* BeThePartyViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
@@ -433,6 +448,7 @@
 				678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */,
 				E897D5032102621B00BF33AD /* PartyCell.m in Sources */,
 				E897D512210281BF00BF33AD /* AbstractSongCell.m in Sources */,
+				6708BCA32106571000EC1231 /* SpotifySingleton.m in Sources */,
 				678606D92100FF35003EA77F /* PoolCell.m in Sources */,
 				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,
@@ -573,6 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HH2ZJ74M2A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -595,6 +612,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HH2ZJ74M2A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

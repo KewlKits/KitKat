@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SpotifySingleton.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) SPTAuth *auth;
@@ -29,7 +29,7 @@
     // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
     self.auth.sessionUserDefaultsKey = @"current session";
     // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
-    self.auth.requestedScopes = @[SPTAuthStreamingScope];
+    self.auth.requestedScopes = @[SPTAuthStreamingScope,SPTAuthPlaylistReadPrivateScope,SPTAuthPlaylistModifyPublicScope];
     
     // Become the streaming controller delegate
     self.player.delegate = self;
@@ -83,7 +83,12 @@
                 [self.player loginWithAccessToken:self.auth.session.accessToken];
                 NSLog(@"ACCESS TOKEN: ");
                 NSLog(@"%@", self.auth.session.accessToken);
-                NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+                
+                SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
+                [spotifySingleton setPlayer:self.player];
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:self.auth.session.canonicalUsername forKey:@"username"];
                 [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
             }
         }];
