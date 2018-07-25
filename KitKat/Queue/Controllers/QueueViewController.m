@@ -28,6 +28,9 @@
     
     [self populateQueue];
 }
+-(void)viewDidAppear:(BOOL)animated{
+    [self populateQueue];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
