@@ -26,11 +26,29 @@
 }
 
 - (NSArray<Song *> *)fetchPool {
-    return @[];
+    NSMutableArray *poolSongs = [NSMutableArray arrayWithCapacity:self.pool.count];
+    for (int i = 0; i < self.pool.count; i += 1) {
+        [[BackendAPIManager shared] getASong:self.pool[i] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            if (!error) {
+                poolSongs[i] = [[Song alloc] initWithDictionary:response.body.object];
+            }
+        }];
+    }
+    
+    return poolSongs;
 }
 
 - (NSArray<Song *> *)fetchQueue {
-    return @[];
+    NSMutableArray *queueSongs = [NSMutableArray arrayWithCapacity:self.pool.count];
+    for (int i = 0; i < self.pool.count; i += 1) {
+        [[BackendAPIManager shared] getASong:self.queue[i] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            if (!error) {
+                queueSongs[i] = [[Song alloc] initWithDictionary:response.body.object];
+            }
+        }];
+    }
+    
+    return queueSongs;
 }
 
 @end
