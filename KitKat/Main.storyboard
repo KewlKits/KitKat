@@ -334,9 +334,12 @@
                                                         <constraint firstAttribute="height" constant="30" id="JXB-AG-hJG"/>
                                                         <constraint firstAttribute="width" constant="35" id="pRS-Dp-Wa1"/>
                                                     </constraints>
-                                                    <state key="normal" title="+" image="upicon.png">
+                                                    <state key="normal" title="+">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addButtonClicked:" destination="nxb-d4-ghG" eventType="touchUpInside" id="Jnw-6C-Kjt"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-circle.png" translatesAutoresizingMaskIntoConstraints="NO" id="eEE-Lm-yBk">
                                                     <rect key="frame" x="21" y="22" width="59" height="59"/>
@@ -457,6 +460,5 @@
     </scenes>
     <resources>
         <image name="gray-circle.png" width="1200" height="1200"/>
-        <image name="upicon.png" width="200" height="200"/>
     </resources>
 </document>

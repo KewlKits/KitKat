@@ -8,12 +8,22 @@
 
 #import "PoolCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "BackendAPIManager.h"
+#import "SpotifyDataManager.h"
 
 @implementation PoolCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (IBAction)addButtonClicked:(id)sender {
+    [[BackendAPIManager shared] addSongToQueue:[BackendAPIManager shared].party.partyId uri:self.song.songURI title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+        /*if(response){
+            [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songURI];
+        }*/
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

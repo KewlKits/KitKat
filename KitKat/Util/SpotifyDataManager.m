@@ -7,8 +7,18 @@
 //
 
 #import "SpotifyDataManager.h"
+#import "Party.h"
 
 @implementation SpotifyDataManager
+
++ (instancetype)shared {
+    static SpotifyDataManager *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[self alloc] init];
+    });
+    return sharedManager;
+}
 
 +(void)searchSpotify:(NSString *)query type:(NSString *)type withCompletion:(void(^)(NSDictionary *response))completion{
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
@@ -37,32 +47,28 @@
     }];
 }
 
--(void)addTrackToEndOfPlaylist:(NSString*)uri{
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    SPTTrack * track = [self trackFromUri:uri];
-    NSArray * trackArray = [NSArray arrayWithObject:track];
-    [self.playlist addTracksToPlaylist:trackArray withAccessToken:[defaults objectForKey:@"accessToken"] callback:^(NSError *error) {
-        if(error){
-            NSLog(@"%@",error);
-        }
-        else{
-            NSLog(@"added track to end of playlist");
-        }
-    }];
-}
--(SPTTrack*)trackFromUri:(NSString*) uri{
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url = [NSURL URLWithString:uri];
-    __block SPTTrack * track;
+-(void)addTrackToEndOfPartyPlaylist:(NSString*)trackUri {
+    /*NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *url = [NSURL URLWithString:trackUri];
     [SPTTrack trackWithURI:url accessToken:[defaults objectForKey:@"accessToken"] market:nil callback:^(NSError *error, id object) {
         if(error){
             NSLog(@"%@",error);
         }
         else{
             NSLog(@"Successfully retrieved track from uri");
+            NSArray * trackArray = [NSArray arrayWithObject:object];
+            
+            //if party.playlist's uri is nil we should create a new playlist
+            //self.playlist should be getting the playlist from the party object's uri
+            [self.playlist addTracksToPlaylist:trackArray withAccessToken:[defaults objectForKey:@"accessToken"] callback:^(NSError *error) {
+                if(error){
+                    NSLog(@"%@",error);
+                }
+                else{
+                    NSLog(@"added track to end of playlist");
+                }
+            }];
         }
-        track = (SPTTrack*) object;
-    }];
-    return track;
+    }];*/
 }
 @end

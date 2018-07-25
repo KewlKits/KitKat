@@ -33,7 +33,7 @@
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-            [SpotifyDataManager createPlaylist];
+            [[SpotifyDataManager shared] createPlaylist];
         }
         if(completion) {
             completion(jsonResponse, error);
@@ -117,6 +117,7 @@
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
         }
         if(completion) {
+            //[[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:uri];
             completion(jsonResponse, error);
         }
     }];
