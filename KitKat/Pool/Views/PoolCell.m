@@ -24,7 +24,6 @@
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songURI];
         }
     }];
-    [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songURI];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
