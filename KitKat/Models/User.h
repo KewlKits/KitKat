@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface User : NSObject
+@property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSNumber *score;
 

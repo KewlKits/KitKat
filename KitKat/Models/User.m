@@ -12,6 +12,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     
+    self.userId = dictionary[@"_id"];
     self.name = dictionary[@"name"];
     self.score = dictionary[@"score"];
     
