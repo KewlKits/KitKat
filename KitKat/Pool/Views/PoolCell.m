@@ -20,10 +20,11 @@
 
 - (IBAction)addButtonClicked:(id)sender {
     [[BackendAPIManager shared] addSongToQueue:[BackendAPIManager shared].party.partyId uri:self.song.songURI title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
-        /*if(response){
+        if(response){
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songURI];
-        }*/
+        }
     }];
+    [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songURI];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
