@@ -66,6 +66,8 @@
     //set up url
     NSString * url = @"https://api.spotify.com/v1/users/";
     url = [url stringByAppendingString:[NSString stringWithFormat:@"%@/playlists/%@/tracks?uris=%@",userId,spotifyId,trackUri]];
+    
+    //make post request
     [[UNIRest post:^(UNISimpleRequest *request) {
         [request setUrl:url];
         [request setHeaders:headers];

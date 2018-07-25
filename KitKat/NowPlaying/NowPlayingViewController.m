@@ -7,6 +7,7 @@
 //
 
 #import "NowPlayingViewController.h"
+#import "SpotifyDataManager.h"
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import "SpotifySingleton.h"
 #import "BackendAPIManager.h"
@@ -27,27 +28,14 @@
     
     // Become the streaming controller delegate
     self.player.delegate = self;
-    [self playSong:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp"];
-}
-
--(void)startSongManager{
-    //play the first song
-    if(self.queue.count != 0){
-        Song * firstSong = self.queue[0];
-        [self playSong:firstSong.songURI];
-        //remove song from queue
-        [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:firstSong.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
-        }];
-        
-        [self.queue removeObjectAtIndex:0];
-    }
-    while(self.queue.count > 0){
-        
+    SPTPlaylistSnapshot * playlist = [SpotifyDataManager shared].playlist;
+    NSString *uri = [NSString stringWithFormat:@"%@", playlist.uri];
+    if(playlist != nil){
+        [self playUri:uri];
     }
 }
 
--(void)playSong: (NSString *)spotifyURI{
+-(void)playUri: (NSString *)spotifyURI{
     [self.player playSpotifyURI:spotifyURI startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
         if (error != nil) {
             NSLog(@"*** failed to play: %@", error);
