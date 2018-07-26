@@ -7,6 +7,7 @@
 //
 
 #import "NowPlayingViewController.h"
+#import "SpotifyDataManager.h"
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import "SpotifySingleton.h"
 #import "BackendAPIManager.h"
@@ -15,6 +16,8 @@
 @interface NowPlayingViewController ()
 @property (nonatomic, strong) SPTAudioStreamingController *player;
 @property NSMutableArray * queue;
+@property bool playing;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 @end
 
@@ -22,32 +25,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.playing = NO;
+    [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+    
     SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
     self.player = [spotifySingleton getPlayer];
     
     // Become the streaming controller delegate
     self.player.delegate = self;
-    [self playSong:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp"];
-}
-
--(void)startSongManager{
-    //play the first song
-    if(self.queue.count != 0){
-        Song * firstSong = self.queue[0];
-        [self playSong:firstSong.songUri];
-        //remove song from queue
-        [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:firstSong.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
-        }];
-        
-        [self.queue removeObjectAtIndex:0];
-    }
-    while(self.queue.count > 0){
-        
+    
+    //play the playlist
+    SPTPlaylistSnapshot * playlist = [SpotifyDataManager shared].playlist;
+    NSString *uri = [NSString stringWithFormat:@"%@", playlist.uri];
+    if(playlist != nil){
+        [self playUri:uri];
     }
 }
+- (IBAction)onPlay:(id)sender {
+    if(!self.playing){
+        [self.player setIsPlaying:YES callback:nil];
+        [self.playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+        self.playing = YES;
+    }
+    else{
+        [self.player setIsPlaying:NO callback:nil];
+        [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+        self.playing = NO;
+    }
+}
+- (IBAction)onSkip:(id)sender {
+    [self.player skipNext:^(NSError *error) {
+        if(error){
+            NSLog(@"%@",error);
+        }
+    }];
+}
+- (IBAction)onSkipBack:(id)sender {
+    [self.player skipPrevious:^(NSError *error) {
+        if(error){
+            NSLog(@"%@",error);
+        }
+    }];
+}
 
--(void)playSong: (NSString *)spotifyURI{
+-(void)playUri: (NSString *)spotifyURI{
     [self.player playSpotifyURI:spotifyURI startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
         if (error != nil) {
             NSLog(@"*** failed to play: %@", error);
