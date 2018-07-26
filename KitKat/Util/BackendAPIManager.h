@@ -17,7 +17,7 @@
 
 + (instancetype)shared;
 + (void)getAllParties:(void (^_Nonnull)(UNIHTTPJsonResponse*, NSError*))completion;
-- (void)makeParty:(NSString *) partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+- (void)makeParty:(NSString *) partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude playlistUri:(NSString *) playlistUri withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)getAParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)deleteParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)addSongToPool:(NSString*) partyId uri:(NSString*)uri title:(NSString*) title artist:(NSString*) artist album:(NSString*) album albumArtUrlString:(NSString*)albumArtUrlString withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
