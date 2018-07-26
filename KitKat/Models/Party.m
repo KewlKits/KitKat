@@ -16,6 +16,7 @@
     self.name = dictionary[@"name"];
     self.location = dictionary[@"location"];
     self.partyId = dictionary[@"_id"];
+    self.playlistUri = dictionary[@"playlistUri"];
     self.createdAt = dictionary[@"createdAt"];
     
     self.pool = dictionary[@"pool"];

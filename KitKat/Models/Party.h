@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *partyId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSArray<NSNumber *> *location;
+@property (nonatomic, strong) NSString *playlistUri;
 @property (nonatomic, strong) NSDate *createdAt;
 
 @property (nonatomic, strong) NSString *ownerId;
