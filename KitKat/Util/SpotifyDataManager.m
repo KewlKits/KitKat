@@ -50,6 +50,9 @@
 }
 
 -(void)addTrackToEndOfPartyPlaylist:(NSString*)trackUri {
+    if(!self.playlist){
+        self.playlist = [BackendAPIManager shared].party.playlistUri;
+    }
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *headers = @{@"Accept": @"application/json",@"Content-Type": @"application/json", @"Authorization":[NSString stringWithFormat:@"Bearer %@", [defaults objectForKey:@"accessToken"]]};
     
