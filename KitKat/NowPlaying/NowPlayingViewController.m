@@ -9,15 +9,20 @@
 #import "NowPlayingViewController.h"
 #import "SpotifyDataManager.h"
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+#import <SpotifyMetadata/SpotifyMetadata.h>
 #import "SpotifySingleton.h"
 #import "BackendAPIManager.h"
 #import "Song.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface NowPlayingViewController ()
 @property (nonatomic, strong) SPTAudioStreamingController *player;
 @property NSMutableArray * queue;
 @property bool playing;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *songImageView;
 
 @end
 
@@ -35,7 +40,7 @@
     self.player.delegate = self;
     
     //play the playlist
-    NSString *uri = [SpotifyDataManager shared].playlist;
+    NSString *uri = [BackendAPIManager shared].party.playlistUri;
     if(uri != nil){
         [self playUri:uri];
     }
@@ -51,12 +56,14 @@
         [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
         self.playing = NO;
     }
+    [self updateUI];
 }
 - (IBAction)onSkip:(id)sender {
     [self.player skipNext:^(NSError *error) {
         if(error){
             NSLog(@"%@",error);
         }
+        [self updateUI];
     }];
 }
 - (IBAction)onSkipBack:(id)sender {
@@ -64,7 +71,14 @@
         if(error){
             NSLog(@"%@",error);
         }
+        [self updateUI];
     }];
+}
+-(void)updateUI{
+    [self.player metadata];
+    self.songTitleLabel.text = self.player.metadata.currentTrack.name;
+    self.artistNameLabel.text = self.player.metadata.currentTrack.artistName;
+    [self.songImageView setImageWithURL:[NSURL URLWithString:self.player.metadata.currentTrack.albumCoverArtURL]];
 }
 
 -(void)playUri: (NSString *)spotifyURI{
