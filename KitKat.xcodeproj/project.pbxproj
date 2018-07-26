@@ -35,6 +35,8 @@
 		678AC0F420FFBB29000CD978 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 678AC0F320FFBB29000CD978 /* SystemConfiguration.framework */; };
 		678AC0F620FFFE9D000CD978 /* fox.png in Resources */ = {isa = PBXBuildFile; fileRef = 678AC0F520FFFE9D000CD978 /* fox.png */; };
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
+		E840CE4F210801C800466F1A /* SpotifySong.m in Sources */ = {isa = PBXBuildFile; fileRef = E840CE4E210801C800466F1A /* SpotifySong.m */; };
+		E840CE522108F9A800466F1A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E840CE512108F9A800466F1A /* User.m */; };
 		E897D5032102621B00BF33AD /* PartyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E897D5022102621B00BF33AD /* PartyCell.m */; };
 		E897D512210281BF00BF33AD /* AbstractSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E897D511210281BF00BF33AD /* AbstractSongCell.m */; };
 		E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C9482020FFAFF300962B4D /* AppDelegate.m */; };
@@ -91,6 +93,10 @@
 		97B709FF732FA2C63C67C79E /* Pods-KitKat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.debug.xcconfig"; sourceTree = "<group>"; };
 		A0BCB2D73B8353EE2827BCA8 /* Pods-KitKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KitKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-KitKat/Pods-KitKat.release.xcconfig"; sourceTree = "<group>"; };
 		E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KitKat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E840CE4D210801C800466F1A /* SpotifySong.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifySong.h; sourceTree = "<group>"; };
+		E840CE4E210801C800466F1A /* SpotifySong.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifySong.m; sourceTree = "<group>"; };
+		E840CE502108F9A800466F1A /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		E840CE512108F9A800466F1A /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		E897D5012102620900BF33AD /* PartyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyCell.h; sourceTree = "<group>"; };
 		E897D5022102621B00BF33AD /* PartyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartyCell.m; sourceTree = "<group>"; };
 		E897D510210281BF00BF33AD /* AbstractSongCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractSongCell.h; sourceTree = "<group>"; };
@@ -152,6 +158,10 @@
 				1982EC4420FFBB0400336246 /* Song.m */,
 				1982EC4620FFBB1400336246 /* Party.h */,
 				1982EC4720FFBB1400336246 /* Party.m */,
+				E840CE4D210801C800466F1A /* SpotifySong.h */,
+				E840CE4E210801C800466F1A /* SpotifySong.m */,
+				E840CE502108F9A800466F1A /* User.h */,
+				E840CE512108F9A800466F1A /* User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E840CE522108F9A800466F1A /* User.m in Sources */,
 				1982EC4520FFBB0400336246 /* Song.m in Sources */,
 				6708BCA02106459F00EC1231 /* NowPlayingViewController.m in Sources */,
 				678606D02100FEE0003EA77F /* PoolViewController.m in Sources */,
@@ -465,6 +476,7 @@
 				E897D5032102621B00BF33AD /* PartyCell.m in Sources */,
 				E897D512210281BF00BF33AD /* AbstractSongCell.m in Sources */,
 				6708BCA32106571000EC1231 /* SpotifySingleton.m in Sources */,
+				E840CE4F210801C800466F1A /* SpotifySong.m in Sources */,
 				678606D92100FF35003EA77F /* PoolCell.m in Sources */,
 				678AC0E420FFB612000CD978 /* SearchViewController.m in Sources */,
 				E8C9482120FFAFF300962B4D /* AppDelegate.m in Sources */,

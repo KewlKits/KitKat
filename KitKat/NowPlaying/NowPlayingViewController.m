@@ -80,7 +80,7 @@
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
-            self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
+            self.queue = (NSMutableArray *)[Song songsWithArray:response.body.object[@"queue"]];
         }
     }];
 }
