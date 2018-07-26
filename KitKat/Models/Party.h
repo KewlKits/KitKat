@@ -20,6 +20,6 @@
 @property (nonatomic, strong) NSArray<NSString *> *queue;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (NSArray<Song *> *)fetchPool;
-- (NSArray<Song *> *)fetchQueue;
+- (NSMutableArray<Song *> *)fetchPool;
+- (NSMutableArray<Song *> *)fetchQueue;
 @end

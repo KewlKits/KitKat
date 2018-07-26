@@ -46,7 +46,7 @@
             temporary = response[@"tracks"][@"items"];
         }
         
-        self.searchResults = [Song songsWithSpotifyArray:temporary];
+        self.searchResults = [SpotifySong songsWithArray:temporary];
         [self.tableView reloadData];
     }];
 }

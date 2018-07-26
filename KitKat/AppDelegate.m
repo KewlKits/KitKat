@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "SpotifySingleton.h"
+#import "BackendAPIManager.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) SPTAuth *auth;
@@ -90,6 +92,10 @@
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:self.auth.session.canonicalUsername forKey:@"username"];
                 [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
+                
+                [[BackendAPIManager shared] touchUser:self.auth.session.canonicalUsername withCompletion:^(UNIHTTPJsonResponse *a, NSError *aa) {
+                    NSLog(@"%@", [BackendAPIManager shared].currentUser);
+                }];
             }
         }];
         

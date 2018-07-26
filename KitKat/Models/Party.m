@@ -25,27 +25,19 @@
     return self;
 }
 
-- (NSArray<Song *> *)fetchPool {
-    NSMutableArray *poolSongs = [NSMutableArray arrayWithCapacity:self.pool.count];
+- (NSMutableArray<Song *> *)fetchPool {
+    NSMutableArray<Song *> *poolSongs = [NSMutableArray arrayWithCapacity:self.pool.count];
     for (int i = 0; i < self.pool.count; i += 1) {
-        [[BackendAPIManager shared] getASong:self.pool[i] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            if (!error) {
-                poolSongs[i] = [[Song alloc] initWithDictionary:response.body.object];
-            }
-        }];
+        poolSongs[i] = [[BackendAPIManager shared] getASongSync:self.pool[i] withCompletion:nil];
     }
     
     return poolSongs;
 }
 
-- (NSArray<Song *> *)fetchQueue {
-    NSMutableArray *queueSongs = [NSMutableArray arrayWithCapacity:self.pool.count];
-    for (int i = 0; i < self.pool.count; i += 1) {
-        [[BackendAPIManager shared] getASong:self.queue[i] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            if (!error) {
-                queueSongs[i] = [[Song alloc] initWithDictionary:response.body.object];
-            }
-        }];
+- (NSMutableArray<Song *> *)fetchQueue {
+    NSMutableArray *queueSongs = [NSMutableArray arrayWithCapacity:self.queue.count];
+    for (int i = 0; i < self.queue.count; i += 1) {
+        queueSongs[i] = [[BackendAPIManager shared] getASongSync:self.queue[i] withCompletion:nil];
     }
     
     return queueSongs;

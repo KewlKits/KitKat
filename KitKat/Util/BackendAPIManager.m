@@ -8,6 +8,7 @@
 
 #import "BackendAPIManager.h"
 #import "SpotifyDataManager.h"
+#import "Song.h"
 @implementation BackendAPIManager
 
 + (instancetype)shared {
@@ -26,6 +27,7 @@
 }
 
 - (void)makeParty:(NSString *) partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+//    self.
     [[UNIRest postEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party"];
         [unibodyRequest setHeaders: @{@"Content-Type": @"application/json"}];
@@ -47,7 +49,7 @@
     }] asJsonAsync:completion];
 }
 
-//- (void) deleteParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+- (void) deleteParty: (NSString *) partyId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
 //    NSString *preURL = [@"https://kk-backend.herokuapp.com/party/" stringByAppendingString:partyId];
 //
 //    [[UNIRest delete:^(UNISimpleRequest *simpleRequest) {
@@ -60,7 +62,7 @@
 //            completion(jsonResponse, error);
 //        }
 //    }];
-//}
+}
 
 - (void)addSongToPool:(NSString*) partyId uri:(NSString*)uri title:(NSString*) title artist:(NSString*) artist album:(NSString*) album albumArtUrlString:(NSString*)albumArtUrlString withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
@@ -77,7 +79,7 @@
     }];
 }
 
-//- (void) removeSongFromPool:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+- (void) removeSongFromPool:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
 //    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
 //        [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party/%@/pool/remove"];
 //        [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
@@ -90,7 +92,7 @@
 //            completion(jsonResponse, error);
 //        }
 //    }];
-//}
+}
 
 - (void) moveSongFromPoolToQueue:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
@@ -123,7 +125,7 @@
     }];
 }
 
-//- (void) removeSongFromQueue:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+- (void) removeSongFromQueue:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
 //    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
 //        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/queue/remove", partyId]];
 //        [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
@@ -136,7 +138,7 @@
 //            completion(jsonResponse, error);
 //        }
 //    }];
-//}
+}
 
 - (void)moveSongWithinQueue:(NSString*) partyId index:(NSNumber*) index target:(NSNumber*) target withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
@@ -207,6 +209,14 @@
     [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:[@"https://kk-backend.herokuapp.com/song/" stringByAppendingString:songId]];
     }] asJsonAsync:completion];
+}
+
+- (Song *)getASongSync: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    UNIHTTPJsonResponse *response = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setUrl:[@"https://kk-backend.herokuapp.com/song/" stringByAppendingString:songId]];
+    }]asJson];
+    
+    return [[Song alloc] initWithDictionary:response.body.object];
 }
 
 - (void)upvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
