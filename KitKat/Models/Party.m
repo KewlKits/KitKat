@@ -31,7 +31,6 @@
     for (int i = 0; i < self.pool.count; i += 1) {
         poolSongs[i] = [[BackendAPIManager shared] getASongSync:self.pool[i] withCompletion:nil];
     }
-    
     return poolSongs;
 }
 

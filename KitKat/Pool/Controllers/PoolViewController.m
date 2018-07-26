@@ -37,7 +37,16 @@
         if(response){
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 if(response){
-                    self.poolSongs = [[BackendAPIManager shared].party fetchPool];
+                    self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                        NSLog(@"%@", obj1.songTitle);
+                        NSDate *d1 = obj1.createdAt;
+                        NSDate *d2 = obj2.createdAt;
+                        NSLog(@"%@", d1);
+                        NSLog(@"%@", d2);
+                        NSComparisonResult result = [d1 compare:d2];
+                        return result;
+                    }];
+                    
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
                     });
