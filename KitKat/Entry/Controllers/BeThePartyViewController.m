@@ -49,6 +49,7 @@
     NSNumber *partyLat = [NSNumber numberWithDouble: self.thisPartyLoc.coordinate.latitude];
     NSLog(@"LONGITUDE %@", partyLong);
    NSLog(@"LATITUDE %@", partyLat);
+    
    // [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
     [[BackendAPIManager shared] makeParty:partyName longitude:partyLong latitude:partyLat playlistUri:@"" withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         Party *party =  [[Party alloc] initWithDictionary: response.body.object];
