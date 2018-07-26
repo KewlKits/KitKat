@@ -13,6 +13,7 @@
 
 @interface QueueViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @property(strong, nonatomic) NSMutableArray<Song *> *queue;
 
@@ -25,6 +26,8 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.editButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
     
     [self populateQueue];
 }

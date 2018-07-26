@@ -245,6 +245,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="RCi-Z4-ewA" id="YTn-tP-yZH"/>
                         <outlet property="tableView" destination="o8N-3x-4JG" id="BFf-WV-nP2"/>
                     </connections>
                 </viewController>
@@ -389,6 +390,7 @@
                                         <connections>
                                             <outlet property="albumCover" destination="eEE-Lm-yBk" id="hG8-AY-V00"/>
                                             <outlet property="artistAlbumLabel" destination="0XF-d4-wcs" id="M6C-ca-3AU"/>
+                                            <outlet property="moveToQueueButton" destination="1co-7O-qIS" id="xvv-sg-rbL"/>
                                             <outlet property="songTitleLabel" destination="cms-hX-iHK" id="k3x-Nb-kXI"/>
                                         </connections>
                                     </tableViewCell>

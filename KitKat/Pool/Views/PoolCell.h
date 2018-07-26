@@ -10,4 +10,5 @@
 #import "AbstractSongCell.h"
 
 @interface PoolCell : AbstractSongCell
+@property (weak, nonatomic) IBOutlet UIButton *moveToQueueButton;
 @end

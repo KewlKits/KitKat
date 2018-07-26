@@ -94,7 +94,7 @@
 
 - (void) moveSongFromPoolToQueue:(NSString*) partyId songId:(NSString*) songId withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party/%@/pool"];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/pool", partyId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": songId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
