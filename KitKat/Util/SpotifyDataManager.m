@@ -48,27 +48,36 @@
 }
 
 -(void)addTrackToEndOfPartyPlaylist:(NSString*)trackUri {
-    /*NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *url = [NSURL URLWithString:trackUri];
-    [SPTTrack trackWithURI:url accessToken:[defaults objectForKey:@"accessToken"] market:nil callback:^(NSError *error, id object) {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *headers = @{@"Accept": @"application/json",@"Content-Type": @"application/json", @"Authorization":[NSString stringWithFormat:@"Bearer %@", [defaults objectForKey:@"accessToken"]]};
+    
+    //get user id
+    UNIHTTPJsonResponse *userResponse = [[UNIRest get:^(UNISimpleRequest *request) {
+        [request setUrl:@"https://api.spotify.com/v1/me"];
+        [request setHeaders:headers];
+    }] asJson];
+    NSString * userId = userResponse.body.object[@"id"];
+    
+    //get the playlist's spotify id from the uri
+    NSString *uri = [NSString stringWithFormat:@"%@", self.playlist.uri];
+    NSArray *items = [uri componentsSeparatedByString:@":"];
+    NSString *spotifyId = [items objectAtIndex:4];
+    
+    //set up url
+    NSString * url = @"https://api.spotify.com/v1/users/";
+    url = [url stringByAppendingString:[NSString stringWithFormat:@"%@/playlists/%@/tracks?uris=%@",userId,spotifyId,trackUri]];
+    
+    //make post request
+    [[UNIRest post:^(UNISimpleRequest *request) {
+        [request setUrl:url];
+        [request setHeaders:headers];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *response, NSError *error) {
         if(error){
             NSLog(@"%@",error);
         }
         else{
-            NSLog(@"Successfully retrieved track from uri");
-            NSArray * trackArray = [NSArray arrayWithObject:object];
-            
-            //if party.playlist's uri is nil we should create a new playlist
-            //self.playlist should be getting the playlist from the party object's uri
-            [self.playlist addTracksToPlaylist:trackArray withAccessToken:[defaults objectForKey:@"accessToken"] callback:^(NSError *error) {
-                if(error){
-                    NSLog(@"%@",error);
-                }
-                else{
-                    NSLog(@"added track to end of playlist");
-                }
-            }];
+            NSLog(@"%@",response.body.object[@"snapshot_id"]);
         }
-    }];*/
+    }];
 }
 @end

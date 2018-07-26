@@ -16,6 +16,10 @@
 		6708BC9D2106451A00EC1231 /* NowPlayingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6708BC9C2106451A00EC1231 /* NowPlayingStoryboard.storyboard */; };
 		6708BCA02106459F00EC1231 /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */; };
 		6708BCA32106571000EC1231 /* SpotifySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCA22106571000EC1231 /* SpotifySingleton.m */; };
+		6708BCA5210947DF00EC1231 /* skip_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA4210947DF00EC1231 /* skip_forward.png */; };
+		6708BCA72109480500EC1231 /* skip_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA62109480500EC1231 /* skip_back.png */; };
+		6708BCA92109485500EC1231 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA82109485500EC1231 /* play.png */; };
+		6708BCAB21094CCD00EC1231 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAA21094CCD00EC1231 /* pause.png */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
 		678606D32100FF03003EA77F /* QueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D22100FF03003EA77F /* QueueViewController.m */; };
 		678606D62100FF27003EA77F /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D52100FF27003EA77F /* QueueCell.m */; };
@@ -61,6 +65,10 @@
 		6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NowPlayingViewController.m; path = NowPlaying/NowPlayingViewController.m; sourceTree = "<group>"; };
 		6708BCA12106571000EC1231 /* SpotifySingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifySingleton.h; sourceTree = "<group>"; };
 		6708BCA22106571000EC1231 /* SpotifySingleton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifySingleton.m; sourceTree = "<group>"; };
+		6708BCA4210947DF00EC1231 /* skip_forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_forward.png; sourceTree = "<group>"; };
+		6708BCA62109480500EC1231 /* skip_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_back.png; sourceTree = "<group>"; };
+		6708BCA82109485500EC1231 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		6708BCAA21094CCD00EC1231 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		678606CE2100FEE0003EA77F /* PoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoolViewController.h; sourceTree = "<group>"; };
 		678606CF2100FEE0003EA77F /* PoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolViewController.m; sourceTree = "<group>"; };
 		678606D12100FF03003EA77F /* QueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueueViewController.h; sourceTree = "<group>"; };
@@ -193,6 +201,10 @@
 		678606DA2101010B003EA77F /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				6708BCA82109485500EC1231 /* play.png */,
+				6708BCAA21094CCD00EC1231 /* pause.png */,
+				6708BCA4210947DF00EC1231 /* skip_forward.png */,
+				6708BCA62109480500EC1231 /* skip_back.png */,
 				678AC0F520FFFE9D000CD978 /* fox.png */,
 				678606DB21010124003EA77F /* upicon.png */,
 				678606DD2101012D003EA77F /* downicon.png */,
@@ -408,9 +420,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6708BCA5210947DF00EC1231 /* skip_forward.png in Resources */,
+				6708BCAB21094CCD00EC1231 /* pause.png in Resources */,
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				19626384210006C80064BC6A /* Entry.storyboard in Resources */,
+				6708BCA72109480500EC1231 /* skip_back.png in Resources */,
 				E8C9482920FFAFF500962B4D /* Assets.xcassets in Resources */,
+				6708BCA92109485500EC1231 /* play.png in Resources */,
 				6708BC9D2106451A00EC1231 /* NowPlayingStoryboard.storyboard in Resources */,
 				678606DE2101012D003EA77F /* downicon.png in Resources */,
 				678606E821014092003EA77F /* gray-circle.png in Resources */,
