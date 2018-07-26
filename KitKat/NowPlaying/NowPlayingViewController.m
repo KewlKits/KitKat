@@ -35,9 +35,8 @@
     self.player.delegate = self;
     
     //play the playlist
-    SPTPlaylistSnapshot * playlist = [SpotifyDataManager shared].playlist;
-    NSString *uri = [NSString stringWithFormat:@"%@", playlist.uri];
-    if(playlist != nil){
+    NSString *uri = [SpotifyDataManager shared].playlist;
+    if(uri != nil){
         [self playUri:uri];
     }
 }

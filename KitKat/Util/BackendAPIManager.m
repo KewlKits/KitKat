@@ -26,7 +26,7 @@
     }] asJsonAsync:completion];
 }
 
-- (void)makeParty:(NSString *) partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude playlistUri:(NSString *) playlistUri withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+- (void)makeParty:(NSString *)partyName longitude:(NSNumber *)longitude latitude: (NSNumber *) latitude playlistUri:(NSString *) playlistUri withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest postEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party"];
         [unibodyRequest setHeaders: @{@"Content-Type": @"application/json"}];
@@ -34,7 +34,6 @@
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-            [[SpotifyDataManager shared] createPlaylist];
         }
         if(completion) {
             completion(jsonResponse, error);
