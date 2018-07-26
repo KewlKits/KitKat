@@ -92,6 +92,8 @@
                     <connections>
                         <outlet property="artistNameLabel" destination="eOq-E2-jGv" id="wzY-Qb-bsD"/>
                         <outlet property="playButton" destination="YEw-vg-FHn" id="13r-gO-g5u"/>
+                        <outlet property="skipBackButton" destination="Wm5-Lh-gkf" id="YAC-JY-o6S"/>
+                        <outlet property="skipForwardButton" destination="W6D-ui-wTF" id="o41-VO-KG2"/>
                         <outlet property="songImageView" destination="B4E-dV-Rcg" id="mAA-bp-bBF"/>
                         <outlet property="songTitleLabel" destination="qRG-w5-BTJ" id="MKq-ti-hPf"/>
                     </connections>
