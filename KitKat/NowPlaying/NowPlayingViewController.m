@@ -18,6 +18,8 @@
 @property NSMutableArray * queue;
 @property bool playing;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipForwardButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipBackButton;
 
 @end
 
@@ -25,6 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.playButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    self.skipForwardButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    self.skipBackButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+
+    
     self.playing = NO;
     [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
     
