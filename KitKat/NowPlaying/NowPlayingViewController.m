@@ -28,11 +28,27 @@
     
     // Become the streaming controller delegate
     self.player.delegate = self;
+}
+- (IBAction)onPlay:(id)sender {
     SPTPlaylistSnapshot * playlist = [SpotifyDataManager shared].playlist;
     NSString *uri = [NSString stringWithFormat:@"%@", playlist.uri];
     if(playlist != nil){
         [self playUri:uri];
     }
+}
+- (IBAction)onSkip:(id)sender {
+    [self.player skipNext:^(NSError *error) {
+        if(error){
+            NSLog(@"%@",error);
+        }
+    }];
+}
+- (IBAction)onSkipBack:(id)sender {
+    [self.player skipPrevious:^(NSError *error) {
+        if(error){
+            NSLog(@"%@",error);
+        }
+    }];
 }
 
 -(void)playUri: (NSString *)spotifyURI{

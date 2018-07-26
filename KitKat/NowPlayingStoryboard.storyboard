@@ -18,13 +18,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello Storyboards!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP2-EO-nvs">
-                                <rect key="frame" x="154" y="314" width="143" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEw-vg-FHn">
+                                <rect key="frame" x="169" y="273" width="37" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Play" image="play.png"/>
+                                <connections>
+                                    <action selector="onPlay:" destination="83f-zJ-daf" eventType="touchUpInside" id="K0p-PH-gKU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6D-ui-wTF">
+                                <rect key="frame" x="233" y="259" width="82" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Skip Forward" image="skip_forward.png"/>
+                                <connections>
+                                    <action selector="onSkip:" destination="83f-zJ-daf" eventType="touchUpInside" id="2KG-KY-N3b"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm5-Lh-gkf">
+                                <rect key="frame" x="55" y="258" width="82" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Skip Back" image="skip_back.png"/>
+                                <connections>
+                                    <action selector="onSkipBack:" destination="83f-zJ-daf" eventType="touchUpInside" id="xel-lC-bp3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="NRq-42-dWN"/>
@@ -36,4 +53,9 @@
             <point key="canvasLocation" x="920.79999999999995" y="-14.842578710644679"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="play.png" width="86" height="113"/>
+        <image name="skip_back.png" width="192" height="192"/>
+        <image name="skip_forward.png" width="192" height="192"/>
+    </resources>
 </document>
