@@ -18,57 +18,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bcI-F0-BdQ">
-                                <rect key="frame" x="67" y="292" width="241" height="83"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rhd-VO-Qi1">
+                                <rect key="frame" x="37.5" y="92" width="300" height="484"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm5-Lh-gkf">
-                                        <rect key="frame" x="0.0" y="0.0" width="82" height="83"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B4E-dV-Rcg">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="82" id="a29-Ji-7Qb"/>
-                                            <constraint firstAttribute="height" constant="83" id="lpd-bI-OQl"/>
+                                            <constraint firstAttribute="height" constant="300" id="J0m-Fg-e1s"/>
+                                            <constraint firstAttribute="width" constant="300" id="wqf-45-I0K"/>
                                         </constraints>
-                                        <state key="normal" title="Skip Back" image="skip_back.png"/>
-                                        <connections>
-                                            <action selector="onSkipBack:" destination="83f-zJ-daf" eventType="touchUpInside" id="xel-lC-bp3"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEw-vg-FHn">
-                                        <rect key="frame" x="102" y="15" width="37" height="53"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="37" id="LcK-Ye-uD5"/>
-                                            <constraint firstAttribute="height" constant="53" id="jwS-EX-RyI"/>
-                                        </constraints>
-                                        <state key="normal" title="Play" image="play.png"/>
-                                        <connections>
-                                            <action selector="onPlay:" destination="83f-zJ-daf" eventType="touchUpInside" id="K0p-PH-gKU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6D-ui-wTF">
-                                        <rect key="frame" x="159" y="0.5" width="82" height="82"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="82" id="3MM-Dh-bh9"/>
-                                            <constraint firstAttribute="height" constant="82" id="bHZ-6d-kv4"/>
-                                        </constraints>
-                                        <state key="normal" title="Skip Forward" image="skip_forward.png"/>
-                                        <connections>
-                                            <action selector="onSkip:" destination="83f-zJ-daf" eventType="touchUpInside" id="2KG-KY-N3b"/>
-                                        </connections>
-                                    </button>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRG-w5-BTJ">
+                                        <rect key="frame" x="111.5" y="320" width="77.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOq-E2-jGv">
+                                        <rect key="frame" x="104.5" y="360.5" width="91" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bcI-F0-BdQ">
+                                        <rect key="frame" x="29.5" y="401" width="241" height="83"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wm5-Lh-gkf">
+                                                <rect key="frame" x="0.0" y="0.0" width="82" height="83"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="82" id="a29-Ji-7Qb"/>
+                                                    <constraint firstAttribute="height" constant="83" id="lpd-bI-OQl"/>
+                                                </constraints>
+                                                <state key="normal" title="Skip Back" image="skip_back.png"/>
+                                                <connections>
+                                                    <action selector="onSkipBack:" destination="83f-zJ-daf" eventType="touchUpInside" id="xel-lC-bp3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEw-vg-FHn">
+                                                <rect key="frame" x="102" y="15" width="37" height="53"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="37" id="LcK-Ye-uD5"/>
+                                                    <constraint firstAttribute="height" constant="53" id="jwS-EX-RyI"/>
+                                                </constraints>
+                                                <state key="normal" title="Play" image="play.png"/>
+                                                <connections>
+                                                    <action selector="onPlay:" destination="83f-zJ-daf" eventType="touchUpInside" id="K0p-PH-gKU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6D-ui-wTF">
+                                                <rect key="frame" x="159" y="0.5" width="82" height="82"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="82" id="3MM-Dh-bh9"/>
+                                                    <constraint firstAttribute="height" constant="82" id="bHZ-6d-kv4"/>
+                                                </constraints>
+                                                <state key="normal" title="Skip Forward" image="skip_forward.png"/>
+                                                <connections>
+                                                    <action selector="onSkip:" destination="83f-zJ-daf" eventType="touchUpInside" id="2KG-KY-N3b"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="bcI-F0-BdQ" firstAttribute="centerY" secondItem="Php-pm-gLj" secondAttribute="centerY" id="ClA-V8-9JB"/>
-                            <constraint firstItem="bcI-F0-BdQ" firstAttribute="centerX" secondItem="Php-pm-gLj" secondAttribute="centerX" id="dbr-QA-rzg"/>
+                            <constraint firstItem="Rhd-VO-Qi1" firstAttribute="centerX" secondItem="Php-pm-gLj" secondAttribute="centerX" id="R27-e7-AM1"/>
+                            <constraint firstItem="Rhd-VO-Qi1" firstAttribute="centerY" secondItem="Php-pm-gLj" secondAttribute="centerY" id="yIc-Dh-FO4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="NRq-42-dWN"/>
                     </view>
                     <navigationItem key="navigationItem" id="v33-vi-zic"/>
                     <connections>
+                        <outlet property="artistNameLabel" destination="eOq-E2-jGv" id="wzY-Qb-bsD"/>
                         <outlet property="playButton" destination="YEw-vg-FHn" id="13r-gO-g5u"/>
                         <outlet property="skipBackButton" destination="Wm5-Lh-gkf" id="YAC-JY-o6S"/>
                         <outlet property="skipForwardButton" destination="W6D-ui-wTF" id="o41-VO-KG2"/>
+                        <outlet property="songImageView" destination="B4E-dV-Rcg" id="mAA-bp-bBF"/>
+                        <outlet property="songTitleLabel" destination="qRG-w5-BTJ" id="MKq-ti-hPf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hgx-dd-rwE" userLabel="First Responder" sceneMemberID="firstResponder"/>
