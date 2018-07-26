@@ -41,6 +41,7 @@
 }
 - (IBAction)onEditTapped:(id)sender {
     [self.tableView setEditing:!self.tableView.isEditing animated:YES];
+    [self.editButton setTitle:(self.tableView.isEditing) ? @"Done" : @"Edit" forState:UIControlStateNormal];
 }
 
 - (void)populateQueue {
