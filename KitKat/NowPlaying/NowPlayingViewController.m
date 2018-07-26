@@ -16,6 +16,8 @@
 @interface NowPlayingViewController ()
 @property (nonatomic, strong) SPTAudioStreamingController *player;
 @property NSMutableArray * queue;
+@property bool playing;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 @end
 
@@ -23,17 +25,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.playing = NO;
+    [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+    
     SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
     self.player = [spotifySingleton getPlayer];
     
     // Become the streaming controller delegate
     self.player.delegate = self;
-}
-- (IBAction)onPlay:(id)sender {
+    
+    //play the playlist
     SPTPlaylistSnapshot * playlist = [SpotifyDataManager shared].playlist;
     NSString *uri = [NSString stringWithFormat:@"%@", playlist.uri];
     if(playlist != nil){
         [self playUri:uri];
+    }
+}
+- (IBAction)onPlay:(id)sender {
+    if(!self.playing){
+        [self.player setIsPlaying:YES callback:nil];
+        [self.playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+        self.playing = YES;
+    }
+    else{
+        [self.player setIsPlaying:NO callback:nil];
+        [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+        self.playing = NO;
     }
 }
 - (IBAction)onSkip:(id)sender {

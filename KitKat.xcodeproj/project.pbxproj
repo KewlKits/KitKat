@@ -19,6 +19,7 @@
 		6708BCA5210947DF00EC1231 /* skip_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA4210947DF00EC1231 /* skip_forward.png */; };
 		6708BCA72109480500EC1231 /* skip_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA62109480500EC1231 /* skip_back.png */; };
 		6708BCA92109485500EC1231 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCA82109485500EC1231 /* play.png */; };
+		6708BCAB21094CCD00EC1231 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAA21094CCD00EC1231 /* pause.png */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
 		678606D32100FF03003EA77F /* QueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D22100FF03003EA77F /* QueueViewController.m */; };
 		678606D62100FF27003EA77F /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D52100FF27003EA77F /* QueueCell.m */; };
@@ -65,6 +66,7 @@
 		6708BCA4210947DF00EC1231 /* skip_forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_forward.png; sourceTree = "<group>"; };
 		6708BCA62109480500EC1231 /* skip_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip_back.png; sourceTree = "<group>"; };
 		6708BCA82109485500EC1231 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		6708BCAA21094CCD00EC1231 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		678606CE2100FEE0003EA77F /* PoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoolViewController.h; sourceTree = "<group>"; };
 		678606CF2100FEE0003EA77F /* PoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolViewController.m; sourceTree = "<group>"; };
 		678606D12100FF03003EA77F /* QueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueueViewController.h; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				6708BCA82109485500EC1231 /* play.png */,
+				6708BCAA21094CCD00EC1231 /* pause.png */,
 				6708BCA4210947DF00EC1231 /* skip_forward.png */,
 				6708BCA62109480500EC1231 /* skip_back.png */,
 				678AC0F520FFFE9D000CD978 /* fox.png */,
@@ -408,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6708BCA5210947DF00EC1231 /* skip_forward.png in Resources */,
+				6708BCAB21094CCD00EC1231 /* pause.png in Resources */,
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				19626384210006C80064BC6A /* Entry.storyboard in Resources */,
 				6708BCA72109480500EC1231 /* skip_back.png in Resources */,
