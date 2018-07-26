@@ -17,8 +17,8 @@
 
 @interface SpotifyDataManager : NSObject
 + (instancetype)shared;
-@property (strong,nonatomic) SPTPlaylistSnapshot * playlist;
+@property (strong,nonatomic) NSString * playlist;
 +(void)searchSpotify:(NSString *)query type:(NSString *)type withCompletion:(void(^)(NSDictionary *response))completion;
--(void)createPlaylist;
+-(void)createPlaylist:(NSString*) partyName withCompletion:(void (^_Nullable)(NSError*, NSString*))completion;
 -(void)addTrackToEndOfPartyPlaylist:(NSString*)trackUri;
 @end

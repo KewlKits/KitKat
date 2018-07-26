@@ -32,17 +32,19 @@
     completion(response.body.object);
 }
 
--(void)createPlaylist{
+-(void)createPlaylist:(NSString*)partyName withCompletion:(void (^_Nullable)(NSError*, NSString*))completion{
     // Creates a playlist for the signed in user with the name of the party
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [SPTPlaylistList createPlaylistWithName:[[BackendAPIManager shared] party].name forUser:[defaults objectForKey:@"username"] publicFlag:YES accessToken:[defaults objectForKey:@"accessToken"] callback:^(NSError *error, SPTPlaylistSnapshot *playlist) {
-        if(error){
+    [SPTPlaylistList createPlaylistWithName:partyName forUser:[defaults objectForKey:@"username"] publicFlag:YES accessToken:[defaults objectForKey:@"accessToken"] callback:^(NSError *error, SPTPlaylistSnapshot *playlist) {
+        if(!error){
             NSLog(@"%@",error);
-        }
-        else{
             NSLog(@"Successfully Initialized a new playlist");
             //save the uri for the playlist in the party object
-            self.playlist = playlist;
+            NSString* playlistUri = [NSString stringWithFormat:@"%@", playlist.uri];
+            self.playlist = playlistUri;
+        }
+        if(completion){
+            completion(error,self.playlist);
         }
     }];
 }
@@ -59,7 +61,7 @@
     NSString * userId = userResponse.body.object[@"id"];
     
     //get the playlist's spotify id from the uri
-    NSString *uri = [NSString stringWithFormat:@"%@", self.playlist.uri];
+    NSString *uri = [NSString stringWithFormat:@"%@", self.playlist];
     NSArray *items = [uri componentsSeparatedByString:@":"];
     NSString *spotifyId = [items objectAtIndex:4];
     
