@@ -43,7 +43,7 @@
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
-            self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
+            self.queue = [[BackendAPIManager shared].party fetchQueue];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
             });
@@ -79,7 +79,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:self.queue[indexPath.row].songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
+            self.queue = [[BackendAPIManager shared].party fetchQueue];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
             });
@@ -97,7 +97,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[BackendAPIManager shared] moveSongWithinQueue:[BackendAPIManager shared].party.partyId index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
+            self.queue = [[BackendAPIManager shared].party fetchQueue];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];
             });

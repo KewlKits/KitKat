@@ -7,18 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SpotifySong.h"
 
-@interface Song : NSObject
+@interface Song : SpotifySong
 
 @property (nonatomic, strong) NSString *songId;
-@property (nonatomic, strong) NSString *songURI;
-@property (nonatomic, strong) NSString *songTitle;
-@property (nonatomic, strong) NSString *songArtist;
-@property (nonatomic, strong) NSString *songAlbum;
-@property (nonatomic, strong) NSString *songAlbumArt;
 @property (nonatomic, strong) NSDate *createdAt;
 
+@property (nonatomic, strong) NSString *partyId;
+@property (nonatomic, strong) NSString *ownerId;
+@property (nonatomic, strong) NSArray<NSString *> *upvotedBy;
+@property (nonatomic, strong) NSArray<NSString *> *downvotedBy;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-+ (NSArray<Song *> *)songsWithSpotifyArray:(NSArray *)dicts;
-+ (NSArray<Song *> *)songsWithDatabaseArray:(NSArray *)dicts;
++ (NSArray<Song *> *)songsWithArray:(NSArray *)dicts;
 @end

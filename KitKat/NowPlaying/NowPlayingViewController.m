@@ -34,7 +34,7 @@
     //play the first song
     if(self.queue.count != 0){
         Song * firstSong = self.queue[0];
-        [self playSong:firstSong.songURI];
+        [self playSong:firstSong.songUri];
         //remove song from queue
         [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:firstSong.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.queue = (NSMutableArray *)[BackendAPIManager shared].party.queue;
@@ -59,7 +59,7 @@
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
-            self.queue = (NSMutableArray *)[Song songsWithDatabaseArray:response.body.object[@"queue"]];
+            self.queue = (NSMutableArray *)[Song songsWithArray:response.body.object[@"queue"]];
         }
     }];
 }

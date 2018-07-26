@@ -37,7 +37,7 @@
         if(response){
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 if(response){
-                    self.poolSongs = [Song songsWithDatabaseArray:response.body.object[@"pool"]];
+                    self.poolSongs = [[BackendAPIManager shared].party fetchPool];
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
                     });
