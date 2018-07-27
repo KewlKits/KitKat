@@ -28,11 +28,15 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     self.searching = NO;
-    [self populatePool];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
+    //[self populatePool];
+}
 
-    
-    // Do any additional setup after loading the view.
+-(void)partyLoaded:(NSNotification *) notification{
+    if ([[notification name] isEqualToString:@"partyLoaded"]){
+        NSLog (@"party loaded!!");
+        [self populatePool];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{

@@ -34,6 +34,9 @@
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"partyLoaded"
+             object:self];
         }
         if(completion) {
             completion(jsonResponse, error);
