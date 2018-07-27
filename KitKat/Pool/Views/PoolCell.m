@@ -16,10 +16,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
 }
 
 - (IBAction)addButtonClicked:(id)sender {
-    [[BackendAPIManager shared] addSongToQueue:[BackendAPIManager shared].party.partyId uri:self.song.songUri title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+    [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].party.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         if(response){
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
         }

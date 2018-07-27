@@ -11,7 +11,7 @@
 #import "BackendAPIManager.h"
 #import "JoinPartyViewController.h"
 #import <CoreLocation/CoreLocation.h>
-
+#import "SpotifyDataManager.h"
 
 @interface BeThePartyViewController ()
 
@@ -26,14 +26,10 @@
     [self.locationMan requestWhenInUseAuthorization];
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 - (IBAction)createPartyButtonPressed:(id)sender {
     NSString *partyName = self.textField.text;
@@ -48,13 +44,16 @@
     NSNumber *partyLong = [NSNumber numberWithDouble: self.thisPartyLoc.coordinate.longitude];
     NSNumber *partyLat = [NSNumber numberWithDouble: self.thisPartyLoc.coordinate.latitude];
     NSLog(@"LONGITUDE %@", partyLong);
-   NSLog(@"LATITUDE %@", partyLat);
-   // [[BackendAPIManager shared] makeParty:partyName longitude:@(-122.16) latitude:@(37.48) withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-    [[BackendAPIManager shared] makeParty:partyName longitude:partyLong latitude:partyLat playlistUri:@"" withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-        Party *party =  [[Party alloc] initWithDictionary: response.body.object];
-        [BackendAPIManager shared].party = party;
-    }];
+    NSLog(@"LATITUDE %@", partyLat);
     
+    [[SpotifyDataManager shared] createPlaylist:partyName withCompletion:^(NSError * error, NSString *uri) {
+        if(uri){
+            [[BackendAPIManager shared] makeParty:partyName longitude:partyLong latitude:partyLat playlistUri:uri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                Party *party =  [[Party alloc] initWithDictionary: response.body.object];
+                [BackendAPIManager shared].party = party;
+            }];
+        }
+    }];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{

@@ -25,7 +25,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
     //get the current session's location and set the location to a location object
     self.locationMan = [CLLocationManager new];
     self.locationMan.delegate = self;
@@ -52,7 +51,6 @@
         self.partyList = temp;
         
     }];
-  
     
     /*
      [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -66,7 +64,6 @@
      
      }];
      */
-     
     
      [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
     [self.tableView reloadData];
@@ -81,7 +78,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 
