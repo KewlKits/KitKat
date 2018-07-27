@@ -7,16 +7,31 @@
 //
 
 #import "UserViewController.h"
-
-@interface UserViewController ()
-
+#import "BackendAPIManager.h"
+#import "User.h"
+#import "Song.h"
+#import "PoolCell.h"
+@interface UserViewController () <UITableViewDelegate,UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(strong, nonatomic) NSMutableArray<Song *>* songs;
 @end
 
 @implementation UserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self getUserSongs];
     // Do any additional setup after loading the view.
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self getUserSongs];
+}
+
+-(void)getUserSongs{
+    self.songs = [[BackendAPIManager shared].currentUser fetchUserPool];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +48,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PoolCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
+    [cell setAttributes:self.songs[indexPath.row]];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.songs.count;
+}
 
 @end

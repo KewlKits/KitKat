@@ -22,6 +22,7 @@
 		6708BCAB21094CCD00EC1231 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAA21094CCD00EC1231 /* pause.png */; };
 		6708BCAD210A9E2500EC1231 /* UserStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */; };
 		6708BCB0210A9E5A00EC1231 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCAF210A9E5A00EC1231 /* UserViewController.m */; };
+		6708BCB5210B925200EC1231 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCB4210B925200EC1231 /* UserCell.m */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
 		678606D32100FF03003EA77F /* QueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D22100FF03003EA77F /* QueueViewController.m */; };
 		678606D62100FF27003EA77F /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D52100FF27003EA77F /* QueueCell.m */; };
@@ -74,6 +75,8 @@
 		6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserStoryboard.storyboard; sourceTree = "<group>"; };
 		6708BCAE210A9E5A00EC1231 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		6708BCAF210A9E5A00EC1231 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		6708BCB3210B925200EC1231 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		6708BCB4210B925200EC1231 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		678606CE2100FEE0003EA77F /* PoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoolViewController.h; sourceTree = "<group>"; };
 		678606CF2100FEE0003EA77F /* PoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolViewController.m; sourceTree = "<group>"; };
 		678606D12100FF03003EA77F /* QueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueueViewController.h; sourceTree = "<group>"; };
@@ -369,6 +372,8 @@
 				6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */,
 				6708BCAE210A9E5A00EC1231 /* UserViewController.h */,
 				6708BCAF210A9E5A00EC1231 /* UserViewController.m */,
+				6708BCB3210B925200EC1231 /* UserCell.h */,
+				6708BCB4210B925200EC1231 /* UserCell.m */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482820FFAFF500962B4D /* Assets.xcassets */,
@@ -501,6 +506,7 @@
 				1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */,
 				1982EC4820FFBB1400336246 /* Party.m in Sources */,
 				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
+				6708BCB5210B925200EC1231 /* UserCell.m in Sources */,
 				678606D32100FF03003EA77F /* QueueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,8 @@
 //
 
 #import "User.h"
+#import "Song.h"
+#import "BackendAPIManager.h"
 
 @implementation User
 - (id)initWithDictionary:(NSDictionary *)dictionary {
@@ -23,4 +25,14 @@
     
     return self;
 }
+
+- (NSMutableArray<Song *> *)fetchUserPool {
+    NSArray* songIds = [BackendAPIManager shared].currentUser.songIds;
+    NSMutableArray<Song *> *poolSongs = [NSMutableArray arrayWithCapacity:songIds.count];
+    for (int i = 0; i < songIds.count; i += 1) {
+        poolSongs[i] = [[BackendAPIManager shared] getASongSync:songIds[i] withCompletion:nil];
+    }
+    return poolSongs;
+}
+
 @end
