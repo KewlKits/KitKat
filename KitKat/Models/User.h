@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Song.h"
 @interface User : NSObject
 @property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSString *name;
@@ -19,4 +19,6 @@
 @property (strong, nonatomic) NSArray<NSString *> *downvoteIds;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+- (NSMutableArray<Song *> *)fetchUserPool;
+
 @end

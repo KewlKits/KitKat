@@ -22,6 +22,8 @@
 		6708BCAB21094CCD00EC1231 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAA21094CCD00EC1231 /* pause.png */; };
 		6708BCAD210A9E2500EC1231 /* UserStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */; };
 		6708BCB0210A9E5A00EC1231 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCAF210A9E5A00EC1231 /* UserViewController.m */; };
+		6708BCB5210B925200EC1231 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCB4210B925200EC1231 /* UserCell.m */; };
+		6708BCB9210B9A4300EC1231 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6708BCB8210B9A4300EC1231 /* UserInfoCell.m */; };
 		678606D02100FEE0003EA77F /* PoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606CF2100FEE0003EA77F /* PoolViewController.m */; };
 		678606D32100FF03003EA77F /* QueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D22100FF03003EA77F /* QueueViewController.m */; };
 		678606D62100FF27003EA77F /* QueueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 678606D52100FF27003EA77F /* QueueCell.m */; };
@@ -74,6 +76,10 @@
 		6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserStoryboard.storyboard; sourceTree = "<group>"; };
 		6708BCAE210A9E5A00EC1231 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		6708BCAF210A9E5A00EC1231 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		6708BCB3210B925200EC1231 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		6708BCB4210B925200EC1231 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		6708BCB7210B9A4300EC1231 /* UserInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
+		6708BCB8210B9A4300EC1231 /* UserInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		678606CE2100FEE0003EA77F /* PoolViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoolViewController.h; sourceTree = "<group>"; };
 		678606CF2100FEE0003EA77F /* PoolViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoolViewController.m; sourceTree = "<group>"; };
 		678606D12100FF03003EA77F /* QueueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QueueViewController.h; sourceTree = "<group>"; };
@@ -192,6 +198,19 @@
 				6708BC9F2106459F00EC1231 /* NowPlayingViewController.m */,
 			);
 			path = "Now Playing";
+			sourceTree = "<group>";
+		};
+		6708BCB6210B980700EC1231 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6708BCAE210A9E5A00EC1231 /* UserViewController.h */,
+				6708BCAF210A9E5A00EC1231 /* UserViewController.m */,
+				6708BCB3210B925200EC1231 /* UserCell.h */,
+				6708BCB4210B925200EC1231 /* UserCell.m */,
+				6708BCB7210B9A4300EC1231 /* UserInfoCell.h */,
+				6708BCB8210B9A4300EC1231 /* UserInfoCell.m */,
+			);
+			path = "User Profile";
 			sourceTree = "<group>";
 		};
 		678606CC2100FEA9003EA77F /* Pool */ = {
@@ -353,22 +372,21 @@
 		E8C9481E20FFAFF300962B4D /* KitKat */ = {
 			isa = PBXGroup;
 			children = (
-				6708BCB2210A9E7800EC1231 /* Now Playing */,
 				E897D50F2102818A00BF33AD /* Views */,
 				1982EC4220FFBAE200336246 /* Models */,
 				678606DA2101010B003EA77F /* Image Assets */,
 				678606CD2100FEC1003EA77F /* Queue */,
 				678606CC2100FEA9003EA77F /* Pool */,
 				678AC0F020FFB794000CD978 /* Util */,
+				6708BCB2210A9E7800EC1231 /* Now Playing */,
 				1962638B2100FBF60064BC6A /* Entry */,
 				678AC0EB20FFB66B000CD978 /* Search */,
+				6708BCB6210B980700EC1231 /* User Profile */,
 				E8C9482A20FFAFF500962B4D /* LaunchScreen.storyboard */,
 				19626383210006C80064BC6A /* Entry.storyboard */,
 				678AC0E020FFB55E000CD978 /* Main.storyboard */,
 				6708BC9C2106451A00EC1231 /* NowPlayingStoryboard.storyboard */,
 				6708BCAC210A9E2500EC1231 /* UserStoryboard.storyboard */,
-				6708BCAE210A9E5A00EC1231 /* UserViewController.h */,
-				6708BCAF210A9E5A00EC1231 /* UserViewController.m */,
 				E8C9481F20FFAFF300962B4D /* AppDelegate.h */,
 				E8C9482020FFAFF300962B4D /* AppDelegate.m */,
 				E8C9482820FFAFF500962B4D /* Assets.xcassets */,
@@ -489,6 +507,7 @@
 				19626387210007150064BC6A /* BeThePartyViewController.m in Sources */,
 				E8C9482F20FFAFF500962B4D /* main.m in Sources */,
 				678AC0E920FFB63C000CD978 /* SearchCell.m in Sources */,
+				6708BCB9210B9A4300EC1231 /* UserInfoCell.m in Sources */,
 				678606D62100FF27003EA77F /* QueueCell.m in Sources */,
 				678AC0EE20FFB725000CD978 /* SpotifyDataManager.m in Sources */,
 				E897D5032102621B00BF33AD /* PartyCell.m in Sources */,
@@ -501,6 +520,7 @@
 				1962638A2100F8CA0064BC6A /* JoinPartyViewController.m in Sources */,
 				1982EC4820FFBB1400336246 /* Party.m in Sources */,
 				E8D9211420FFBA4200CB5994 /* BackendAPIManager.m in Sources */,
+				6708BCB5210B925200EC1231 /* UserCell.m in Sources */,
 				678606D32100FF03003EA77F /* QueueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
