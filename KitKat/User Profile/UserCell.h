@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AbstractSongCell.h"
+
 @interface UserCell : AbstractSongCell
 
 @end

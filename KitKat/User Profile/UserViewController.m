@@ -10,7 +10,8 @@
 #import "BackendAPIManager.h"
 #import "User.h"
 #import "Song.h"
-#import "PoolCell.h"
+#import "UserCell.h"
+#import "UserInfoCell.h"
 @interface UserViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray<Song *>* songs;
@@ -50,9 +51,15 @@
 */
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PoolCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
-    [cell setAttributes:self.songs[indexPath.row]];
-    return cell;
+    if(indexPath.row ==0){
+        UserInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoCell"];
+        return cell;
+    }
+    else{
+        UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell"];
+        [cell setAttributes:self.songs[indexPath.row]];
+        return cell;
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
