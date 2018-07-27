@@ -10,6 +10,7 @@
 
 @interface PartyCell: UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameOfPartyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *flavortextLabel;
 
 @property (strong, nonatomic) Party *party;
 

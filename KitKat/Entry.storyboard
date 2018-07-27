@@ -77,21 +77,46 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Party" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
-                                                    <rect key="frame" x="40" y="21" width="295" height="49"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Kewl Event" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
+                                                    <rect key="frame" x="103" y="0.0" width="257" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="27" id="Rs8-Y3-H2Z"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wa8-Iu-8tI">
+                                                    <rect key="frame" x="15" y="0.0" width="80" height="80"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="Gke-Gk-PZL"/>
+                                                        <constraint firstAttribute="height" constant="80" id="MG6-VG-ZO4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mpolson64 - 1 Hacker Way" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KF-8v-f2c">
+                                                    <rect key="frame" x="103" y="32" width="242" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="CWT-dG-GWU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="topMargin" constant="10" id="H7P-og-xai"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="10" id="ZmL-wW-xRx"/>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leadingMargin" constant="25" id="t22-VA-JAm"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="25" id="vNW-8i-By7"/>
+                                                <constraint firstAttribute="trailing" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="15" id="Hju-gL-2pd"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="top" id="Xzb-jJ-GnW"/>
+                                                <constraint firstAttribute="bottom" secondItem="Wa8-Iu-8tI" secondAttribute="bottom" constant="10.5" id="Yc0-Hs-QrB"/>
+                                                <constraint firstItem="Wa8-Iu-8tI" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leading" constant="15" id="a2F-x5-dmV"/>
+                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="Wa8-Iu-8tI" secondAttribute="trailing" constant="8" id="egS-ta-3qe"/>
+                                                <constraint firstItem="4KF-8v-f2c" firstAttribute="leading" secondItem="Wa8-Iu-8tI" secondAttribute="trailing" constant="8" id="mzJ-7s-gzT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4KF-8v-f2c" secondAttribute="trailing" constant="15" id="rlK-Se-ZVo"/>
+                                                <constraint firstItem="4KF-8v-f2c" firstAttribute="top" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="5" id="xd5-a3-24R"/>
+                                                <constraint firstItem="Wa8-Iu-8tI" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="top" id="xn4-Ei-KEX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="flavortextLabel" destination="4KF-8v-f2c" id="BoS-Dx-DKT"/>
                                             <outlet property="nameOfPartyLabel" destination="kAW-6t-3Vd" id="YRE-T6-UWz"/>
                                             <segue destination="90f-qU-mqR" kind="show" id="Jw1-gQ-Fwu"/>
                                         </connections>
@@ -108,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vud-a1-Iad" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2614" y="-357"/>
+            <point key="canvasLocation" x="2613.5999999999999" y="-357.57121439280365"/>
         </scene>
         <!--Main-->
         <scene sceneID="z9r-7D-mJF">
