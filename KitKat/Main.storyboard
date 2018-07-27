@@ -404,9 +404,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vjx-Tq-6yP"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4zn-0v-HMs"/>
+                    <navigationItem key="navigationItem" id="4zn-0v-HMs">
+                        <barButtonItem key="rightBarButtonItem" title="FIlter by Age" id="aK5-cI-5uo">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="sorterButtonTapped:" destination="15y-bs-p11" id="ABD-7N-kSF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="pPS-rd-hTK" id="SNf-FU-4Ol"/>
+                        <outlet property="sorterButton" destination="aK5-cI-5uo" id="arc-78-LeE"/>
                         <outlet property="tableView" destination="LuY-rV-OVE" id="RkE-05-2zg"/>
                     </connections>
                 </viewController>
