@@ -57,13 +57,13 @@
     if ([self.auth.session isValid]) {
         // Use it to log in
         [self.player loginWithAccessToken:self.auth.session.accessToken];
-    } else {
-        // Get the URL to the Spotify authorization portal
-        NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
-        // Present in a SafariViewController
-        self.authViewController = [[SFSafariViewController alloc] initWithURL:authURL];
-        [self.window.rootViewController presentViewController:self.authViewController animated:YES completion:nil];
     }
+    // Get the URL to the Spotify authorization portal
+    NSURL *authURL = [self.auth spotifyWebAuthenticationURL];
+    // Present in a SafariViewController
+    self.authViewController = [[SFSafariViewController alloc] initWithURL:authURL];
+    [self.window.rootViewController presentViewController:self.authViewController animated:YES completion:nil];
+    
 }
 
 /*When the user has finished the authorization process, the authorization service closes the SFSafariViewController and triggers this method. In the method SPTAuth checks if the provided URL is a Spotify authentication callback. If so, to get an access token, the procedure calls the token swap service (see the Readme in the download package). When the access token is generated, this procedure calls -loginWithAccessToken: to login the player.
