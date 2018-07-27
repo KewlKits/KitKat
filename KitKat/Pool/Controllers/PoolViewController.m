@@ -10,11 +10,14 @@
 #import "PoolCell.h"
 #import <Unirest/UNIRest.h>
 #import "BackendAPIManager.h"
+#import "SpotifyDataManager.h"
+#import "SearchCell.h"
 
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSArray<Song*> * poolSongs;
+@property NSArray<Song*> * songs;
+@property bool searching;
 @end
 
 @implementation PoolViewController
@@ -24,14 +27,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    [self populatePool];
-    
+    self.searching = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
+    //[self populatePool];
+}
 
-    
-    // Do any additional setup after loading the view.
+-(void)partyLoaded:(NSNotification *) notification{
+    if ([[notification name] isEqualToString:@"partyLoaded"]){
+        NSLog (@"party loaded!!");
+        [self populatePool];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    self.searching = NO;
     [self populatePool];
 }
 
@@ -44,31 +53,15 @@
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 
                 if(response){
-                    if(isAgeOn){
-                        NSLog(@"age is on");
-                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                            NSDate *d1 = obj1.createdAt;
-                            NSDate *d2 = obj2.createdAt;
-                            NSComparisonResult result = [d1 compare:d2];
-                            return result;
-                        }];
-                    }
-                    
-                    else{
-                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                            NSUInteger d1 = [obj1.upvotedBy count] - [obj1.downvotedBy count];
-                             NSUInteger d2 = [obj2.upvotedBy count] - [obj2.downvotedBy count];
-                            if (d1 > d2) {
-                                return (NSComparisonResult)NSOrderedDescending;
-                            }
-                            
-                            if (d1 < d2) {
-                                return (NSComparisonResult)NSOrderedAscending;
-                            }
-                            return (NSComparisonResult)NSOrderedSame;
-                        }];
-
-                    }
+                    self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                        NSLog(@"%@", obj1.songTitle);
+                        NSDate *d1 = obj1.createdAt;
+                        NSDate *d2 = obj2.createdAt;
+                        NSLog(@"%@", d1);
+                        NSLog(@"%@", d2);
+                        NSComparisonResult result = [d1 compare:d2];
+                        return result;
+                    }];
                     
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
@@ -78,23 +71,62 @@
         }
     }];
 }
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
-    Song * track = self.poolSongs[indexPath.row];
-    [poolCell setAttributes: track];
-    return poolCell;
+
+-(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
+    
+    [SpotifyDataManager searchSpotify:query type:type withCompletion:^(NSDictionary *response) {
+        NSArray *temporary = [[NSArray alloc] init];
+        
+        if([type isEqualToString:@"artist"]){
+            temporary = response[@"artists"][@"items"];
+        }
+        else if ([type isEqualToString:@"album"]){
+            temporary = response[@"albums"][@"items"];
+        }
+        else if ([type isEqualToString:@"playlist"]){
+            temporary = response[@"playlists"][@"items"];
+        }
+        else if ([type isEqualToString:@"track"]){
+            temporary = response[@"tracks"][@"items"];
+        }
+        
+        self.songs = [SpotifySong songsWithArray:temporary];
+        [self.tableView reloadData];
+    }];
+}
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    self.searching = YES;
+    [self fetchSearchResults:self.searchBar.text type:@"track"];
 }
 
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.poolSongs count];
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    self.searching = NO;
+    self.searchBar.text = @"";
+    [self populatePool];
 }
-
-/*-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if(!self.searching){
+        PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
+        Song * track = self.songs[indexPath.row];
+        [poolCell setAttributes: track];
+        return poolCell;
+    }
+    else{
+        SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
+        Song * track = self.songs[indexPath.row];
+        [searchCell setAttributes:track];
+        return searchCell;
+    }
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.songs count];
 }
 
 /*
