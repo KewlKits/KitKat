@@ -10,6 +10,7 @@
 #import "Song.h"
 #import "BackendAPIManager.h"
 #import "QueueCell.h"
+#import "SpotifyDataManager.h"
 
 @interface QueueViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -101,6 +102,9 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [[BackendAPIManager shared] moveSongWithinQueue:[BackendAPIManager shared].party.partyId index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            if (!error) {
+                [[SpotifyDataManager shared] moveSongWithinPlaylist:[[BackendAPIManager shared].party.playlistUri componentsSeparatedByString:@":"].lastObject owner:[BackendAPIManager shared].currentUser.name index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:nil];
+            }
             self.queue = [[BackendAPIManager shared].party fetchQueue];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [self.tableView reloadData];

@@ -10,4 +10,6 @@
 
 @interface PoolViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sorterButton;
+
 @end

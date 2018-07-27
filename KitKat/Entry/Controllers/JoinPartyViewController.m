@@ -52,18 +52,7 @@
         
     }];
     
-    /*
-     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
-     NSMutableArray *temp = [NSMutableArray new];
-     for (NSDictionary *dict in response.body.array) {
-     Party *party = [[Party alloc] initWithDictionary:dict];
-     
-     [temp addObject:party];
-     }
-     self.partyList = temp;
-     
-     }];
-     */
+
     
      [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
     [self.tableView reloadData];

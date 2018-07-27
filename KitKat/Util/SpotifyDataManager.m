@@ -85,4 +85,17 @@
         }
     }];
 }
+
+-(void)moveSongWithinPlaylist:(NSString*) playlistId owner:(NSString *)owner index:(NSNumber *) index target:(NSNumber *) target withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://api.spotify.com/v1/users/%@/playlists/%@/tracks", owner, playlistId]];
+        [unibodyRequest setHeaders:@{@"Accept": @"application/json",@"Content-Type": @"application/json", @"Authorization":[NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]}];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"range_start": index, @"range_length": @1, @"insert_before": (index < target) ? ([NSNumber numberWithInteger:[target integerValue] + 1]) : target} options:0 error:nil]];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+        if (completion) {
+            completion(jsonResponse, error);
+        }
+    }];
+}
+
 @end
