@@ -416,6 +416,33 @@
             </objects>
             <point key="canvasLocation" x="2764" y="886"/>
         </scene>
+        <!--UserStoryboard-->
+        <scene sceneID="Rz2-dh-JP4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserStoryboard" id="TO0-Xa-LfI" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ghh-eD-s9c"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRU-4l-CnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850" y="-1229"/>
+        </scene>
+        <!--User-->
+        <scene sceneID="GiL-Rs-Tnb">
+            <objects>
+                <navigationController id="bix-Jy-PTV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="User" id="qgc-M6-wvw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dlf-CH-1z9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="TO0-Xa-LfI" kind="relationship" relationship="rootViewController" id="RDv-Ar-N7S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PSo-j0-iYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="888" y="-717"/>
+        </scene>
         <!--Search-->
         <scene sceneID="k92-DR-b9I">
             <objects>
@@ -453,6 +480,7 @@
                         <segue destination="Zab-Kx-raL" kind="relationship" relationship="viewControllers" id="Kv7-rX-Ge6"/>
                         <segue destination="91K-EF-uOg" kind="relationship" relationship="viewControllers" id="vqO-LZ-nE6"/>
                         <segue destination="RVL-R6-j6u" kind="relationship" relationship="viewControllers" id="FId-Ge-dom"/>
+                        <segue destination="bix-Jy-PTV" kind="relationship" relationship="viewControllers" id="9cM-cH-25E"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ak-yu-7rG" userLabel="First Responder" sceneMemberID="firstResponder"/>
