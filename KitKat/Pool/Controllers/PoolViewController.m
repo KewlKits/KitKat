@@ -29,6 +29,9 @@
     self.searchBar.delegate = self;
     self.searching = NO;
     [self populatePool];
+    
+
+    
     // Do any additional setup after loading the view.
 }
 
@@ -38,9 +41,13 @@
 }
 
 -(void)populatePool{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool isAgeOn = [defaults boolForKey:@"isAgeOn" ];
+    
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+                
                 if(response){
                     self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                         NSLog(@"%@", obj1.songTitle);
@@ -127,5 +134,32 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)sorterButtonTapped:(id)sender {
+    bool ageOn;
+    if([self.sorterButton.title isEqual: @"Filter by popularity"]){
+        ageOn = NO;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:ageOn forKey:@"isAgeOn"];
+        [self.sorterButton setTintColor:[UIColor whiteColor]];
+        [self.sorterButton setTitle:@"Filter by Age"];
+        [self populatePool];
+         [self.tableView reloadData];
+       
+        
+    }
+    else{
+        ageOn = YES;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:ageOn forKey:@"isAgeOn"];
+        [self.sorterButton setTintColor:[UIColor redColor]];
+        [self.sorterButton setTitle:@"Filter by popularity"];
+        [self populatePool];
+        [self.tableView reloadData];
+    }
+}
+
+
+
 
 @end
