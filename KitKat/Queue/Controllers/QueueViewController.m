@@ -13,6 +13,7 @@
 
 @interface QueueViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @property(strong, nonatomic) NSMutableArray<Song *> *queue;
 
@@ -26,6 +27,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.editButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    
     [self populateQueue];
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -38,6 +41,7 @@
 }
 - (IBAction)onEditTapped:(id)sender {
     [self.tableView setEditing:!self.tableView.isEditing animated:YES];
+    [self.editButton setTitle:(self.tableView.isEditing) ? @"Done" : @"Edit" forState:UIControlStateNormal];
 }
 
 - (void)populateQueue {
