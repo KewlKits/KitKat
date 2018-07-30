@@ -26,6 +26,11 @@
     self.searchBar.delegate = self;
     [self populatePool];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+
+    
 
     
     // Do any additional setup after loading the view.
@@ -60,16 +65,14 @@
                             long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
 
                             if (d1 < d2) {
-                                NSLog(@"comparison finished");
                                 return (NSComparisonResult)NSOrderedDescending;
                             }
                             
                            else if (d1 > d2) {
-                               NSLog(@"comparison finished");
                                 return (NSComparisonResult)NSOrderedAscending;
                                
                             }
-                            NSLog(@"comparison finished");
+
                             return (NSComparisonResult)NSOrderedSame;
                             
                         }];
@@ -78,7 +81,6 @@
                     
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
-                        NSLog(@"reload data");
                     });
                 }
             }];
@@ -139,6 +141,11 @@
     }
 }
 
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self populatePool];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
+}
 
 
 
