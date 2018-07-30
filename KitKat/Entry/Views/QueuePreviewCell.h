@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AbstractSongCell.h"
 
-@interface QueuePreviewCell : UITableViewCell
+@interface QueuePreviewCell : AbstractSongCell
 
 @end

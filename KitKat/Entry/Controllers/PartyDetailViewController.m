@@ -10,12 +10,15 @@
 #import "PartyDetailViewController.h"
 #import "BackendAPIManager.h"
 #import "SpotifyDataManager.h"
+#import "QueuePreviewCell.h"
 
-@interface PartyDetailViewController ()
+@interface PartyDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ownerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *counterLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray<Song *> *queue;
 
 @end
 
@@ -24,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
     self.nameLabel.text = self.party.name;
     
     [[BackendAPIManager shared] getAUser:self.party.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -49,13 +55,15 @@
     }];
     
     self.counterLabel.text = [NSString stringWithFormat:@"%lu in pool • %lu in queue", self.party.pool.count, self.party.queue.count];
+    
+    self.queue = [self.party fetchQueue];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Navigation
 
@@ -68,5 +76,15 @@
     }
 }
 
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    QueuePreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueuePreviewCell"];
+    [cell setAttributes:self.queue[indexPath.row]];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.party.queue.count;
+}
 
 @end
