@@ -228,7 +228,7 @@
 
 - (void)upvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/upvote]", songId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/upvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
@@ -240,7 +240,7 @@
 
 - (void)unUpvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/unupvote]", songId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/unupvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
@@ -252,7 +252,7 @@
 
 - (void)downvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/downvote]", songId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/downvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
@@ -264,7 +264,7 @@
 
 - (void)unDownvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/undownvote]", songId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/undownvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {

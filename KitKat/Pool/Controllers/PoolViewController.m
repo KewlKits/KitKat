@@ -27,10 +27,19 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    [self populatePool];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+
+    
+
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     //[self populatePool];
 }
+
 
 -(void)partyLoaded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"partyLoaded"]){
@@ -53,6 +62,37 @@
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 
                 if(response){
+
+                    if(isAgeOn){
+                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                            NSDate *d1 = obj1.createdAt;
+                            NSDate *d2 = obj2.createdAt;
+                            NSComparisonResult result = [d1 compare:d2];
+                            return result;
+                        }];
+                    }
+                    
+                    else{
+                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                            long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
+
+                            long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
+
+                            if (d1 < d2) {
+                                return (NSComparisonResult)NSOrderedDescending;
+                            }
+                            
+                           else if (d1 > d2) {
+                                return (NSComparisonResult)NSOrderedAscending;
+                               
+                            }
+
+                            return (NSComparisonResult)NSOrderedSame;
+                            
+                        }];
+
+                    }
+
                     self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                         NSLog(@"%@", obj1.songTitle);
                         NSDate *d1 = obj1.createdAt;
@@ -62,6 +102,7 @@
                         NSComparisonResult result = [d1 compare:d2];
                         return result;
                     }];
+
                     
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
@@ -71,6 +112,15 @@
         }
     }];
 }
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
+    Song * track = self.poolSongs[indexPath.row];
+    [poolCell setAttributes: track];
+    [poolCell setVoteAttributes:track];
+    return poolCell;
+}
+
 
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
     
@@ -163,6 +213,11 @@
     }
 }
 
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self populatePool];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
+}
 
 
 
