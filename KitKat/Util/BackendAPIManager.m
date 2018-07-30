@@ -34,6 +34,9 @@
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"partyLoaded"
+             object:self];
         }
         if(completion) {
             completion(jsonResponse, error);
@@ -191,6 +194,12 @@
             completion(jsonResponse, error);
         }
     }];
+}
+
+- (void)getAUser: (NSString *) userId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setUrl:[@"https://kk-backend.herokuapp.com/user/" stringByAppendingString:userId]];
+    }] asJsonAsync:completion];
 }
 
 - (void)getAllSongs:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {

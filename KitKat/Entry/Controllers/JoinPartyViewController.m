@@ -76,6 +76,9 @@
     // Pass the selected object to the new view controller.
     if([sender isKindOfClass:[PartyCell class]]) {
         [BackendAPIManager shared].party = [(PartyCell *)sender party];
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"partyLoaded"
+         object:self];
     }
 }
 

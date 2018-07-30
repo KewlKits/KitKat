@@ -1,18 +1,19 @@
 //
-//  UserViewController.m
+//  PartyDetailViewController.m
 //  KitKat
 //
-//  Created by Natalie Ghidali on 7/26/18.
+//  Created by Miles Olson on 7/30/18.
 //  Copyright © 2018 kewlkits. All rights reserved.
 //
 
-#import "UserViewController.h"
+#import "PartyDetailViewController.h"
+#import "BackendAPIManager.h"
 
-@interface UserViewController ()
+@interface PartyDetailViewController ()
 
 @end
 
-@implementation UserViewController
+@implementation PartyDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,14 +25,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([sender isKindOfClass:[UIButton class]]) {
+        [BackendAPIManager shared].party = self.party;
+    }
 }
-*/
+
 
 @end

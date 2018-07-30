@@ -29,6 +29,7 @@
 - (void)getAllUsers:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)makeUser:(NSString *) name withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)touchUser:(NSString *) name withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+- (void)getAUser: (NSString *) userId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)getAllSongs:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)getASong: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (Song *)getASongSync: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;

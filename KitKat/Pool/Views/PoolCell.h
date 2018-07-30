@@ -18,3 +18,4 @@
 -(void)setVoteAttributes:(Song *)song;
 
 @end
+
