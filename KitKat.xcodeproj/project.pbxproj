@@ -41,6 +41,7 @@
 		DE4ED3C9A63CE8320172F64E /* libPods-KitKat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E4A6FAB9D96FF96D1F87C5 /* libPods-KitKat.a */; };
 		E82FE0CD210F8175007F7526 /* PartyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E82FE0CC210F8175007F7526 /* PartyAnnotation.m */; };
 		E82FE0D3210F9C47007F7526 /* PartyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E82FE0D2210F9C47007F7526 /* PartyDetailViewController.m */; };
+		E82FE0D5210F9ED4007F7526 /* comingsoon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E82FE0D4210F9ED4007F7526 /* comingsoon.jpg */; };
 		E840CE4F210801C800466F1A /* SpotifySong.m in Sources */ = {isa = PBXBuildFile; fileRef = E840CE4E210801C800466F1A /* SpotifySong.m */; };
 		E840CE522108F9A800466F1A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E840CE512108F9A800466F1A /* User.m */; };
 		E850FAE4210BDF5A00832FA0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E850FAE3210BDF5A00832FA0 /* MapKit.framework */; };
@@ -112,6 +113,7 @@
 		E82FE0CC210F8175007F7526 /* PartyAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyAnnotation.m; sourceTree = "<group>"; };
 		E82FE0D1210F9C47007F7526 /* PartyDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PartyDetailViewController.h; sourceTree = "<group>"; };
 		E82FE0D2210F9C47007F7526 /* PartyDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PartyDetailViewController.m; sourceTree = "<group>"; };
+		E82FE0D4210F9ED4007F7526 /* comingsoon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = comingsoon.jpg; path = ../../../Desktop/comingsoon.jpg; sourceTree = "<group>"; };
 		E840CE4D210801C800466F1A /* SpotifySong.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpotifySong.h; sourceTree = "<group>"; };
 		E840CE4E210801C800466F1A /* SpotifySong.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotifySong.m; sourceTree = "<group>"; };
 		E840CE502108F9A800466F1A /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		678606DA2101010B003EA77F /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E82FE0D4210F9ED4007F7526 /* comingsoon.jpg */,
 				6708BCA82109485500EC1231 /* play.png */,
 				6708BCAA21094CCD00EC1231 /* pause.png */,
 				6708BCA4210947DF00EC1231 /* skip_forward.png */,
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6708BCA5210947DF00EC1231 /* skip_forward.png in Resources */,
+				E82FE0D5210F9ED4007F7526 /* comingsoon.jpg in Resources */,
 				6708BCAB21094CCD00EC1231 /* pause.png in Resources */,
 				E8C9482C20FFAFF500962B4D /* LaunchScreen.storyboard in Resources */,
 				19626384210006C80064BC6A /* Entry.storyboard in Resources */,
