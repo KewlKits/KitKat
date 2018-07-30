@@ -7,6 +7,7 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "PartyDetailViewController.h"
 #import "BackendAPIManager.h"
 #import "SpotifyDataManager.h"
@@ -18,6 +19,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *albumArtTopLeft;
+@property (weak, nonatomic) IBOutlet UIImageView *albumArtTopRight;
+@property (weak, nonatomic) IBOutlet UIImageView *albumArtBottomLeft;
+@property (weak, nonatomic) IBOutlet UIImageView *albumArtBottomRight;
+
+
 @property (strong, nonatomic) NSArray<Song *> *queue;
 
 @end
@@ -58,11 +66,26 @@
     
     self.queue = [self.party fetchQueue];
     [self.tableView reloadData];
+    
+    [self setAlbumArts];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setAlbumArts {
+    NSArray<UIImageView *> *albumArts = @[self.albumArtTopLeft, self.albumArtTopRight, self.albumArtBottomLeft, self.albumArtBottomRight];
+    if (self.queue.count > 0) {
+        for (int i = 0; i < 4; i += 1) {
+            if (i < self.queue.count) {
+                [albumArts[i] setImageWithURL:[NSURL URLWithString:self.queue[i].songAlbumArt]];
+            } else {
+                [albumArts[i] setImageWithURL:[NSURL URLWithString:self.queue[self.queue.count - 1].songAlbumArt]];
+            }
+        }
+    }
 }
 
 #pragma mark - Navigation
