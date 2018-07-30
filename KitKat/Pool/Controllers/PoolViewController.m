@@ -64,7 +64,7 @@
                 if(response){
 
                     if(isAgeOn){
-                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                             NSDate *d1 = obj1.createdAt;
                             NSDate *d2 = obj2.createdAt;
                             NSComparisonResult result = [d1 compare:d2];
@@ -73,7 +73,7 @@
                     }
                     
                     else{
-                        self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                             long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
 
                             long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
@@ -113,13 +113,6 @@
     }];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
-    Song * track = self.poolSongs[indexPath.row];
-    [poolCell setAttributes: track];
-    [poolCell setVoteAttributes:track];
-    return poolCell;
-}
 
 
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
@@ -165,6 +158,7 @@
         PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
         Song * track = self.songs[indexPath.row];
         [poolCell setAttributes: track];
+        [poolCell setVoteAttributes:track];
         return poolCell;
     }
     else{
@@ -174,6 +168,15 @@
         return searchCell;
     }
 }
+
+
+//- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+//    PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
+//    Song * track = self.poolSongs[indexPath.row];
+//    [poolCell setAttributes: track];
+//    [poolCell setVoteAttributes:track];
+//    return poolCell;
+//}
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.songs count];
