@@ -196,6 +196,12 @@
     }];
 }
 
+- (void)getAUser: (NSString *) userId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setUrl:[@"https://kk-backend.herokuapp.com/user/" stringByAppendingString:userId]];
+    }] asJsonAsync:completion];
+}
+
 - (void)getAllSongs:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:@"https://kk-backend.herokuapp.com/song"];
