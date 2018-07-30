@@ -11,4 +11,10 @@
 
 @interface PoolCell : AbstractSongCell
 @property (weak, nonatomic) IBOutlet UIButton *moveToQueueButton;
+@property (weak, nonatomic) IBOutlet UIButton *downvoteButton;
+@property (weak, nonatomic) IBOutlet UILabel *songVotesLabel;
+@property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
+
+-(void)setVoteAttributes:(Song *)song;
+
 @end

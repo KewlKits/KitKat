@@ -24,7 +24,7 @@
 
 -(void)setAttributes:(Song *)song{
     self.albumCover.layer.cornerRadius = self.albumCover.frame.size.width / 2;
-    self.song = song;
+    _song = song;
     //set title
     self.songTitleLabel.text = song.songTitle;
 

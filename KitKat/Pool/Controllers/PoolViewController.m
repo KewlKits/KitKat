@@ -45,7 +45,6 @@
                 
                 if(response){
                     if(isAgeOn){
-                        NSLog(@"age is on");
                         self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                             NSDate *d1 = obj1.createdAt;
                             NSDate *d2 = obj2.createdAt;
@@ -56,13 +55,16 @@
                     
                     else{
                         self.poolSongs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                            NSUInteger d1 = [obj1.upvotedBy count] - [obj1.downvotedBy count];
-                             NSUInteger d2 = [obj2.upvotedBy count] - [obj2.downvotedBy count];
-                            if (d1 > d2) {
+                            long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
+                            //NSLog(@"votes of first song: %ld", (long)d1);
+                            long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
+
+                           // NSLog(@"votes of second song: %ld", (long)d2);
+                            if (d1 < d2) {
                                 return (NSComparisonResult)NSOrderedDescending;
                             }
                             
-                            if (d1 < d2) {
+                            if (d1 > d2) {
                                 return (NSComparisonResult)NSOrderedAscending;
                             }
                             return (NSComparisonResult)NSOrderedSame;
@@ -81,7 +83,10 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
     Song * track = self.poolSongs[indexPath.row];
+    NSLog(@"CELL FOR ROW SONG");
+    NSLog(@"%@", track.songTitle);
     [poolCell setAttributes: track];
+    [poolCell setVoteAttributes:track ];
     return poolCell;
 }
 

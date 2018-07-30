@@ -372,6 +372,35 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wju-DW-5N0">
+                                                    <rect key="frame" x="304" y="78" width="30" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
+                                                    <state key="normal" title="up">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="upvoteButtonClicked:" destination="nxb-d4-ghG" eventType="touchUpInside" id="m8b-Nf-qnN"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKm-dY-TGa">
+                                                    <rect key="frame" x="342" y="77" width="30" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                                                    <state key="normal" title="dn">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="downvoteButtonClicked:" destination="nxb-d4-ghG" eventType="touchUpInside" id="KsU-bU-nc1"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHz-AF-v6v">
+                                                    <rect key="frame" x="332" y="60" width="28" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="eEE-Lm-yBk" firstAttribute="centerY" secondItem="NCp-cY-BRt" secondAttribute="centerY" id="DGR-0s-FIt"/>
@@ -390,8 +419,11 @@
                                         <connections>
                                             <outlet property="albumCover" destination="eEE-Lm-yBk" id="hG8-AY-V00"/>
                                             <outlet property="artistAlbumLabel" destination="0XF-d4-wcs" id="M6C-ca-3AU"/>
-                                            <outlet property="moveToQueueButton" destination="1co-7O-qIS" id="xvv-sg-rbL"/>
+                                            <outlet property="downvoteButton" destination="lKm-dY-TGa" id="IMG-qL-2qT"/>
+                                            <outlet property="moveToQueueButton" destination="lKm-dY-TGa" id="EjL-gc-1fI"/>
                                             <outlet property="songTitleLabel" destination="cms-hX-iHK" id="k3x-Nb-kXI"/>
+                                            <outlet property="songVotesLabel" destination="pHz-AF-v6v" id="KXu-zP-Dnx"/>
+                                            <outlet property="upvoteButton" destination="wju-DW-5N0" id="A62-UD-jRE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -422,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Key-up-dNf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="886"/>
+            <point key="canvasLocation" x="2764" y="884.70764617691157"/>
         </scene>
         <!--UserStoryboard-->
         <scene sceneID="Rz2-dh-JP4">
