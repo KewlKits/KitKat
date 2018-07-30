@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistAlbumLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *albumCover;
+@property (weak, nonatomic) IBOutlet UIButton *addCheckButton;
 -(void)setAttributes:(Song *) song;
+-(void)setAddedButton:(Song *)song addedSongs:(NSArray <Song*>*)addedSongs;
 @property Song * song;
 @end

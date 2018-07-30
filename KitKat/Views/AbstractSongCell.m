@@ -35,7 +35,24 @@
     self.albumCover.image = nil;
     NSURL *url = [NSURL URLWithString:song.songAlbumArt];
     [self.albumCover setImageWithURL:url];
-
     
 }
+
+-(void)setAddedButton:(Song *)song addedSongs:(NSArray <Song*>*)addedSongs{
+    bool isInPool = NO;
+    NSString* currUri = song.songUri;
+    for(int i = 0; i<addedSongs.count; i++){
+        if([addedSongs[i].songUri isEqualToString:currUri]){
+            isInPool = YES;
+        }
+    }
+    if(isInPool){
+        [self.addCheckButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [self.addCheckButton setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    }
+    
+}
+
 @end

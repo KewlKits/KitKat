@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *songTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *songImageView;
+@property (weak, nonatomic) IBOutlet UIView *playingView;
+@property (strong, nonatomic) NSTimer * metadataTimer;
 
 @end
 
@@ -37,9 +39,10 @@
     self.skipForwardButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
     self.skipBackButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
 
+    [self.playingView setHidden:YES];
     
-    self.playing = NO;
-    [self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+    self.playing = YES;
+    [self.playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
     
     SpotifySingleton *spotifySingleton = [SpotifySingleton getInstance];
     self.player = [spotifySingleton getPlayer];
@@ -83,19 +86,35 @@
     }];
 }
 -(void)updateUI{
-    [self.player metadata];
-    self.songTitleLabel.text = self.player.metadata.currentTrack.name;
-    self.artistNameLabel.text = self.player.metadata.currentTrack.artistName;
-    [self.songImageView setImageWithURL:[NSURL URLWithString:self.player.metadata.currentTrack.albumCoverArtURL]];
+   // [self.songImageView setImageWithURL:[NSURL URLWithString:self.player.metadata.currentTrack.albumCoverArtURL]];
+    if(self.player.metadata.currentTrack){
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.player.metadata.currentTrack.albumCoverArtURL]];
+        [self.songImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+            [self.playingView setHidden:NO];
+            self.songImageView.image = image;
+            self.songTitleLabel.text = self.player.metadata.currentTrack.name;
+            self.artistNameLabel.text = self.player.metadata.currentTrack.artistName;
+        } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 -(void)playUri: (NSString *)spotifyURI{
+    __weak typeof (self) weak_self = self;
+    __strong typeof (self) strong_self = weak_self;
     [self.player playSpotifyURI:spotifyURI startingWithIndex:0 startingWithPosition:0 callback:^(NSError *error) {
         if (error != nil) {
             NSLog(@"*** failed to play: %@", error);
             return;
         }
-        NSLog(@"Playing Music: %@",spotifyURI);
+        else{
+            NSLog(@"Playing Music: %@",spotifyURI);
+            if(strong_self){
+                self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
+                [self updateUI];
+            }
+        }
     }];
 }
 - (void)populateQueue {

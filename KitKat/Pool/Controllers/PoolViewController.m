@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSArray<Song*> * songs;
+@property NSArray<Song*> * poolSongs;
 @property bool searching;
 @end
 
@@ -64,6 +65,7 @@
                     }];
                     
                     dispatch_async(dispatch_get_main_queue(), ^(void){
+                        self.poolSongs = self.songs;
                         [self.tableView reloadData];
                     });
                 }
@@ -121,6 +123,7 @@
         SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
         Song * track = self.songs[indexPath.row];
         [searchCell setAttributes:track];
+        [searchCell setAddedButton:track addedSongs:self.poolSongs];
         return searchCell;
     }
 }
