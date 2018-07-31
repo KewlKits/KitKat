@@ -38,12 +38,22 @@
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     //[self populatePool];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
 }
 
 
 -(void)partyLoaded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"partyLoaded"]){
         NSLog (@"party loaded!!");
+        [self populatePool];
+    }
+}
+
+-(void)voteReorder:(NSNotification *) notification{
+    if ([[notification name] isEqualToString:@"voteReorder"]){
+        NSLog (@"vote caused shift");
         [self populatePool];
     }
 }
@@ -175,12 +185,12 @@
 
 - (IBAction)sorterButtonTapped:(id)sender {
     bool ageOn;
-    if([self.sorterButton.title isEqual: @"Filter by popularity"]){
+    if([self.sorterButton.title isEqual: @"Sort by popularity"]){
         ageOn = NO;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
         [self.sorterButton setTintColor:[UIColor whiteColor]];
-        [self.sorterButton setTitle:@"Filter by Age"];
+        [self.sorterButton setTitle:@"Sort by New"];
         [self populatePool];
          [self.tableView reloadData];
        
@@ -191,7 +201,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
         [self.sorterButton setTintColor:[UIColor redColor]];
-        [self.sorterButton setTitle:@"Filter by popularity"];
+        [self.sorterButton setTitle:@"Sort by popularity"];
         [self populatePool];
         [self.tableView reloadData];
     }
@@ -202,6 +212,8 @@
     [self.tableView reloadData];
     [refreshControl endRefreshing];
 }
+
+
 
 
 

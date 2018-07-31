@@ -16,12 +16,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    
+
         
     // Initialization code
     self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
 }
 
+-(void)partyLoaded:(NSNotification *) notification{
+    
+}
 
 -(void)setVoteAttributes:(Song *)song{
      self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", (long)song.upvotedBy.count - (long)song.downvotedBy.count];
@@ -55,6 +58,11 @@
         [self.downvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
                 }];
         currVoteVal += 1;
     }
@@ -73,6 +81,11 @@
          [self.upvoteButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
         [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
         }];
         currVoteVal += 1;
             self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];

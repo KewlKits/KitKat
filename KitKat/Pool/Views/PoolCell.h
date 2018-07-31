@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "AbstractSongCell.h"
 
+//@protocol PoolCellDelegate
+//-(void) voteDone: (Song *) song;
+//@end
+
 @interface PoolCell : AbstractSongCell
 @property (weak, nonatomic) IBOutlet UIButton *moveToQueueButton;
 @property (weak, nonatomic) IBOutlet UIButton *downvoteButton;
 @property (weak, nonatomic) IBOutlet UILabel *songVotesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
+
+//@property(nonatomic, weak) id<PoolCellDelegate> delegate;
 
 -(void)setVoteAttributes:(Song *)song;
 
