@@ -45,7 +45,6 @@
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
         }
     }];
-    [self.moveToQueueButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)upvoteButtonClicked:(id)sender {
