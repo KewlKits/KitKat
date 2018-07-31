@@ -24,16 +24,14 @@
 
 
 -(void)setVoteAttributes:(Song *)song{
-     self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", (long)song.upvotedBy.count - (long)song.downvotedBy.count];
-    [self.upvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.downvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", (long)song.upvotedBy.count - (long)song.downvotedBy.count];
+    self.upvoteButton.selected = NO;
+    self.downvoteButton.selected = NO;
     if([song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.upvoteButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-
+        self.upvoteButton.selected = YES;
     }
     if([song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.downvoteButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-
+        self.downvoteButton.selected = YES;
     }
 }
 
@@ -52,27 +50,41 @@
     
     //eliminate existing downvote if you upvote a song
     if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.downvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
                 }];
         currVoteVal += 1;
     }
     
     
     if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.upvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
            self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
     }
     
     else{
-         [self.upvoteButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        self.upvoteButton.selected = YES;
         [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
         }];
         currVoteVal += 1;
             self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
@@ -87,26 +99,38 @@
     
     //eliminate existing downvote if you upvote a song
     if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.upvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
     }
     
     if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-        [self.downvoteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal += 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
     }
     
     else{
-        [self.downvoteButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        self.downvoteButton.selected = YES;
         [[BackendAPIManager shared] downvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
