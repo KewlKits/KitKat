@@ -14,10 +14,11 @@
 #import "PartyDetailViewController.h"
 #import "SpotifyDataManager.h"
 
-@interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UITextField *hostTextField;
+@property (weak, nonatomic) IBOutlet UIStackView *hostInputStackView;
 
 @end
 
@@ -30,6 +31,8 @@
     self.mapView.showsUserLocation = YES;
     self.mapView.showsScale = YES;
     self.mapView.showsCompass = YES;
+    
+    self.hostTextField.delegate = self;
     
     self.locationManager = [CLLocationManager new];
     self.locationManager.delegate = self;
@@ -96,7 +99,21 @@
         [self performSegueWithIdentifier:@"creationSegue" sender:nil];
     }];
 }
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
+}
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+    }];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y + 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+    }];
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
