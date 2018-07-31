@@ -16,8 +16,9 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSArray<Song*> * songs;
-@property NSArray<Song*> * poolSongs;
+@property NSArray<Song*> * songs; //songs in pool or songs in spotify
+@property NSArray<Song*> * poolSongs; //only songs in pool
+@property NSArray<Song*> * queueSongs;
 @property bool searching;
 @end
 
@@ -54,7 +55,8 @@
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 
                 if(response){
-                    self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                    self.songs = [[[BackendAPIManager shared].party fetchPool]
+                                  sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                         NSLog(@"%@", obj1.songTitle);
                         NSDate *d1 = obj1.createdAt;
                         NSDate *d2 = obj2.createdAt;
@@ -63,7 +65,7 @@
                         NSComparisonResult result = [d1 compare:d2];
                         return result;
                     }];
-                    
+                    self.queueSongs = [[BackendAPIManager shared].party fetchQueue];
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         self.poolSongs = self.songs;
                         [self.tableView reloadData];
@@ -123,7 +125,8 @@
         SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
         Song * track = self.songs[indexPath.row];
         [searchCell setAttributes:track];
-        [searchCell setAddedButton:track addedSongs:self.poolSongs];
+        NSArray<Song *> * poolAndQueueSongs = [self.poolSongs arrayByAddingObjectsFromArray:self.queueSongs];
+        [searchCell setAddedButton:track addedSongs:poolAndQueueSongs];
         return searchCell;
     }
 }

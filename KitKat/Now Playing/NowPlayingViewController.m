@@ -92,18 +92,6 @@
         self.artistNameLabel.text = self.player.metadata.currentTrack.artistName;
         [self.playingView setHidden:NO];
     });
-    
-    /*if(self.player.metadata.currentTrack){
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.player.metadata.currentTrack.albumCoverArtURL]];
-        [self.songImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-            [self.playingView setHidden:NO];
-            self.songImageView.image = image;
-            self.songTitleLabel.text = self.player.metadata.currentTrack.name;
-            self.artistNameLabel.text = self.player.metadata.currentTrack.artistName;
-        } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-            NSLog(@"%@",error);
-        }];
-    }*/
 }
 
 -(void)playUri: (NSString *)spotifyURI{
@@ -117,7 +105,6 @@
         else{
             NSLog(@"Playing Music: %@",spotifyURI);
             if(strong_self){
-                //self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
                 [self addObserver:self forKeyPath:@"player.metadata.currentTrack" options:0 context:nil];
                 [self updateUI];
             }
