@@ -23,7 +23,7 @@
 
 - [ ] Filter miscapitalized
 
-- [ ] Downvote button sometimes gone (on bigger screen)
+- [X] Downvote button sometimes gone (on bigger screen)
 
 - [ ] Location sometimes 0, 0
 
