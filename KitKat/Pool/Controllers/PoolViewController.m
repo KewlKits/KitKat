@@ -75,35 +75,16 @@
                     else{
                         self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                             long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
-
                             long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
-
                             if (d1 < d2) {
                                 return (NSComparisonResult)NSOrderedDescending;
                             }
-                            
                            else if (d1 > d2) {
                                 return (NSComparisonResult)NSOrderedAscending;
-                               
                             }
-
                             return (NSComparisonResult)NSOrderedSame;
-                            
                         }];
-
                     }
-
-                    self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                        NSLog(@"%@", obj1.songTitle);
-                        NSDate *d1 = obj1.createdAt;
-                        NSDate *d2 = obj2.createdAt;
-                        NSLog(@"%@", d1);
-                        NSLog(@"%@", d2);
-                        NSComparisonResult result = [d1 compare:d2];
-                        return result;
-                    }];
-
-                    
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
                     });
