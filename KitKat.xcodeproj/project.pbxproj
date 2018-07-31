@@ -681,7 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HH2ZJ74M2A;
+				DEVELOPMENT_TEAM = 2CFN5BAYFF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -692,7 +692,7 @@
 					"@executable_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mpolson64.KitKat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.q.KitKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -704,7 +704,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HH2ZJ74M2A;
+				DEVELOPMENT_TEAM = 2CFN5BAYFF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -715,7 +715,7 @@
 					"@executable_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mpolson64.KitKat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.q.KitKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
