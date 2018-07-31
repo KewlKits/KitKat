@@ -53,6 +53,11 @@
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
                 }];
         currVoteVal += 1;
     }
@@ -62,6 +67,10 @@
         self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
            self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
@@ -71,6 +80,11 @@
         self.upvoteButton.selected = YES;
         [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
         }];
         currVoteVal += 1;
             self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
@@ -88,6 +102,10 @@
         self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
     }
@@ -96,6 +114,10 @@
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal += 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
@@ -105,6 +127,10 @@
         self.downvoteButton.selected = YES;
         [[BackendAPIManager shared] downvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
         }];
         currVoteVal -= 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];

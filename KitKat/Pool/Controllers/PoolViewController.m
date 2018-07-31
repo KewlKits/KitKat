@@ -39,12 +39,21 @@
 
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
+    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
 }
 
 
 -(void)partyLoaded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"partyLoaded"]){
         NSLog (@"party loaded!!");
+        [self populatePool];
+    }
+}
+
+-(void)voteReorder:(NSNotification *) notification{
+    if ([[notification name] isEqualToString:@"voteReorder"]){
+        NSLog (@"vote caused shift");
         [self populatePool];
     }
 }
@@ -68,7 +77,7 @@
                         self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                             NSDate *d1 = obj1.createdAt;
                             NSDate *d2 = obj2.createdAt;
-                            NSComparisonResult result = [d1 compare:d2];
+                            NSComparisonResult result = [d2 compare:d1];
                             return result;
                         }];
                     }
@@ -181,12 +190,12 @@
 
 - (IBAction)sorterButtonTapped:(id)sender {
     bool ageOn;
-    if([self.sorterButton.title isEqual: @"Filter by popularity"]){
+    if([self.sorterButton.title isEqual: @"Sort by Popular"]){
         ageOn = NO;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
         [self.sorterButton setTintColor:[UIColor whiteColor]];
-        [self.sorterButton setTitle:@"Filter by Age"];
+        [self.sorterButton setTitle:@"Sort by New"];
         [self populatePool];
          [self.tableView reloadData];
        
@@ -197,7 +206,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
         [self.sorterButton setTintColor:[UIColor redColor]];
-        [self.sorterButton setTitle:@"Filter by popularity"];
+        [self.sorterButton setTitle:@"Sort by Popular"];
         [self populatePool];
         [self.tableView reloadData];
     }
