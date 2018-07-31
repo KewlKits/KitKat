@@ -39,7 +39,6 @@
 
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
-    //[self populatePool];
 }
 
 
@@ -64,19 +63,33 @@
             [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
                 
                 if(response){
-                    self.songs = [[[BackendAPIManager shared].party fetchPool]
-                                  sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                        NSLog(@"%@", obj1.songTitle);
-                        NSDate *d1 = obj1.createdAt;
-                        NSDate *d2 = obj2.createdAt;
-                        NSLog(@"%@", d1);
-                        NSLog(@"%@", d2);
-                        NSComparisonResult result = [d1 compare:d2];
-                        return result;
-                    }];
+
+                    if(isAgeOn){
+                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                            NSDate *d1 = obj1.createdAt;
+                            NSDate *d2 = obj2.createdAt;
+                            NSComparisonResult result = [d1 compare:d2];
+                            return result;
+                        }];
+                    }
+                    
+                    else{
+                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                            long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
+                            long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
+                            if (d1 < d2) {
+                                return (NSComparisonResult)NSOrderedDescending;
+                            }
+                           else if (d1 > d2) {
+                                return (NSComparisonResult)NSOrderedAscending;
+                            }
+                            return (NSComparisonResult)NSOrderedSame;
+                        }];
+                    }
+
                     self.queueSongs = [[BackendAPIManager shared].party fetchQueue];
+                    self.poolSongs = self.songs;
                     dispatch_async(dispatch_get_main_queue(), ^(void){
-                        self.poolSongs = self.songs;
                         [self.tableView reloadData];
                     });
                 }
