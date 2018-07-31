@@ -16,7 +16,9 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSArray<Song*> * songs;
+@property NSArray<Song*> * songs; //songs in pool or songs in spotify
+@property NSArray<Song*> * poolSongs; //only songs in pool
+@property NSArray<Song*> * queueSongs;
 @property bool searching;
 @end
 
@@ -37,7 +39,6 @@
 
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
-    //[self populatePool];
 }
 
 
@@ -85,6 +86,9 @@
                             return (NSComparisonResult)NSOrderedSame;
                         }];
                     }
+
+                    self.queueSongs = [[BackendAPIManager shared].party fetchQueue];
+                    self.poolSongs = self.songs;
                     dispatch_async(dispatch_get_main_queue(), ^(void){
                         [self.tableView reloadData];
                     });
@@ -146,6 +150,8 @@
         SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
         Song * track = self.songs[indexPath.row];
         [searchCell setAttributes:track];
+        NSArray<Song *> * poolAndQueueSongs = [self.poolSongs arrayByAddingObjectsFromArray:self.queueSongs];
+        [searchCell setAddedButton:track addedSongs:poolAndQueueSongs];
         return searchCell;
     }
 }
