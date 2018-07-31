@@ -47,3 +47,5 @@
 
 - [ ] Play not working on physical devices
 
+- [ ] Blue dot sometimes gone on map
+
