@@ -12,10 +12,12 @@
 #import "BackendAPIManager.h"
 #import "PartyAnnotation.h"
 #import "PartyDetailViewController.h"
+#import "SpotifyDataManager.h"
 
 @interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UITextField *hostTextField;
 
 @end
 
@@ -84,6 +86,16 @@
     }
 }
 
+- (IBAction)onCreateButtonTapped:(id)sender {
+    [self.locationManager requestLocation];
+    CLLocation *currentLocation = [self.locationManager location];
+    
+    
+    [[SpotifyDataManager shared] createPlaylist:self.hostTextField.text withCompletion:^(NSError *error, NSString *uri) {
+        [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:nil];
+        [self performSegueWithIdentifier:@"creationSegue" sender:nil];
+    }];
+}
 
 #pragma mark - Navigation
 
