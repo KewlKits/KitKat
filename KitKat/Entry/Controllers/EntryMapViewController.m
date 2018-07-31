@@ -17,6 +17,7 @@
 @interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (weak, nonatomic) IBOutlet UITextField *hostTextField;
 @property (weak, nonatomic) IBOutlet UIStackView *hostInputStackView;
 
@@ -95,8 +96,13 @@
     
     
     [[SpotifyDataManager shared] createPlaylist:self.hostTextField.text withCompletion:^(NSError *error, NSString *uri) {
-        [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:nil];
-        [self performSegueWithIdentifier:@"creationSegue" sender:nil];
+        [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            Party *party =  [[Party alloc] initWithDictionary: response.body.object];
+            [BackendAPIManager shared].party = party;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self performSegueWithIdentifier:@"creationSegue" sender:self.createButton];
+            });
+        }];
     }];
 }
 - (IBAction)onTap:(id)sender {
@@ -104,9 +110,11 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
-    }];
+    if(self.hostTextField.isEditing) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+        }];
+    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {

@@ -26,16 +26,16 @@
                                     <outletCollection property="gestureRecognizers" destination="R06-5S-nDI" appends="YES" id="ijf-ut-nYg"/>
                                 </connections>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NLL-q3-6F8">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLL-q3-6F8">
                                 <rect key="frame" x="16" y="617" width="343" height="30"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Or host a party..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8g2-mk-z5T">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Or host a party..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8g2-mk-z5T">
                                         <rect key="frame" x="0.0" y="0.0" width="297" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCo-Bc-u1V">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCo-Bc-u1V">
                                         <rect key="frame" x="297" y="0.0" width="46" height="30"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
@@ -55,13 +55,14 @@
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="top" secondItem="XDR-go-Gz2" secondAttribute="top" id="Hdx-gS-D97"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="bottom" secondItem="B7f-fr-CJn" secondAttribute="bottom" id="Q9s-I1-IF1"/>
                             <constraint firstItem="B7f-fr-CJn" firstAttribute="trailing" secondItem="NLL-q3-6F8" secondAttribute="trailing" constant="16" id="k4b-gO-15y"/>
-                            <constraint firstItem="B7f-fr-CJn" firstAttribute="bottom" secondItem="NLL-q3-6F8" secondAttribute="bottom" constant="20" id="p14-zz-dE8"/>
+                            <constraint firstItem="B7f-fr-CJn" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NLL-q3-6F8" secondAttribute="bottom" constant="20" id="p14-zz-dE8"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="leading" secondItem="B7f-fr-CJn" secondAttribute="leading" id="sWI-Cz-acs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B7f-fr-CJn"/>
                     </view>
                     <navigationItem key="navigationItem" id="9F0-OQ-Spy"/>
                     <connections>
+                        <outlet property="createButton" destination="eCo-Bc-u1V" id="xsE-3V-8Qa"/>
                         <outlet property="hostInputStackView" destination="NLL-q3-6F8" id="CPd-9c-HL6"/>
                         <outlet property="hostTextField" destination="8g2-mk-z5T" id="5Yj-H9-RXs"/>
                         <outlet property="mapView" destination="1e4-mh-lzQ" id="WUA-SU-HzS"/>
