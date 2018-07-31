@@ -43,9 +43,6 @@
     CLLocation *currentLocation = [self.locationManager location];
     NSLog(@"Location: %@", currentLocation);
     
-    MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
-    [self.mapView setRegion:sfRegion animated:false];
-    
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
         for (NSDictionary *dict in response.body.array) {
             PartyAnnotation *pin = [PartyAnnotation new];
@@ -53,6 +50,11 @@
             pin.coordinate = CLLocationCoordinate2DMake([pin.party.location[1] doubleValue], [pin.party.location[0] doubleValue]);
             [self.mapView addAnnotation:pin];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mapView showAnnotations:self.mapView.annotations animated:NO];
+            MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
+            [self.mapView setRegion:sfRegion animated:NO];
+        });
     }];
 }
 
