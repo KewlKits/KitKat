@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dxP-kJ-7mB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FHN-FT-enH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,73 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Entry Map View Controller-->
+        <scene sceneID="8VB-ke-PiI">
+            <objects>
+                <viewController id="FHN-FT-enH" customClass="EntryMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XDR-go-Gz2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1e4-mh-lzQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1e4-mh-lzQ" firstAttribute="trailing" secondItem="B7f-fr-CJn" secondAttribute="trailing" id="27x-WL-FRl"/>
+                            <constraint firstItem="1e4-mh-lzQ" firstAttribute="top" secondItem="XDR-go-Gz2" secondAttribute="top" id="Hdx-gS-D97"/>
+                            <constraint firstItem="1e4-mh-lzQ" firstAttribute="bottom" secondItem="B7f-fr-CJn" secondAttribute="bottom" id="Q9s-I1-IF1"/>
+                            <constraint firstItem="1e4-mh-lzQ" firstAttribute="leading" secondItem="B7f-fr-CJn" secondAttribute="leading" id="sWI-Cz-acs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="B7f-fr-CJn"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="1e4-mh-lzQ" id="WUA-SU-HzS"/>
+                        <segue destination="JJa-8r-mnb" kind="show" identifier="toPartyDetailView" id="tot-3S-AY0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zks-Ol-8HF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="948" y="-696.7016491754124"/>
+        </scene>
+        <!--Party Detail View Controller-->
+        <scene sceneID="cqq-Ue-lga">
+            <objects>
+                <viewController id="JJa-8r-mnb" customClass="PartyDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TZz-kS-5Pi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqp-RA-fH4">
+                                <rect key="frame" x="172" y="318" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Join"/>
+                                <connections>
+                                    <segue destination="0X6-WA-XMX" kind="show" id="cqJ-2V-ZgE"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="comingsoon.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="VmX-ec-TIZ">
+                                <rect key="frame" x="23" y="82" width="328" height="220"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="05N-yX-L72"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vRc-gO-ugO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1980" y="-1169.865067466267"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="Avk-0a-PsM">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" id="0X6-WA-XMX" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="57q-jp-c1z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2781" y="-1170"/>
+        </scene>
         <!--Be The Party View Controller-->
         <scene sceneID="spI-iJ-dFj">
             <objects>
@@ -137,6 +204,9 @@
             <point key="canvasLocation" x="-12" y="143"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="comingsoon.jpg" width="525" height="348"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Jw1-gQ-Fwu"/>
     </inferredMetricsTieBreakers>

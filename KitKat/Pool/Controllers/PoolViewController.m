@@ -29,10 +29,19 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
+    [self populatePool];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+
+    
+
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     //[self populatePool];
 }
+
 
 -(void)partyLoaded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"partyLoaded"]){
@@ -75,6 +84,8 @@
         }
     }];
 }
+
+
 
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
     
@@ -119,6 +130,7 @@
         PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
         Song * track = self.songs[indexPath.row];
         [poolCell setAttributes: track];
+        [poolCell setVoteAttributes:track];
         return poolCell;
     }
     else{
@@ -130,6 +142,15 @@
         return searchCell;
     }
 }
+
+
+//- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+//    PoolCell * poolCell = [tableView dequeueReusableCellWithIdentifier:@"PoolCell"];
+//    Song * track = self.poolSongs[indexPath.row];
+//    [poolCell setAttributes: track];
+//    [poolCell setVoteAttributes:track];
+//    return poolCell;
+//}
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.songs count];
@@ -169,6 +190,11 @@
     }
 }
 
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self populatePool];
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
+}
 
 
 
