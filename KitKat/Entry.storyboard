@@ -22,20 +22,47 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1e4-mh-lzQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Or host a party..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8g2-mk-z5T">
+                                <rect key="frame" x="16" y="617" width="289" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2La-mU-pXj"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCo-Bc-u1V">
+                                <rect key="frame" x="313" y="617" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="7CC-gw-kzh"/>
+                                    <constraint firstAttribute="height" constant="30" id="cNr-QZ-Wzi"/>
+                                </constraints>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="onCreateButtonTapped:" destination="FHN-FT-enH" eventType="touchUpInside" id="Qne-na-f3x"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="B7f-fr-CJn" firstAttribute="trailing" secondItem="eCo-Bc-u1V" secondAttribute="trailing" constant="16" id="27T-zO-wOj"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="trailing" secondItem="B7f-fr-CJn" secondAttribute="trailing" id="27x-WL-FRl"/>
+                            <constraint firstItem="B7f-fr-CJn" firstAttribute="bottom" secondItem="eCo-Bc-u1V" secondAttribute="bottom" constant="20" id="4Eu-Q0-SJP"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="top" secondItem="XDR-go-Gz2" secondAttribute="top" id="Hdx-gS-D97"/>
+                            <constraint firstItem="B7f-fr-CJn" firstAttribute="bottom" secondItem="8g2-mk-z5T" secondAttribute="bottom" constant="20" id="Iko-zu-1LU"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="bottom" secondItem="B7f-fr-CJn" secondAttribute="bottom" id="Q9s-I1-IF1"/>
+                            <constraint firstItem="8g2-mk-z5T" firstAttribute="leading" secondItem="B7f-fr-CJn" secondAttribute="leading" constant="16" id="hee-cx-5t2"/>
+                            <constraint firstItem="eCo-Bc-u1V" firstAttribute="leading" secondItem="8g2-mk-z5T" secondAttribute="trailing" constant="8" id="iJ9-gq-S7u"/>
                             <constraint firstItem="1e4-mh-lzQ" firstAttribute="leading" secondItem="B7f-fr-CJn" secondAttribute="leading" id="sWI-Cz-acs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B7f-fr-CJn"/>
                     </view>
                     <navigationItem key="navigationItem" id="9F0-OQ-Spy"/>
                     <connections>
+                        <outlet property="hostTextField" destination="8g2-mk-z5T" id="5Yj-H9-RXs"/>
                         <outlet property="mapView" destination="1e4-mh-lzQ" id="WUA-SU-HzS"/>
                         <segue destination="JJa-8r-mnb" kind="show" identifier="toPartyDetailView" id="tot-3S-AY0"/>
+                        <segue destination="0X6-WA-XMX" kind="presentation" identifier="creationSegue" id="COw-Ix-bZR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zks-Ol-8HF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,5 +368,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Jw1-gQ-Fwu"/>
+        <segue reference="COw-Ix-bZR"/>
     </inferredMetricsTieBreakers>
 </document>
