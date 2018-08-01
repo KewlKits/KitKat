@@ -64,10 +64,13 @@
     
     self.counterLabel.text = [NSString stringWithFormat:@"%lu in pool • %lu in queue", self.party.pool.count, self.party.queue.count];
     
-    self.queue = [self.party fetchQueue];
-    [self.tableView reloadData];
-    
-    [self setAlbumArts];
+    [[BackendAPIManager shared] getSongArray:self.party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.queue = [Song songsWithArray:response.body.array];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self.tableView reloadData];
+            [self setAlbumArts];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
