@@ -29,18 +29,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-//    [self populatePool];
+    [self fetchQueue:nil];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
 
-    
-
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
-    
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
 }
 
 
@@ -48,7 +45,6 @@
     if ([[notification name] isEqualToString:@"partyLoaded"]){
         NSLog (@"party loaded!!");
         [self populatePool];
-        [self fetchQueue:nil];
     }
 }
 
@@ -121,7 +117,6 @@
 
 
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
-    
     [SpotifyDataManager searchSpotify:query type:type withCompletion:^(NSDictionary *response) {
         NSArray *temporary = [[NSArray alloc] init];
         
