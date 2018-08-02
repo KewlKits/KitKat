@@ -14,7 +14,7 @@
 #import "UserInfoCell.h"
 @interface UserViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(strong, nonatomic) NSMutableArray<Song *>* songs;
+@property(strong, nonatomic) NSArray<Song *>* songs;
 @end
 
 @implementation UserViewController
@@ -51,8 +51,12 @@
 }
 
 -(void)getUserSongs{
-    self.songs = [[BackendAPIManager shared].currentUser fetchUserPool];
-    [self.tableView reloadData];
+    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.songs = [Song songsWithArray:response.body.array];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

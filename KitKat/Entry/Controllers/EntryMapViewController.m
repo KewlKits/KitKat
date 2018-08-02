@@ -14,10 +14,12 @@
 #import "PartyDetailViewController.h"
 #import "SpotifyDataManager.h"
 
-@interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (weak, nonatomic) IBOutlet UITextField *hostTextField;
+@property (weak, nonatomic) IBOutlet UIStackView *hostInputStackView;
 
 @end
 
@@ -31,6 +33,8 @@
     self.mapView.showsScale = YES;
     self.mapView.showsCompass = YES;
     
+    self.hostTextField.delegate = self;
+    
     self.locationManager = [CLLocationManager new];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
@@ -39,9 +43,6 @@
     CLLocation *currentLocation = [self.locationManager location];
     NSLog(@"Location: %@", currentLocation);
     
-    MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
-    [self.mapView setRegion:sfRegion animated:false];
-    
     [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse *response, NSError *error) {
         for (NSDictionary *dict in response.body.array) {
             PartyAnnotation *pin = [PartyAnnotation new];
@@ -49,6 +50,11 @@
             pin.coordinate = CLLocationCoordinate2DMake([pin.party.location[1] doubleValue], [pin.party.location[0] doubleValue]);
             [self.mapView addAnnotation:pin];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mapView showAnnotations:self.mapView.annotations animated:NO];
+            MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
+            [self.mapView setRegion:sfRegion animated:NO];
+        });
     }];
 }
 
@@ -92,11 +98,32 @@
     
     
     [[SpotifyDataManager shared] createPlaylist:self.hostTextField.text withCompletion:^(NSError *error, NSString *uri) {
-        [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:nil];
-        [self performSegueWithIdentifier:@"creationSegue" sender:nil];
+        [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            Party *party =  [[Party alloc] initWithDictionary: response.body.object];
+            [BackendAPIManager shared].party = party;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self performSegueWithIdentifier:@"creationSegue" sender:self.createButton];
+            });
+        }];
     }];
 }
+- (IBAction)onTap:(id)sender {
+    [self.view endEditing:YES];
+}
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if(self.hostTextField.isEditing) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+        }];
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.2 animations:^{
+        self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y + 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+    }];
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

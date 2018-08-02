@@ -226,6 +226,18 @@
     return [[Song alloc] initWithDictionary:response.body.object];
 }
 
+-(void) getSongArray: (NSArray<NSString *> *) songIds withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
+        [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/song/list"];
+        [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"songIds": songIds} options:0 error:nil]];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+        if(completion) {
+            completion(jsonResponse, error);
+        }
+    }];
+}
+
 - (void)upvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/upvote", songId]];

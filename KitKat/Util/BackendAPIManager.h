@@ -32,6 +32,7 @@
 - (void)getAUser: (NSString *) userId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)getAllSongs:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)getASong: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+-(void) getSongArray: (NSArray<NSString *> *) songIds withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (Song *)getASongSync: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)upvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)unUpvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
