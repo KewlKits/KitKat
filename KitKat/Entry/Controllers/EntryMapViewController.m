@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *createButton;
 @property (weak, nonatomic) IBOutlet UITextField *hostTextField;
 @property (weak, nonatomic) IBOutlet UIStackView *hostInputStackView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputBottomConstraint;
 
 @end
 
@@ -112,17 +113,17 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if(self.hostTextField.isEditing) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
-        }];
-    }
+    [UIView animateWithDuration:0.2 animations:^{
+        self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y - 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
+    }];
+    [self.inputBottomConstraint setConstant:self.inputBottomConstraint.constant + 250];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     [UIView animateWithDuration:0.2 animations:^{
         self.hostInputStackView.frame = CGRectMake(self.hostInputStackView.frame.origin.x, self.hostInputStackView.frame.origin.y + 250, self.hostInputStackView.frame.size.width, self.hostInputStackView.frame.size.height);
     }];
+    [self.inputBottomConstraint setConstant:self.inputBottomConstraint.constant - 250];
 }
 #pragma mark - Navigation
 
