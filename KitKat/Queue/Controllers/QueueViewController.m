@@ -14,7 +14,7 @@
 
 @interface QueueViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @property(strong, nonatomic) NSMutableArray<Song *> *queue;
 
@@ -28,7 +28,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.editButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    if (![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId]) {
+        [self.editButton setEnabled:NO];
+    }
     
     [self populateQueue];
 }
@@ -42,17 +44,27 @@
 }
 - (IBAction)onEditTapped:(id)sender {
     [self.tableView setEditing:!self.tableView.isEditing animated:YES];
-    [self.editButton setTitle:(self.tableView.isEditing) ? @"Done" : @"Edit" forState:UIControlStateNormal];
+    [self.navigationItem.rightBarButtonItem setTitle:(self.tableView.isEditing) ? @"Done" : @"Edit"];
 }
 
 - (void)populateQueue {
-    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
-        if(response){
-            self.queue = [[BackendAPIManager shared].party fetchQueue];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            NSArray *unsortedQueue = [NSMutableArray arrayWithArray:[Song songsWithArray:response.body.array]];
+            NSMutableDictionary *queueMap = [NSMutableDictionary new];
+            for (Song *song in unsortedQueue) {
+                [queueMap setObject:song forKey:song.songId];
+            }
+            NSMutableArray *queueBuilder = [NSMutableArray new];
+            for (NSString *songId in [BackendAPIManager shared].party.queue) {
+                [queueBuilder addObject:[queueMap objectForKey:songId]];
+            }
+            self.queue = queueBuilder;
+            NSLog(@"%@", self.queue);
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
                 [self.tableView reloadData];
             });
-        }
+        }];
     }];
 }
 
@@ -84,10 +96,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:self.queue[indexPath.row].songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = [[BackendAPIManager shared].party fetchQueue];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self.tableView reloadData];
-            });
+            [self populateQueue];
         }];
         
         [self.queue removeObjectAtIndex:indexPath.row];
@@ -105,10 +114,7 @@
             if (!error) {
                 [[SpotifyDataManager shared] moveSongWithinPlaylist:[[BackendAPIManager shared].party.playlistUri componentsSeparatedByString:@":"].lastObject owner:[BackendAPIManager shared].currentUser.name index:[NSNumber numberWithUnsignedInteger:sourceIndexPath.row] target:[NSNumber numberWithUnsignedInteger:destinationIndexPath.row] withCompletion:nil];
             }
-            self.queue = [[BackendAPIManager shared].party fetchQueue];
-            dispatch_async(dispatch_get_main_queue(), ^(void){
-                [self.tableView reloadData];
-            });
+            [self populateQueue];
         }];
     });
 }

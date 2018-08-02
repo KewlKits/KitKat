@@ -110,9 +110,14 @@
                         <viewLayoutGuide key="safeArea" id="9Fn-mu-Zy2"/>
                     </view>
                     <navigationItem key="navigationItem" id="41d-IN-5Zx">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="kBF-Jd-vQ6"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="kBF-Jd-vQ6">
+                            <connections>
+                                <action selector="onEditTapped:" destination="ft4-Vh-v3u" id="Efl-MT-eTa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="kBF-Jd-vQ6" id="cvD-4W-Ij1"/>
                         <outlet property="tableView" destination="o8N-3x-4JG" id="BFf-WV-nP2"/>
                     </connections>
                 </viewController>

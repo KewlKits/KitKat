@@ -20,5 +20,4 @@
 @property (nonatomic, strong) NSArray<NSString *> *downvotedBy;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-+ (NSArray<Song *> *)songsWithArray:(NSArray *)dicts;
 @end

@@ -218,14 +218,6 @@
     }] asJsonAsync:completion];
 }
 
-- (Song *)getASongSync: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
-    UNIHTTPJsonResponse *response = [[UNIRest get:^(UNISimpleRequest *simpleRequest) {
-        [simpleRequest setUrl:[@"https://kk-backend.herokuapp.com/song/" stringByAppendingString:songId]];
-    }]asJson];
-    
-    return [[Song alloc] initWithDictionary:response.body.object];
-}
-
 -(void) getSongArray: (NSArray<NSString *> *) songIds withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/song/list"];

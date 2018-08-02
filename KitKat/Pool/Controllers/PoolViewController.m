@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property NSArray<Song*> * songs; //songs in pool or songs in spotify
-@property NSArray<Song*> * poolSongs; //only songs in pool
-@property NSArray<Song*> * queueSongs;
+@property NSArray<Song *> *pool;
+@property NSArray<Song *> *queue;
 @property bool searching;
 @end
 
@@ -29,7 +29,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    [self populatePool];
+//    [self populatePool];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
@@ -48,6 +48,7 @@
     if ([[notification name] isEqualToString:@"partyLoaded"]){
         NSLog (@"party loaded!!");
         [self populatePool];
+        [self fetchQueue:nil];
     }
 }
 
@@ -63,50 +64,60 @@
     [self populatePool];
 }
 
--(void)populatePool{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    bool isAgeOn = [defaults boolForKey:@"isAgeOn" ];
-    
-    [BackendAPIManager getAllParties:^(UNIHTTPJsonResponse * response, NSError * error) {
-        if(response){
-            [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
-                
-                if(response){
-
-                    if(isAgeOn){
-                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                            NSDate *d1 = obj1.createdAt;
-                            NSDate *d2 = obj2.createdAt;
-                            NSComparisonResult result = [d2 compare:d1];
-                            return result;
-                        }];
-                    }
-                    
-                    else{
-                        self.songs = [[[BackendAPIManager shared].party fetchPool] sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
-                            long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
-                            long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
-                            if (d1 < d2) {
-                                return (NSComparisonResult)NSOrderedDescending;
-                            }
-                           else if (d1 > d2) {
-                                return (NSComparisonResult)NSOrderedAscending;
-                            }
-                            return (NSComparisonResult)NSOrderedSame;
-                        }];
-                    }
-
-                    self.queueSongs = [[BackendAPIManager shared].party fetchQueue];
-                    self.poolSongs = self.songs;
-                    dispatch_async(dispatch_get_main_queue(), ^(void){
-                        [self.tableView reloadData];
-                    });
-                }
-            }];
-        }
+-(void)fetchPool:(void (^_Nullable)(void))completion {
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.pool = [Song songsWithArray:response.body.array];
+            if(completion) {
+                completion();
+            }
+        }];
     }];
 }
 
+-(void)fetchQueue:(void (^_Nullable)(void))completion {
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.queue = [Song songsWithArray:response.body.array];
+            if(completion) {
+                completion();
+            }
+        }];
+    }];
+}
+
+-(void)populatePool{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    bool isAgeOn = [defaults boolForKey:@"isAgeOn" ];
+    [self fetchPool:^{
+        if(isAgeOn){
+            self.songs = [self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                NSDate *d1 = obj1.createdAt;
+                NSDate *d2 = obj2.createdAt;
+                NSComparisonResult result = [d2 compare:d1];
+                return result;
+            }];
+        }
+        
+        else{
+            self.songs = [self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+                long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
+                long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
+                if (d1 < d2) {
+                    return (NSComparisonResult)NSOrderedDescending;
+                }
+                else if (d1 > d2) {
+                    return (NSComparisonResult)NSOrderedAscending;
+                }
+                return (NSComparisonResult)NSOrderedSame;
+            }];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [self.tableView reloadData];
+        });
+    }];
+}
 
 
 -(void)fetchSearchResults:(NSString *)query type: (NSString *) type{
@@ -159,8 +170,8 @@
         SearchCell * searchCell = [tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
         Song * track = self.songs[indexPath.row];
         [searchCell setAttributes:track];
-        NSArray<Song *> * poolAndQueueSongs = [self.poolSongs arrayByAddingObjectsFromArray:self.queueSongs];
-        [searchCell setAddedButton:track addedSongs:poolAndQueueSongs];
+        
+        [searchCell setAddedButton:track addedSongs:[self.pool arrayByAddingObjectsFromArray:self.queue]];
         return searchCell;
     }
 }

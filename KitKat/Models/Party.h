@@ -21,6 +21,4 @@
 @property (nonatomic, strong) NSArray<NSString *> *queue;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (NSMutableArray<Song *> *)fetchPool;
-- (NSMutableArray<Song *> *)fetchQueue;
 @end
