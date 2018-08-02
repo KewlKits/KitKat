@@ -38,8 +38,15 @@
     self.searching = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
 }
 
+-(void)songAdded:(NSNotification *) notification{
+    if ([[notification name] isEqualToString:@"songAdded"]){
+        NSLog (@"song added!!");
+        [self populatePool];
+    }
+}
 
 -(void)partyLoaded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"partyLoaded"]){
