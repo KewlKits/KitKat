@@ -208,7 +208,7 @@
         [self.sorterButton setTintColor:[UIColor whiteColor]];
         [self.sorterButton setTitle:@"Sort by New"];
         [self populatePool];
-         [self.tableView reloadData];
+        [self.tableView reloadData];
        
         
     }

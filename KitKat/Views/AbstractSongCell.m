@@ -48,9 +48,11 @@
     }
     if(isInPool){
         [self.addCheckButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+        [self.addCheckButton setEnabled:NO];
     }
     else{
         [self.addCheckButton setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+        [self.addCheckButton setEnabled:YES];
     }
     
 }
