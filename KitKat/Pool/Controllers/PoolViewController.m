@@ -144,6 +144,7 @@
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     self.searching = NO;
+    [self.view endEditing:YES];
     self.searchBar.text = @"";
     [self populatePool];
 }
