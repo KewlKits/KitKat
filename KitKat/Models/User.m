@@ -35,4 +35,23 @@
     return poolSongs;
 }
 
+//-(NSNumber *) calcScore{
+-(void) calcScore{
+    NSNumber *score = [NSNumber numberWithInt:2];
+    float floatScore =0;
+
+    NSMutableArray *songList = [self fetchUserPool];
+    for (int i = 0; i < [songList count]; i++)
+    {
+        Song *song = songList[i];
+        floatScore = floatScore +  (float)song.upvotedBy.count - .5 * (float)song.downvotedBy.count;
+        
+    }
+    score = [NSNumber numberWithFloat: floatScore];
+   // NSLog(@" SCORE IS %@", score);
+    [[BackendAPIManager shared] updateScore:[BackendAPIManager shared].currentUser.userId score:score withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+      //  NSLog(@"%@", [BackendAPIManager shared].currentUser.score);
+    }];
+}
+
 @end

@@ -20,5 +20,5 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (NSMutableArray<Song *> *)fetchUserPool;
-
+-(void) calcScore;
 @end
