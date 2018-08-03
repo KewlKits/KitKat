@@ -16,9 +16,9 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSArray<Song*> * songs; //songs in pool or songs in spotify
-@property NSArray<Song *> *pool;
-@property NSArray<Song *> *queue;
+@property NSMutableArray<Song*> * songs; //songs in pool or songs in spotify
+@property NSMutableArray<Song *> *pool;
+@property NSMutableArray<Song *> *queue;
 @property bool searching;
 @end
 
@@ -44,7 +44,13 @@
 -(void)songAdded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"songAdded"]){
         NSLog (@"song added!!");
-        [self populatePool];
+        NSLog(@"%@", ((PoolCell *)notification.object).song.songId);
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
+            [self.songs removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self populatePool];
+        });
     }
 }
 
@@ -94,16 +100,16 @@
     bool isAgeOn = [defaults boolForKey:@"isAgeOn" ];
     [self fetchPool:^{
         if(isAgeOn){
-            self.songs = [self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+            self.songs = [[self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                 NSDate *d1 = obj1.createdAt;
                 NSDate *d2 = obj2.createdAt;
                 NSComparisonResult result = [d2 compare:d1];
                 return result;
-            }];
+            }] mutableCopy];
         }
         
         else{
-            self.songs = [self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
+            self.songs = [[self.pool sortedArrayUsingComparator:^NSComparisonResult(Song* obj1, Song* obj2) {
                 long d1 = (long)obj1.upvotedBy.count - (long) obj1.downvotedBy.count;
                 long d2 = (long) obj2.upvotedBy.count - (long) obj2.downvotedBy.count;
                 if (d1 < d2) {
@@ -113,7 +119,7 @@
                     return (NSComparisonResult)NSOrderedAscending;
                 }
                 return (NSComparisonResult)NSOrderedSame;
-            }];
+            }] mutableCopy];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -140,7 +146,7 @@
             temporary = response[@"tracks"][@"items"];
         }
         
-        self.songs = [SpotifySong songsWithArray:temporary];
+        self.songs = [[SpotifySong songsWithArray:temporary] mutableCopy];
         [self.tableView reloadData];
     }];
 }
@@ -211,7 +217,6 @@
         [self.sorterButton setTintColor:[UIColor whiteColor]];
         [self.sorterButton setTitle:@"Sort by New"];
         [self populatePool];
-        [self.tableView reloadData];
        
         
     }
@@ -222,13 +227,11 @@
         [self.sorterButton setTintColor:[UIColor redColor]];
         [self.sorterButton setTitle:@"Sort by Popular"];
         [self populatePool];
-        [self.tableView reloadData];
     }
 }
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self populatePool];
-    [self.tableView reloadData];
     [refreshControl endRefreshing];
 }
 
