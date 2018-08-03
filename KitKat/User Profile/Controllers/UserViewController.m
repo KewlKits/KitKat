@@ -31,11 +31,13 @@
 }
 
 -(void)getUserSongs{
-    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-        self.songs = [Song songsWithArray:response.body.array];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self.tableView reloadData];
-        });
+    [[BackendAPIManager shared] touchUser:[BackendAPIManager shared].currentUser.name withCompletion:^(UNIHTTPJsonResponse *userResponse, NSError *userError) {
+        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.songs = [Song songsWithArray:response.body.array];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self.tableView reloadData];
+            });
+        }];
     }];
 }
 
