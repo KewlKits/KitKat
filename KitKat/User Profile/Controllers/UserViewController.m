@@ -24,6 +24,15 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self getUserSongs];
+    
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
+    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
+    
+//    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
+    [self.tableView reloadData];
+
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -39,6 +48,16 @@
             });
         }];
     }];
+}
+
+//- (void)onTimer {
+//    [self.tableView reloadData];
+//    
+//}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+    [self.tableView reloadData];
+    [refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +78,7 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if(indexPath.row ==0){
         UserInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoCell"];
+         [cell setAttributes: [[BackendAPIManager shared] currentUser]];
         return cell;
     }
     else{

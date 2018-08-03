@@ -57,21 +57,8 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jve-N0-PzA">
-                                                    <rect key="frame" x="298.5" y="21.5" width="35.5" height="17"/>
-                                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment content="Rank:">
-                                                            <attributes>
-                                                                <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYo-en-WHA">
-                                                    <rect key="frame" x="344" y="21.5" width="16" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYo-en-WHA">
+                                                    <rect key="frame" x="318" y="22" width="42" height="17"/>
                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="15">
@@ -93,11 +80,9 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="jve-N0-PzA" firstAttribute="centerY" secondItem="vSs-na-nqv" secondAttribute="centerY" id="4NA-Id-69E"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vSs-na-nqv" secondAttribute="bottom" constant="20" id="6Zv-tP-ghb"/>
                                                 <constraint firstItem="5Kr-EN-VIK" firstAttribute="leading" secondItem="OCP-u5-0Pk" secondAttribute="trailing" constant="8" id="85l-Qz-zpW"/>
                                                 <constraint firstItem="5Kr-EN-VIK" firstAttribute="centerY" secondItem="vSs-na-nqv" secondAttribute="centerY" id="FxG-MC-WYC"/>
-                                                <constraint firstItem="mYo-en-WHA" firstAttribute="leading" secondItem="jve-N0-PzA" secondAttribute="trailing" constant="10" id="Rfu-25-RdB"/>
                                                 <constraint firstItem="OCP-u5-0Pk" firstAttribute="centerY" secondItem="vSs-na-nqv" secondAttribute="centerY" id="XsQ-RT-I05"/>
                                                 <constraint firstItem="vSs-na-nqv" firstAttribute="leading" secondItem="zM0-Kc-vQa" secondAttribute="leading" constant="6" id="igy-XK-UPR"/>
                                                 <constraint firstItem="mYo-en-WHA" firstAttribute="trailing" secondItem="zM0-Kc-vQa" secondAttribute="trailingMargin" id="j2A-vA-xcC"/>

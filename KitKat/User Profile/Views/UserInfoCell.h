@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface UserInfoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rankLabel;
+
+-(void)setAttributes:(User*) currentUser;
 
 @end
