@@ -179,23 +179,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LuY-rV-OVE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPS-rd-hTK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Nl7-7n-E4d"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <scopeButtonTitles>
+                                    <string>artist</string>
+                                    <string>album</string>
+                                    <string>playlist</string>
+                                    <string>track</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LuY-rV-OVE">
+                                <rect key="frame" x="0.0" y="56" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" id="pPS-rd-hTK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                    <scopeButtonTitles>
-                                        <string>artist</string>
-                                        <string>album</string>
-                                        <string>playlist</string>
-                                        <string>track</string>
-                                    </scopeButtonTitles>
-                                </searchBar>
+                                <gestureRecognizers/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PoolCell" rowHeight="103" id="nxb-d4-ghG" customClass="PoolCell">
-                                        <rect key="frame" x="0.0" y="84" width="375" height="103"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nxb-d4-ghG" id="NCp-cY-BRt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="102.5"/>
@@ -317,13 +320,14 @@
                                             <outlet property="albumCover" destination="eEE-Lm-yBk" id="hG8-AY-V00"/>
                                             <outlet property="artistAlbumLabel" destination="0XF-d4-wcs" id="M6C-ca-3AU"/>
                                             <outlet property="downvoteButton" destination="lKm-dY-TGa" id="IMG-qL-2qT"/>
+                                            <outlet property="moveToQueueButton" destination="1co-7O-qIS" id="jYR-Ex-wBY"/>
                                             <outlet property="songTitleLabel" destination="cms-hX-iHK" id="k3x-Nb-kXI"/>
                                             <outlet property="songVotesLabel" destination="pHz-AF-v6v" id="KXu-zP-Dnx"/>
                                             <outlet property="upvoteButton" destination="wju-DW-5N0" id="A62-UD-jRE"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="103" id="oyD-Nu-JgC" customClass="SearchCell">
-                                        <rect key="frame" x="0.0" y="187" width="375" height="103"/>
+                                        <rect key="frame" x="0.0" y="131" width="375" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oyD-Nu-JgC" id="WH8-8I-8ec">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="102.5"/>
@@ -407,11 +411,15 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="LuY-rV-OVE" secondAttribute="bottom" id="A6W-Iz-IRd"/>
+                            <constraint firstItem="LuY-rV-OVE" firstAttribute="top" secondItem="pPS-rd-hTK" secondAttribute="bottom" id="Gqk-DB-ErD"/>
                             <constraint firstItem="LuY-rV-OVE" firstAttribute="trailing" secondItem="Vjx-Tq-6yP" secondAttribute="trailing" id="KFx-hK-IQ9"/>
                             <constraint firstItem="LuY-rV-OVE" firstAttribute="leading" secondItem="Vjx-Tq-6yP" secondAttribute="leading" id="Nbd-xR-DAm"/>
-                            <constraint firstItem="LuY-rV-OVE" firstAttribute="top" secondItem="Vjx-Tq-6yP" secondAttribute="top" id="bG4-9w-gQe"/>
+                            <constraint firstItem="pPS-rd-hTK" firstAttribute="top" secondItem="Vjx-Tq-6yP" secondAttribute="top" id="TWT-67-9cz"/>
+                            <constraint firstItem="pPS-rd-hTK" firstAttribute="trailing" secondItem="Vjx-Tq-6yP" secondAttribute="trailing" id="Z0v-TZ-ilo"/>
+                            <constraint firstItem="pPS-rd-hTK" firstAttribute="leading" secondItem="Vjx-Tq-6yP" secondAttribute="leading" id="zhW-yh-WUn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vjx-Tq-6yP"/>
                     </view>

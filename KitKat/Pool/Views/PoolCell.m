@@ -15,9 +15,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    
-        
     // Initialization code
     self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
 }
