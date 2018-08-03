@@ -30,7 +30,7 @@
     [[UNIRest postEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party"];
         [unibodyRequest setHeaders: @{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name":partyName,@"longitude":longitude, @"latitude":latitude, @"playlistUri": playlistUri, @"owner":self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name":partyName, @"longitude":longitude, @"latitude":latitude, @"playlistUri": playlistUri, @"owner":self.currentUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
             self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];

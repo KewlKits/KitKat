@@ -97,5 +97,16 @@
         }
     }];
 }
+-(void)removeSongFromPlaylist:(NSString*) playlistId owner:(NSString *)owner uri:(NSString *) uri withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
+    [[UNIRest deleteEntity:^(UNIBodyRequest *unibodyRequest) {
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://api.spotify.com/v1/users/%@/playlists/%@/tracks", owner, playlistId]];
+        [unibodyRequest setHeaders:@{@"Accept": @"application/json",@"Content-Type": @"application/json", @"Authorization":[NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]}];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"tracks": @[@{@"uri": uri}]} options:0 error:nil]];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+        if (completion) {
+            completion(jsonResponse, error);
+        }
+    }];
+}
 
 @end

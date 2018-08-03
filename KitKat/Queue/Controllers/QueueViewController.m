@@ -60,7 +60,6 @@
                 [queueBuilder addObject:[queueMap objectForKey:songId]];
             }
             self.queue = queueBuilder;
-            NSLog(@"%@", self.queue);
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 [self.tableView reloadData];
             });
@@ -96,11 +95,18 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         [[BackendAPIManager shared] removeSongFromQueue:[BackendAPIManager shared].party.partyId songId:self.queue[indexPath.row].songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            [self populateQueue];
+            if(!error) {
+                NSLog(@"%@", self.queue[indexPath.row].songTitle);
+                [[SpotifyDataManager shared] removeSongFromPlaylist:[[BackendAPIManager shared].party.playlistUri componentsSeparatedByString:@":"].lastObject owner:[BackendAPIManager shared].currentUser.name uri:self.queue[indexPath.row].songUri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        [self.queue removeObjectAtIndex:indexPath.row];
+                        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                        [self populateQueue];
+                    });
+                   
+                }];
+            }
         }];
-        
-        [self.queue removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

@@ -22,4 +22,5 @@
 -(void)createPlaylist:(NSString*) partyName withCompletion:(void (^_Nullable)(NSError*, NSString*))completion;
 -(void)addTrackToEndOfPartyPlaylist:(NSString*)trackUri;
 -(void)moveSongWithinPlaylist:(NSString*) playlistId owner:(NSString *)owner index:(NSNumber *) index target:(NSNumber *) target withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+-(void)removeSongFromPlaylist:(NSString*) playlistId owner:(NSString *)ownerId uri:(NSString *) uri withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 @end
