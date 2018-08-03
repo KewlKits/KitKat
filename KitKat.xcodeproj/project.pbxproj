@@ -227,12 +227,8 @@
 		6708BCB6210B980700EC1231 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				6708BCAE210A9E5A00EC1231 /* UserViewController.h */,
-				6708BCAF210A9E5A00EC1231 /* UserViewController.m */,
-				6708BCB3210B925200EC1231 /* UserCell.h */,
-				6708BCB4210B925200EC1231 /* UserCell.m */,
-				6708BCB7210B9A4300EC1231 /* UserInfoCell.h */,
-				6708BCB8210B9A4300EC1231 /* UserInfoCell.m */,
+				E8153CDE2114C1A2007B0496 /* Controllers */,
+				E8153CDD2114C193007B0496 /* Views */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -286,6 +282,26 @@
 				6708BCA22106571000EC1231 /* SpotifySingleton.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		E8153CDD2114C193007B0496 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6708BCB3210B925200EC1231 /* UserCell.h */,
+				6708BCB4210B925200EC1231 /* UserCell.m */,
+				6708BCB7210B9A4300EC1231 /* UserInfoCell.h */,
+				6708BCB8210B9A4300EC1231 /* UserInfoCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E8153CDE2114C1A2007B0496 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6708BCAE210A9E5A00EC1231 /* UserViewController.h */,
+				6708BCAF210A9E5A00EC1231 /* UserViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		E82FE0CA210F8157007F7526 /* Models */ = {
