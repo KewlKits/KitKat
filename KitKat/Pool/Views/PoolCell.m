@@ -41,6 +41,9 @@
     [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].party.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         if(response){
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"songAdded"
+             object:self];
         }
     }];
 }
