@@ -60,12 +60,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B7f-fr-CJn"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9F0-OQ-Spy"/>
+                    <navigationItem key="navigationItem" id="9F0-OQ-Spy">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" style="plain" id="y1F-Vf-7ba">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vEQ-H7-5fg">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutClicked:" destination="FHN-FT-enH" eventType="touchUpInside" id="rC7-NM-Jvg"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="logoutClicked:" destination="FHN-FT-enH" id="90v-Gf-yoq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="createButton" destination="eCo-Bc-u1V" id="xsE-3V-8Qa"/>
                         <outlet property="hostInputStackView" destination="NLL-q3-6F8" id="CPd-9c-HL6"/>
                         <outlet property="hostTextField" destination="8g2-mk-z5T" id="5Yj-H9-RXs"/>
                         <outlet property="inputBottomConstraint" destination="vCn-T9-kch" id="CsM-zb-Svb"/>
+                        <outlet property="logoutButton" destination="y1F-Vf-7ba" id="lA5-hm-Opr"/>
                         <outlet property="mapView" destination="1e4-mh-lzQ" id="WUA-SU-HzS"/>
                         <segue destination="JJa-8r-mnb" kind="show" identifier="toPartyDetailView" id="tot-3S-AY0"/>
                         <segue destination="0X6-WA-XMX" kind="presentation" identifier="creationSegue" id="COw-Ix-bZR"/>
@@ -233,131 +248,6 @@
             </objects>
             <point key="canvasLocation" x="2781" y="-1170"/>
         </scene>
-        <!--Be The Party View Controller-->
-        <scene sceneID="spI-iJ-dFj">
-            <objects>
-                <viewController id="dxP-kJ-7mB" customClass="BeThePartyViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9fL-ig-VXJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIi-GJ-qv2">
-                                <rect key="frame" x="149" y="348" width="106" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Let's gooooooo"/>
-                                <connections>
-                                    <action selector="createPartyButtonPressed:" destination="dxP-kJ-7mB" eventType="touchUpInside" id="i3k-bc-Yze"/>
-                                    <segue destination="90f-qU-mqR" kind="show" id="enN-Hg-GZa"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="695-YO-kKt">
-                                <rect key="frame" x="116" y="304" width="161" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMX-UP-6wL">
-                                <rect key="frame" x="162" y="609" width="81" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Join a party"/>
-                                <connections>
-                                    <segue destination="Ya0-OS-c7Q" kind="show" identifier="joinPartySegue" id="Pbw-QE-L5e"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="dVR-sS-JXd"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="fyu-MF-W2J"/>
-                    <connections>
-                        <outlet property="createButton" destination="iIi-GJ-qv2" id="E2o-uf-vuj"/>
-                        <outlet property="textField" destination="695-YO-kKt" id="Tkl-cr-JZP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zRd-Eq-cgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="929" y="143"/>
-        </scene>
-        <!--JOIN THE FUN-->
-        <scene sceneID="A1L-LZ-v4h">
-            <objects>
-                <viewController title="JOIN THE FUN" id="Ya0-OS-c7Q" customClass="JoinPartyViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="faz-vP-LrH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="khV-M6-RgB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PartyCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PartyCell" rowHeight="91" id="V5v-CO-jAO" customClass="PartyCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="91"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5v-CO-jAO" id="5AL-Re-Qm9">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Party" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAW-6t-3Vd">
-                                                    <rect key="frame" x="40" y="21" width="295" height="49"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="top" secondItem="5AL-Re-Qm9" secondAttribute="topMargin" constant="10" id="H7P-og-xai"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="kAW-6t-3Vd" secondAttribute="bottom" constant="10" id="ZmL-wW-xRx"/>
-                                                <constraint firstItem="kAW-6t-3Vd" firstAttribute="leading" secondItem="5AL-Re-Qm9" secondAttribute="leadingMargin" constant="25" id="t22-VA-JAm"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="kAW-6t-3Vd" secondAttribute="trailing" constant="25" id="vNW-8i-By7"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="nameOfPartyLabel" destination="kAW-6t-3Vd" id="YRE-T6-UWz"/>
-                                            <segue destination="90f-qU-mqR" kind="show" id="Jw1-gQ-Fwu"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="RxV-aA-ZYd"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="khV-M6-RgB" id="fdM-Qi-vF7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vud-a1-Iad" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3552.8000000000002" y="-357.57121439280365"/>
-        </scene>
-        <!--Main-->
-        <scene sceneID="z9r-7D-mJF">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="90f-qU-mqR" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RWX-o6-Qdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2613" y="143"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dS0-Vn-MhO">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Tx-mj-Ghj" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LqY-z2-0fd">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dxP-kJ-7mB" kind="relationship" relationship="rootViewController" id="H68-Dw-sxX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ySJ-Tp-5OA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-12" y="143"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="81m-Rf-iJw">
             <objects>
@@ -378,7 +268,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jw1-gQ-Fwu"/>
         <segue reference="COw-Ix-bZR"/>
     </inferredMetricsTieBreakers>
 </document>

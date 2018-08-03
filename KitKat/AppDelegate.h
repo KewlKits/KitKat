@@ -15,7 +15,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, SPTAudioStreamingDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+- (void)startAuthenticationFlow;
 // @property (strong, nonatomic) Party *party;
 
 @end
