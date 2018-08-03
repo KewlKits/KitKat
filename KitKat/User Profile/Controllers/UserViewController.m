@@ -26,10 +26,10 @@
     [self getUserSongs];
     
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
-    
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
+//    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+//    [self.tableView insertSubview:refreshControl atIndex:0];
+//    
 //    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
     [self.tableView reloadData];
 
@@ -55,10 +55,11 @@
 //    
 //}
 
-- (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [self.tableView reloadData];
-    [refreshControl endRefreshing];
-}
+//- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+//    [self.tableView reloadData];
+//
+//    [refreshControl endRefreshing];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

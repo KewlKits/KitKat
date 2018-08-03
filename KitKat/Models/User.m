@@ -26,29 +26,26 @@
     return self;
 }
 
-//-(void) calcScore{
-//    NSNumber *score = [NSNumber numberWithInt:2];
-//    float floatScore =0;
-//
-//    __block NSArray *songList;
-//    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-//        songList = [Song songsWithArray:response.body.array];
-//    }];
-//
-//    for (int i = 0; i < [songList count]; i++)
-//    {
-//        Song *song = songList[i];
-//        NSLog(@"SONG IS %@",song.songTitle);
-//        NSLog(@"SONG UP %lu",(unsigned long)song.upvotedBy.count);
-//        NSLog(@"SONG Down %lu",(unsigned long)song.downvotedBy.count);
-//        floatScore = floatScore +  (float)song.upvotedBy.count - .5 * (float)song.downvotedBy.count;
-//
-//    }
-//    score = [NSNumber numberWithFloat: floatScore];
-//   // NSLog(@" SCORE IS %@", score);
-//    [[BackendAPIManager shared] updateScore:[BackendAPIManager shared].currentUser.userId score:score withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-//        NSLog(@"%@", [BackendAPIManager shared].currentUser.score);
-//    }];
-//}
+-(void) calcScore{
+    __block NSNumber *score = [NSNumber numberWithInt:2];
+    __block float floatScore =0;
+
+    __block NSArray <Song*> *songList;
+    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        songList = [Song songsWithArray:response.body.array];
+        for (int i = 0; i < [songList count]; i++)
+        {
+            Song *song = songList[i];
+            floatScore = floatScore +  (float)song.upvotedBy.count - .5 * (float)song.downvotedBy.count;
+            
+        }
+        score = [NSNumber numberWithFloat: floatScore];
+        // NSLog(@" SCORE IS %@", score);
+        [[BackendAPIManager shared] updateScore:[BackendAPIManager shared].currentUser.userId score:score withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            NSLog(@"%@", [BackendAPIManager shared].currentUser.score);
+        }];
+    }];
+    
+}
 
 @end
