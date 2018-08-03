@@ -48,10 +48,11 @@
         
     }
     score = [NSNumber numberWithFloat: floatScore];
-   // NSLog(@" SCORE IS %@", score);
+    NSLog(@" SCORE IS %@", score);
     [[BackendAPIManager shared] updateScore:[BackendAPIManager shared].currentUser.userId score:score withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-      //  NSLog(@"%@", [BackendAPIManager shared].currentUser.score);
+        NSLog(@"%@", [BackendAPIManager shared].currentUser.score);
     }];
 }
+
 
 @end
