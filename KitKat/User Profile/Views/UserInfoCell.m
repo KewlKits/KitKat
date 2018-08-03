@@ -23,8 +23,7 @@
 
 -(void)setAttributes:(User*) currentUser{
     self.usernameLabel.text = currentUser.name;
-   // [currentUser calcScore];
-   // NSLog(@"SCORE CALC: %@", currentUser.score);
+    [currentUser calcScore];
     self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
 }
 @end
