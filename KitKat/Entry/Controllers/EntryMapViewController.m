@@ -13,6 +13,7 @@
 #import "PartyAnnotation.h"
 #import "PartyDetailViewController.h"
 #import "SpotifyDataManager.h"
+#import "AppDelegate.h"
 
 @interface EntryMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *hostTextField;
 @property (weak, nonatomic) IBOutlet UIStackView *hostInputStackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputBottomConstraint;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
 @end
 
@@ -57,6 +59,11 @@
             [self.mapView setRegion:sfRegion animated:NO];
         });
     }];
+}
+
+- (IBAction)logoutClicked:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate startAuthenticationFlow];
 }
 
 - (void)didReceiveMemoryWarning {

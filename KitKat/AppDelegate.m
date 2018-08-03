@@ -49,7 +49,6 @@
     
     return YES;
 }
-
 //checks if the token is. If it is not, this procedure opens a request in a SFSafariViewController.
 - (void)startAuthenticationFlow
 {
