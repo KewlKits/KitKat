@@ -320,6 +320,7 @@
                                             <outlet property="albumCover" destination="eEE-Lm-yBk" id="hG8-AY-V00"/>
                                             <outlet property="artistAlbumLabel" destination="0XF-d4-wcs" id="M6C-ca-3AU"/>
                                             <outlet property="downvoteButton" destination="lKm-dY-TGa" id="IMG-qL-2qT"/>
+                                            <outlet property="moveToQueueButton" destination="1co-7O-qIS" id="jYR-Ex-wBY"/>
                                             <outlet property="songTitleLabel" destination="cms-hX-iHK" id="k3x-Nb-kXI"/>
                                             <outlet property="songVotesLabel" destination="pHz-AF-v6v" id="KXu-zP-Dnx"/>
                                             <outlet property="upvoteButton" destination="wju-DW-5N0" id="A62-UD-jRE"/>
