@@ -277,4 +277,20 @@
         }
     }];
 }
+
+- (void)updateScore: (NSString *) userId score: (NSNumber*) score withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/user/%@/score", userId]];
+        [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"score": score} options:0 error:nil]];
+    }]asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+        if (!error) {
+            self.currentUser = [[User alloc] initWithDictionary:jsonResponse.body.object];
+        }
+        if(completion) {
+            completion(jsonResponse, error);
+        }
+    }];
+}
+
 @end

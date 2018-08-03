@@ -7,7 +7,7 @@
 //
 
 #import "UserInfoCell.h"
-#import "User.h"
+
 @implementation UserInfoCell
 
 - (void)awakeFromNib {
@@ -23,6 +23,8 @@
 
 -(void)setAttributes:(User*) currentUser{
     self.usernameLabel.text = currentUser.name;
-    self.rankLabel.text = [NSString stringWithFormat:@"%@", currentUser.score];
+   // [currentUser calcScore];
+   // NSLog(@"SCORE CALC: %@", currentUser.score);
+    self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
 }
 @end

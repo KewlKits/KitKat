@@ -19,6 +19,6 @@
 @property (strong, nonatomic) NSArray<NSString *> *downvoteIds;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (NSMutableArray<Song *> *)fetchUserPool;
+- (void) calcScore; 
 
 @end
