@@ -17,6 +17,7 @@
     [super awakeFromNib];
     // Initialization code
     self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
+    self.songAdded = NO;
 }
 
 
@@ -89,8 +90,21 @@
         currVoteVal += 1;
             self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
         
+        else{
+            self.upvoteButton.selected = YES;
+            [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                self.song = [[Song alloc] initWithDictionary:response.body.object];
+                
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"voteReorder"
+                 object:self];
+                
+            }];
+            currVoteVal += 1;
+                self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
+            
+        }
     }
-    
 }
 
 

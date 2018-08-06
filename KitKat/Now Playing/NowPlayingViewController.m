@@ -117,7 +117,6 @@
     if ([keyPath isEqualToString:@"player.metadata.currentTrack"]) {
         [self updateUI];
     }
-            
 }
 
 - (void)populateQueue {
