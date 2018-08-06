@@ -16,7 +16,7 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSMutableArray<Song*> * songs; //songs in pool or songs in spotify
+@property NSMutableArray<Song *> * songs; //songs in pool or songs in spotify
 @property NSMutableArray<Song *> *pool;
 @property NSMutableArray<Song *> *queue;
 
@@ -38,7 +38,7 @@
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
 
-    self.searching = NO;
+    self.searching = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
@@ -69,7 +69,6 @@
             NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
             [self.songs removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self populatePool];
         });
     }
 }

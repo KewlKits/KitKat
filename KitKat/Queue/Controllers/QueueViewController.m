@@ -36,9 +36,11 @@
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self fetchParty:^{
-            if(!self.tableView.isEditing) {
-                [self populateQueue];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(!self.tableView.isEditing) {
+                    [self populateQueue];
+                }
+            });
         }];
     }];
 }
