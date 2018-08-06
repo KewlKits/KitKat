@@ -35,9 +35,10 @@
     }
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        Party *oldParty = self.party;
         [self fetchParty:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if(!self.tableView.isEditing) {
+                if(!self.tableView.isEditing && oldParty.queue.count != self.party.queue.count) {
                     [self populateQueue];
                 }
             });
@@ -46,7 +47,6 @@
 }
 
 -(void)fetchParty:(void (^_Nullable)(void))completion{
-    NSLog(@"fetching party from queue");
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         self.party = [[Party alloc] initWithDictionary:response.body.object];
         if(completion) {

@@ -44,8 +44,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        Party *oldParty = self.party;
         [self fetchParty:^{
-            if (!self.searching) {
+            if (!self.searching && oldParty.pool.count != self.party.pool.count) {
                 [self populatePool];
             }
         }];
