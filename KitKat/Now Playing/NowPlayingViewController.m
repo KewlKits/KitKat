@@ -36,9 +36,9 @@
     [super viewDidLoad];
     self.songImageView.layer.cornerRadius = self.songImageView.frame.size.width / 2;
     
-    self.playButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
-    self.skipForwardButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
-    self.skipBackButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    self.playButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
+    self.skipForwardButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
+    self.skipBackButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
 
     [self.playingView setHidden:YES];
     
@@ -52,7 +52,7 @@
     self.player.delegate = self;
     
     //play the playlist
-    NSString *uri = [BackendAPIManager shared].party.playlistUri;
+    NSString *uri = [BackendAPIManager shared].currentProtoParty.playlistUri;
     if(uri != nil){
         [self playUri:uri];
     }
@@ -121,7 +121,7 @@
 }
 
 - (void)populateQueue {
-    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
             self.queue = (NSMutableArray *)[Song songsWithArray:response.body.object[@"queue"]];
         }

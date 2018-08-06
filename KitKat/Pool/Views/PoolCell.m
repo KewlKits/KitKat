@@ -16,7 +16,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
 }
 
 
@@ -24,10 +24,10 @@
     self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", (long)song.upvotedBy.count - (long)song.downvotedBy.count];
     self.upvoteButton.selected = NO;
     self.downvoteButton.selected = NO;
-    if([song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.upvoteButton.selected = YES;
     }
-    if([song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = YES;
     }
 }
@@ -35,7 +35,7 @@
 
 
 - (IBAction)addButtonClicked:(id)sender {
-    [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].party.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+    [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].currentProtoParty.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
         if(response){
             [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
             [[NSNotificationCenter defaultCenter]
@@ -49,7 +49,7 @@
     long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
     
     //eliminate existing downvote if you upvote a song
-    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
@@ -63,7 +63,7 @@
     }
     
     
-    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
@@ -98,7 +98,7 @@
    long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
     
     //eliminate existing downvote if you upvote a song
-    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
@@ -110,7 +110,7 @@
         currVoteVal -= 1;
     }
     
-    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];

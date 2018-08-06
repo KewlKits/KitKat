@@ -12,8 +12,8 @@
 #import "User.h"
 
 @interface BackendAPIManager : NSObject
-@property (strong, nonatomic) User *currentUser;
-@property (strong, nonatomic) Party *party;
+@property (strong, nonatomic) ProtoUser *currentProtoUser;
+@property (strong, nonatomic) ProtoParty *currentProtoParty;
 
 + (instancetype)shared;
 + (void)getAllParties:(void (^_Nonnull)(UNIHTTPJsonResponse*, NSError*))completion;
