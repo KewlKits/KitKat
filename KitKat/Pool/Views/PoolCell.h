@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *songVotesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *upvoteButton;
 
+@property bool songAdded;
+
 -(void)setVoteAttributes:(Song *)song;
 
 @end

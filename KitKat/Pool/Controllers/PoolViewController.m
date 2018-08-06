@@ -49,6 +49,7 @@
             NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
             [self.songs removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self fetchQueue:^{}];
             [self populatePool];
         });
     }
