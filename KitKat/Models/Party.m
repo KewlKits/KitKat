@@ -22,6 +22,7 @@
     self.pool = dictionary[@"pool"];
     self.queue = dictionary[@"queue"];
     self.ownerId = dictionary[@"owner"];
+    self.nowPlayingId = dictionary[@"now_playing"];
     
     return self;
 }

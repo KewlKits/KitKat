@@ -38,4 +38,5 @@
 - (void)downvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)unDownvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)updateScore: (NSString *) userId score: (NSNumber*) score withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+- (void)setNowPlaying: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 @end
