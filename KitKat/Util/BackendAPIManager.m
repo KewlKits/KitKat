@@ -30,10 +30,10 @@
     [[UNIRest postEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:@"https://kk-backend.herokuapp.com/party"];
         [unibodyRequest setHeaders: @{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name":partyName, @"longitude":longitude, @"latitude":latitude, @"playlistUri": playlistUri, @"owner":self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name":partyName, @"longitude":longitude, @"latitude":latitude, @"playlistUri": playlistUri, @"owner":self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
+            self.currentProtoParty = [[ProtoParty alloc] initWithDictionary:jsonResponse.body.object];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"partyLoaded"
              object:self];
@@ -56,9 +56,6 @@
     [[UNIRest delete:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:preURL];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -67,9 +64,9 @@
 
 - (void)setNowPlaying: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/nowplaying", self.party.partyId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/nowplaying", self.currentProtoParty.partyId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(completion) {
             completion(jsonResponse, error);
@@ -81,11 +78,8 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/pool/add", partyId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"uri": uri, @"title": title, @"artist": artist, @"album": album, @"albumArtUrl": albumArtUrlString, @"owner":self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"uri": uri, @"title": title, @"artist": artist, @"album": album, @"albumArtUrl": albumArtUrlString, @"owner":self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -98,9 +92,6 @@
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": songId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -113,9 +104,6 @@
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": songId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -126,13 +114,9 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/queue/add", partyId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"uri": uri, @"title": title, @"artist": artist, @"album": album, @"albumArtUrl": albumArtUrlString, @"owner":self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"uri": uri, @"title": title, @"artist": artist, @"album": album, @"albumArtUrl": albumArtUrlString, @"owner":self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
-            //[[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:uri];
             completion(jsonResponse, error);
         }
     }];
@@ -144,9 +128,6 @@
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": songId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -159,9 +140,6 @@
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"index": index, @"target": target} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if(!error) {
-            self.party = [[Party alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }
@@ -185,7 +163,7 @@
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name": name} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if (!error) {
-            self.currentUser = [[User alloc] initWithDictionary:jsonResponse.body.object];
+            self.currentProtoUser = [[ProtoUser alloc] initWithDictionary:jsonResponse.body.object];
         }
         if (completion) {
             completion(jsonResponse, error);
@@ -200,7 +178,7 @@
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"name": name} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if (!error) {
-            self.currentUser = [[User alloc] initWithDictionary:jsonResponse.body.object];
+            self.currentProtoUser = [[ProtoUser alloc] initWithDictionary:jsonResponse.body.object];
         }
         if (completion) {
             completion(jsonResponse, error);
@@ -246,7 +224,7 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/upvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(completion) {
             completion(jsonResponse, error);
@@ -258,7 +236,7 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/unupvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(completion) {
             completion(jsonResponse, error);
@@ -270,7 +248,7 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/downvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(completion) {
             completion(jsonResponse, error);
@@ -282,7 +260,7 @@
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/song/%@/undownvote", songId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
-        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentUser.userId} options:0 error:nil]];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"user_id": self.currentProtoUser.userId} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
         if(completion) {
             completion(jsonResponse, error);
@@ -296,9 +274,6 @@
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"score": score} options:0 error:nil]];
     }]asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        if (!error) {
-            self.currentUser = [[User alloc] initWithDictionary:jsonResponse.body.object];
-        }
         if(completion) {
             completion(jsonResponse, error);
         }

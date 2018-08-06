@@ -107,8 +107,7 @@
     
     [[SpotifyDataManager shared] createPlaylist:self.hostTextField.text withCompletion:^(NSError *error, NSString *uri) {
         [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            Party *party =  [[Party alloc] initWithDictionary: response.body.object];
-            [BackendAPIManager shared].party = party;
+            [BackendAPIManager shared].currentProtoParty = [[Party alloc] initWithDictionary: response.body.object];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self performSegueWithIdentifier:@"creationSegue" sender:self.createButton];
             });

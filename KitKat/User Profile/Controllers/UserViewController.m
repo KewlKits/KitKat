@@ -15,6 +15,7 @@
 @interface UserViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong, nonatomic) NSArray<Song *>* songs;
+@property (strong, nonatomic) User *currentUser;
 @end
 
 @implementation UserViewController
@@ -23,7 +24,13 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    [self getUserSongs];
+    
+    [[BackendAPIManager shared] getAUser:[BackendAPIManager shared].currentProtoUser.userId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.currentUser = [[User alloc] initWithDictionary:response.body.object];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            [self getUserSongs];
+        });
+    }];
     
     
 //    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
@@ -31,7 +38,6 @@
 //    [self.tableView insertSubview:refreshControl atIndex:0];
 //    
 //    [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(onTimer) userInfo:nil repeats:true];
-    [self.tableView reloadData];
 
     // Do any additional setup after loading the view.
 }
@@ -40,8 +46,8 @@
 }
 
 -(void)getUserSongs{
-    [[BackendAPIManager shared] touchUser:[BackendAPIManager shared].currentUser.name withCompletion:^(UNIHTTPJsonResponse *userResponse, NSError *userError) {
-        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+    [[BackendAPIManager shared] touchUser:[BackendAPIManager shared].currentProtoUser.name withCompletion:^(UNIHTTPJsonResponse *userResponse, NSError *userError) {
+        [[BackendAPIManager shared] getSongArray:self.currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.songs = [Song songsWithArray:response.body.array];
             dispatch_async(dispatch_get_main_queue(), ^(void) {
                 [self.tableView reloadData];
@@ -79,7 +85,7 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if(indexPath.row ==0){
         UserInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoCell"];
-         [cell setAttributes: [[BackendAPIManager shared] currentUser]];
+         [cell setAttributes: self.currentUser];
         return cell;
     }
     else{
