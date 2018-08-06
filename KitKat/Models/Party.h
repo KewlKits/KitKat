@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *ownerId;
 @property (nonatomic, strong) NSArray<NSString *> *pool;
 @property (nonatomic, strong) NSArray<NSString *> *queue;
+@property (nonatomic, strong) NSString *nowPlayingId;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 @end

@@ -65,6 +65,18 @@
     }];
 }
 
+- (void)setNowPlaying: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
+    [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/nowplaying", self.party.partyId]];
+        [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
+        [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_id": self.currentUser.userId} options:0 error:nil]];
+    }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
+        if(completion) {
+            completion(jsonResponse, error);
+        }
+    }];
+}
+
 - (void)addSongToPool:(NSString*) partyId uri:(NSString*)uri title:(NSString*) title artist:(NSString*) artist album:(NSString*) album albumArtUrlString:(NSString*)albumArtUrlString withCompletion:(void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion {
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
         [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/pool/add", partyId]];
