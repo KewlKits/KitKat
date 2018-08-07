@@ -32,11 +32,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
 
     self.searching = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
@@ -244,12 +239,5 @@
         [self populatePool];
     }
 }
-
-- (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [self populatePool];
-    [refreshControl endRefreshing];
-}
-
-
 
 @end
