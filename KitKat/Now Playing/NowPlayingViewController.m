@@ -14,6 +14,7 @@
 #import "BackendAPIManager.h"
 #import "Song.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "Party.h"
 
 @interface NowPlayingViewController ()
 @property (nonatomic, strong) SPTAudioStreamingController *player;
@@ -27,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *songImageView;
 @property (weak, nonatomic) IBOutlet UIView *playingView;
 @property (strong, nonatomic) NSTimer * metadataTimer;
-
+@property (strong,nonatomic) Party * party;
 @end
 
 @implementation NowPlayingViewController
@@ -42,8 +43,16 @@
 
     [self.playingView setHidden:YES];
     
+    //if not the DJ
+    if(![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId]){
+        [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [self fetchParty:^{
+                [self updateUIForNonDJ];
+            }];
+        }];
+    }
     //if the DJ
-    if([[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId]){
+    if([[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId]){
         self.playing = YES;
         [self.playButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
         
@@ -54,43 +63,24 @@
         self.player.delegate = self;
         
         //play the playlist
-        NSString *uri = [BackendAPIManager shared].party.playlistUri;
+        NSString *uri = [BackendAPIManager shared].currentProtoParty.playlistUri;
         if(uri != nil){
             [self playUri:uri];
         }
     }
-    
-    //if not the DJ
-    if(![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId]){
-        [self notDJRefreshUI];
-        //self.metadataTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(notDJRefreshUI:) userInfo:nil repeats:YES];
-    }
 
 }
-//-(void)notDJRefreshUI:(NSTimer*)timer{
--(void)notDJRefreshUI{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *token = [defaults objectForKey:@"accessToken"];
-    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError *error) {
-        if(!error){
-            [BackendAPIManager shared].party = [[Party alloc] initWithDictionary: response.body.object];
-            [SPTTrack trackWithURI:[NSURL URLWithString:[BackendAPIManager shared].party.nowPlayingId] accessToken:token market:nil callback:^(NSError *err, id object) {
-                if(!error){
-                    SPTTrack * track = (SPTTrack *) object;
-                    dispatch_async(dispatch_get_main_queue(),^{
-                        [self.songImageView setImageWithURL:track.album.largestCover.imageURL];
-                        self.songTitleLabel.text = track.name;
-                        SPTPartialArtist *artist = (SPTPartialArtist *) track.artists[0];
-                        self.artistNameLabel.text = artist.name;
-                        [self.playingView setHidden:NO];
-                        [self notDJRefreshUI];
-                    });
-                }
-            }];
+
+-(void)fetchParty:(void (^_Nullable)(void))completion{
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.party = [[Party alloc] initWithDictionary:response.body.object];
+        NSLog(@"%@",self.party.nowPlayingId);
+        if(completion) {
+            completion();
         }
     }];
-
 }
+
 - (IBAction)onPlay:(id)sender {
     if(!self.playing){
         [self.player setIsPlaying:YES callback:nil];
@@ -156,8 +146,26 @@
             }
         }];
     }
+    if ([keyPath isEqualToString:@"party.nowPlayingId"]){
+        [self updateUIForNonDJ];
+    }
 }
-
+-(void)updateUIForNonDJ{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *token = [defaults objectForKey:@"accessToken"];
+    [SPTTrack trackWithURI:[NSURL URLWithString:self.party.nowPlayingId] accessToken:token market:nil callback:^(NSError *error, id object) {
+        if(!error){
+            SPTTrack * track = (SPTTrack *) object;
+            dispatch_async(dispatch_get_main_queue(),^{
+                [self.songImageView setImageWithURL:track.album.largestCover.imageURL];
+                self.songTitleLabel.text = track.name;
+                SPTPartialArtist *artist = (SPTPartialArtist *) track.artists[0];
+                self.artistNameLabel.text = artist.name;
+                [self.playingView setHidden:NO];
+            });
+        }
+    }];
+}
 - (void)populateQueue {
     [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
         if(response){
