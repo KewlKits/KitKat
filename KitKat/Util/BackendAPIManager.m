@@ -64,7 +64,7 @@
 
 - (void)setNowPlaying: (NSString *) songURI withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion{
     [[UNIRest putEntity:^(UNIBodyRequest *unibodyRequest) {
-        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/now_playing", self.party.partyId]];
+        [unibodyRequest setUrl:[NSString stringWithFormat:@"https://kk-backend.herokuapp.com/party/%@/now_playing", self.currentProtoParty.partyId]];
         [unibodyRequest setHeaders:@{@"Content-Type": @"application/json"}];
         [unibodyRequest setBody:[NSJSONSerialization dataWithJSONObject:@{@"song_uri": songURI} options:0 error:nil]];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
