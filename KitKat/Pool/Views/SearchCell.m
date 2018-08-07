@@ -23,7 +23,7 @@
 }
 
 - (IBAction)addButtonClicked:(id)sender {
-    [[BackendAPIManager shared] addSongToPool:[BackendAPIManager shared].party.partyId uri:self.song.songUri title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
+    [[BackendAPIManager shared] addSongToPool:[BackendAPIManager shared].currentProtoParty.partyId uri:self.song.songUri title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
     }];
     [self.addCheckButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
 }

@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 
+@property bool hasShifted;
+
 @end
 
 @implementation EntryMapViewController
@@ -31,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.hasShifted = false;
+    
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.mapView.showsScale = YES;
@@ -55,8 +59,6 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mapView showAnnotations:self.mapView.annotations animated:NO];
-            MKCoordinateRegion sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), MKCoordinateSpanMake(0.1, 0.1));
-            [self.mapView setRegion:sfRegion animated:NO];
         });
     }];
 }
@@ -77,6 +79,14 @@
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations{
     NSLog(@"location logged");
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    if (!self.hasShifted) {
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 800, 800);
+        [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+        self.hasShifted = true;
+    }
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -107,8 +117,7 @@
     
     [[SpotifyDataManager shared] createPlaylist:self.hostTextField.text withCompletion:^(NSError *error, NSString *uri) {
         [[BackendAPIManager shared] makeParty:self.hostTextField.text longitude:[NSNumber numberWithDouble:currentLocation.coordinate.longitude] latitude:[NSNumber numberWithDouble:currentLocation.coordinate.latitude] playlistUri:uri withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            Party *party =  [[Party alloc] initWithDictionary: response.body.object];
-            [BackendAPIManager shared].party = party;
+            [BackendAPIManager shared].currentProtoParty = [[Party alloc] initWithDictionary: response.body.object];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self performSegueWithIdentifier:@"creationSegue" sender:self.createButton];
             });

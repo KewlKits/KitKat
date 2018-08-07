@@ -12,8 +12,8 @@
 #import "User.h"
 
 @interface BackendAPIManager : NSObject
-@property (strong, nonatomic) User *currentUser;
-@property (strong, nonatomic) Party *party;
+@property (strong, nonatomic) ProtoUser *currentProtoUser;
+@property (strong, nonatomic) ProtoParty *currentProtoParty;
 
 + (instancetype)shared;
 + (void)getAllParties:(void (^_Nonnull)(UNIHTTPJsonResponse*, NSError*))completion;
@@ -38,4 +38,5 @@
 - (void)downvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)unDownvote: (NSString *) songId withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 - (void)updateScore: (NSString *) userId score: (NSNumber*) score withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
+- (void)setNowPlaying: (NSString *) songURI withCompletion: (void (^_Nullable)(UNIHTTPJsonResponse*, NSError*))completion;
 @end

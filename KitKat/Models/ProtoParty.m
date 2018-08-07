@@ -1,15 +1,14 @@
 //
-//  Party.m
+//  ProtoParty.m
 //  KitKat
 //
-//  Created by Leah Xiao on 7/18/18.
+//  Created by Miles Olson on 8/6/18.
 //  Copyright © 2018 kewlkits. All rights reserved.
 //
 
-#import "Party.h"
-#import "BackendAPIManager.h"
+#import "ProtoParty.h"
 
-@implementation Party
+@implementation ProtoParty
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     
@@ -18,12 +17,8 @@
     self.partyId = dictionary[@"_id"];
     self.playlistUri = dictionary[@"playlistUri"];
     self.createdAt = dictionary[@"createdAt"];
-    
-    self.pool = dictionary[@"pool"];
-    self.queue = dictionary[@"queue"];
     self.ownerId = dictionary[@"owner"];
-    self.nowPlayingId = dictionary[@"nowPlaying"];
-    
+
     return self;
 }
 @end
