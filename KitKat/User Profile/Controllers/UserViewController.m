@@ -25,14 +25,6 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [[BackendAPIManager shared] getAUser:[BackendAPIManager shared].currentProtoUser.userId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-        self.currentUser = [[User alloc] initWithDictionary:response.body.object];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self getUserSongs];
-        });
-    }];
-    
-    
 //    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
 //    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
 //    [self.tableView insertSubview:refreshControl atIndex:0];
@@ -47,6 +39,7 @@
 
 -(void)getUserSongs{
     [[BackendAPIManager shared] touchUser:[BackendAPIManager shared].currentProtoUser.name withCompletion:^(UNIHTTPJsonResponse *userResponse, NSError *userError) {
+        self.currentUser = [[User alloc] initWithDictionary:userResponse.body.object];
         [[BackendAPIManager shared] getSongArray:self.currentUser.songIds withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.songs = [Song songsWithArray:response.body.array];
             dispatch_async(dispatch_get_main_queue(), ^(void) {
