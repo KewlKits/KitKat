@@ -16,9 +16,12 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSMutableArray<Song*> * songs; //songs in pool or songs in spotify
+@property NSMutableArray<Song *> * songs; //songs in pool or songs in spotify
 @property NSMutableArray<Song *> *pool;
 @property NSMutableArray<Song *> *queue;
+
+@property Party *party;
+
 @property bool searching;
 @end
 
@@ -29,16 +32,29 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    [self fetchQueue:nil];
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init]; // pulling up refresh
-    [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:refreshControl atIndex:0];
 
-    self.searching = NO;
+    self.searching = false;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        Party *oldParty = self.party;
+        [self fetchParty:^{
+            if (!self.searching && oldParty.pool.count != self.party.pool.count) {
+                [self populatePool];
+            }
+        }];
+    }];
+}
+
+-(void)fetchParty:(void (^_Nullable)(void))completion{
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.party = [[Party alloc] initWithDictionary:response.body.object];
+        if(completion) {
+            completion();
+        }
+    }];
 }
 
 -(void)songAdded:(NSNotification *) notification{
@@ -49,8 +65,6 @@
             NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
             [self.songs removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self fetchQueue:^{}];
-            [self populatePool];
         });
     }
 }
@@ -71,28 +85,23 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     self.searching = NO;
-    [self populatePool];
 }
 
 -(void)fetchPool:(void (^_Nullable)(void))completion {
-    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.pool = [Song songsWithArray:response.body.array];
-            if(completion) {
-                completion();
-            }
-        }];
+    [[BackendAPIManager shared] getSongArray:self.party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.pool = [Song songsWithArray:response.body.array];
+        if(completion) {
+            completion();
+        }
     }];
 }
 
 -(void)fetchQueue:(void (^_Nullable)(void))completion {
-    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].party.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-        [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            self.queue = [Song songsWithArray:response.body.array];
-            if(completion) {
-                completion();
-            }
-        }];
+    [[BackendAPIManager shared] getSongArray:self.party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.queue = [Song songsWithArray:response.body.array];
+        if(completion) {
+            completion();
+        }
     }];
 }
 
@@ -230,12 +239,5 @@
         [self populatePool];
     }
 }
-
-- (void)beginRefresh:(UIRefreshControl *)refreshControl {
-    [self populatePool];
-    [refreshControl endRefreshing];
-}
-
-
 
 @end

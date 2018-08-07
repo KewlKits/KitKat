@@ -92,7 +92,7 @@
                 [defaults setObject:self.auth.session.accessToken forKey:@"accessToken"];
                 
                 [[BackendAPIManager shared] touchUser:self.auth.session.canonicalUsername withCompletion:^(UNIHTTPJsonResponse *a, NSError *aa) {
-                    NSLog(@"%@", [BackendAPIManager shared].currentUser);
+                    NSLog(@"Logged in as %@ with db id %@", [BackendAPIManager shared].currentProtoUser.name, [BackendAPIManager shared].currentProtoUser.userId);
                 }];
             }
         }];

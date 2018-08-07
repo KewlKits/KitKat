@@ -7,12 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ProtoUser.h"
 #import "Song.h"
-@interface User : NSObject
-@property (strong, nonatomic) NSString *userId;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSNumber *score;
-
+@interface User : ProtoUser
 @property (strong, nonatomic) NSArray<NSString *> *partyIds;
 @property (strong, nonatomic) NSArray<NSString *> *songIds;
 @property (strong, nonatomic) NSArray<NSString *> *upvoteIds;

@@ -16,7 +16,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentUser.userId isEqualToString:[BackendAPIManager shared].party.ownerId];
+    self.moveToQueueButton.hidden = ![[BackendAPIManager shared].currentProtoUser.userId isEqualToString:[BackendAPIManager shared].currentProtoParty.ownerId];
     self.songAdded = NO;
 }
 
@@ -25,10 +25,10 @@
     self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", (long)song.upvotedBy.count - (long)song.downvotedBy.count];
     self.upvoteButton.selected = NO;
     self.downvoteButton.selected = NO;
-    if([song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.upvoteButton.selected = YES;
     }
-    if([song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
+    if([song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = YES;
     }
 }
@@ -36,111 +36,103 @@
 
 
 - (IBAction)addButtonClicked:(id)sender {
-    if(!self.songAdded){
-        [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].party.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-            if(response){
-                [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"songAdded"
-                 object:self];
-                self.songAdded = YES;
-            }
-        }];
-    }
+    [[BackendAPIManager shared] moveSongFromPoolToQueue:[BackendAPIManager shared].currentProtoParty.partyId songId:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        if(response){
+            [[SpotifyDataManager shared] addTrackToEndOfPartyPlaylist:self.song.songUri];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"songAdded"
+             object:self];
+        }
+    }];
 }
 
 - (IBAction)upvoteButtonClicked:(id)sender {
-    if(!self.songAdded){
-        long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
-        
-        //eliminate existing downvote if you upvote a song
-        if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-            self.downvoteButton.selected = NO;
-            [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-                
-                    }];
-            currVoteVal += 1;
-        }
-        
-        
-        if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-            self.upvoteButton.selected = NO;
-            [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-            }];
-            currVoteVal -= 1;
-               self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
-        }
-        
-        else{
-            self.upvoteButton.selected = YES;
-            [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-                
-            }];
-            currVoteVal += 1;
-                self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
+    long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
+    
+    //eliminate existing downvote if you upvote a song
+    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
+        self.downvoteButton.selected = NO;
+        [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
             
-        }
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
+                }];
+        currVoteVal += 1;
+    }
+    
+    
+    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
+        self.upvoteButton.selected = NO;
+        [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+        }];
+        currVoteVal -= 1;
+           self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
+    }
+    
+    else{
+        self.upvoteButton.selected = YES;
+        [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+            
+        }];
+        currVoteVal += 1;
+        self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
     }
 }
 
 
 - (IBAction)downvoteButtonClicked:(id)sender {
-    if(!self.songAdded){
-       long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
-        
-        //eliminate existing downvote if you upvote a song
-        if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-            self.upvoteButton.selected = NO;
-            [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-            }];
-            currVoteVal -= 1;
-        }
-        
-        if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentUser.userId]){
-            self.downvoteButton.selected = NO;
-            [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-            }];
-            currVoteVal += 1;
-            self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
-        }
-        
-        else{
-            self.downvoteButton.selected = YES;
-            [[BackendAPIManager shared] downvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                self.song = [[Song alloc] initWithDictionary:response.body.object];
-                
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"voteReorder"
-                 object:self];
-            }];
-            currVoteVal -= 1;
-            self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
-        }
+   long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
+    
+    //eliminate existing downvote if you upvote a song
+    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
+        self.upvoteButton.selected = NO;
+        [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+        }];
+        currVoteVal -= 1;
+    }
+    
+    if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
+        self.downvoteButton.selected = NO;
+        [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+        }];
+        currVoteVal += 1;
+        self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
+    }
+    
+    else{
+        self.downvoteButton.selected = YES;
+        [[BackendAPIManager shared] downvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+            self.song = [[Song alloc] initWithDictionary:response.body.object];
+            
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"voteReorder"
+             object:self];
+        }];
+        currVoteVal -= 1;
+        self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
     }
 }
 

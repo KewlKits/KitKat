@@ -8,15 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Song.h"
+#import "ProtoParty.h"
 
-@interface Party : NSObject
-@property (nonatomic, strong) NSString *partyId;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSArray<NSNumber *> *location;
-@property (nonatomic, strong) NSString *playlistUri;
-@property (nonatomic, strong) NSDate *createdAt;
-
-@property (nonatomic, strong) NSString *ownerId;
+@interface Party : ProtoParty
 @property (nonatomic, strong) NSArray<NSString *> *pool;
 @property (nonatomic, strong) NSArray<NSString *> *queue;
 @property (nonatomic, strong) NSString *nowPlayingId;
