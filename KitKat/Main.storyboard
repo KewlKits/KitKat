@@ -19,6 +19,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SbO-Ek-Okb">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.83727859329999998" green="0.93984567590000001" blue="0.9765123725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="ft4-Vh-v3u" kind="relationship" relationship="rootViewController" id="1b0-lh-93q"/>
@@ -90,7 +91,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="oo9-HP-6Wz" secondAttribute="trailing" constant="10" id="gUg-M1-K02"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.90822461889999995" green="0.5919614768" blue="0.98955970999999998" alpha="0.21858494719999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="albumCover" destination="ePk-Wp-QUz" id="Tq8-Tp-kmo"/>
                                             <outlet property="artistAlbumLabel" destination="oo9-HP-6Wz" id="Sor-fB-bha"/>
@@ -133,6 +134,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lor-mU-dUO">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.83727859329999998" green="0.93984567590000001" blue="0.9765123725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="jPS-iO-xHW" kind="relationship" relationship="rootViewController" id="Daa-Fh-hhD"/>
@@ -160,8 +162,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="PoL-sv-zIx">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.6568188318843563" green="0.37387969687520578" blue="0.98955971002578735" alpha="0.088165713028169015" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <color key="barTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.83727859325932774" green="0.93984567585509271" blue="0.9765123725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="15y-bs-p11" kind="relationship" relationship="rootViewController" id="se0-BQ-kxE"/>
@@ -295,6 +298,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.9367421923" green="0.76109576860000006" blue="0.97699336039999995" alpha="0.20207966550000001" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="lKm-dY-TGa" firstAttribute="leading" secondItem="wju-DW-5N0" secondAttribute="trailing" constant="10" id="9TH-lE-3nt"/>
                                                 <constraint firstItem="eEE-Lm-yBk" firstAttribute="centerY" secondItem="NCp-cY-BRt" secondAttribute="centerY" id="DGR-0s-FIt"/>
@@ -315,7 +319,7 @@
                                                 <constraint firstItem="wju-DW-5N0" firstAttribute="baseline" secondItem="0XF-d4-wcs" secondAttribute="baseline" id="zJU-B7-1op"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.94964617490768433" green="0.98955971002578735" blue="0.98872143030166626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.98955971002578735" green="0.97899948563963979" blue="0.92360184624189423" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="albumCover" destination="eEE-Lm-yBk" id="hG8-AY-V00"/>
                                             <outlet property="artistAlbumLabel" destination="0XF-d4-wcs" id="M6C-ca-3AU"/>
@@ -399,7 +403,7 @@
                                                 <constraint firstItem="cfY-6g-LOn" firstAttribute="bottom" secondItem="XR8-xt-Rsm" secondAttribute="bottom" id="tFP-Bd-mY7"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.97418147325515747" green="0.91889578104019165" blue="0.9765123724937439" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.89817780833651661" green="0.91995609920883237" blue="0.97699336039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="addCheckButton" destination="Lam-Zo-HqL" id="I38-ye-1zl"/>
                                             <outlet property="albumCover" destination="XR8-xt-Rsm" id="Lon-QO-Uva"/>
