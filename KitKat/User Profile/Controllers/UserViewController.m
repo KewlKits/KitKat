@@ -58,14 +58,14 @@
     }];
 }
 
-- (void)onTimer {
-    [self.tableView reloadData];
-    
-}
+//- (void)onTimer {
+//    [self.tableView reloadData];
+//
+//}
 
 - (void)beginRefresh:(UIRefreshControl *)refreshControl {
     [self getUserSongs];
-    [[BackendAPIManager shared].currentUser calcScore];
+   // [[BackendAPIManager shared].currentProtoUser calcScore];
     [self.tableView reloadData];
     [refreshControl endRefreshing];
 }
