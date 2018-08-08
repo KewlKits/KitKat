@@ -23,6 +23,7 @@
 @property Party *party;
 
 @property bool searching;
+@property bool animating;
 @end
 
 @implementation PoolViewController
@@ -39,9 +40,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        Party *oldParty = self.party;
         [self fetchParty:^{
-            if (!self.searching && oldParty.pool.count != self.party.pool.count) {
+           if (!self.searching && !self.animating) {
                 [self populatePool];
             }
         }];
@@ -59,14 +59,17 @@
 
 -(void)songAdded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"songAdded"]){
+        self.animating = true;
         NSLog (@"song added!!");
         NSLog(@"%@", ((PoolCell *)notification.object).song.songId);
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
             [self.songs removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self fetchQueue:^{}];
-            [self populatePool];
+            [self fetchParty:^{
+                [self populatePool];
+                self.animating = false;
+            }];
         });
     }
 }
