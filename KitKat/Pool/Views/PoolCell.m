@@ -92,7 +92,7 @@
             long val = [thisUser.score longValue];
             NSNumber *sum = [NSNumber numberWithLong: val - .5*currVoteVal];
             [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                NSLog(@"%@", self.song.ownerId);
+             //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
             }];
             
         }];

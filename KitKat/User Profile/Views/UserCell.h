@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AbstractSongCell.h"
+#import "Party.h"
 
 @interface UserCell : AbstractSongCell
 @property (weak, nonatomic) IBOutlet UILabel *partyLabel;
+
+@property Song *thisSong;
+@property Party *thisParty;
 
 @end
