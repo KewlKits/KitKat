@@ -10,5 +10,6 @@
 #import "AbstractSongCell.h"
 
 @interface UserCell : AbstractSongCell
+@property (weak, nonatomic) IBOutlet UILabel *partyLabel;
 
 @end
