@@ -16,32 +16,49 @@
 @interface PoolViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property NSMutableArray<Song *> * songs; //songs in pool or songs in spotify
+@property NSMutableArray<Song *> *songs; //songs in pool or songs in spotify
 @property NSMutableArray<Song *> *pool;
 @property NSMutableArray<Song *> *queue;
+@property NSMutableArray<Song *> *justPooled;
 
 @property Party *party;
 
 @property bool searching;
+@property bool animating;
 @end
 
 @implementation PoolViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.justPooled = [NSMutableArray new];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
 
     self.searching = false;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(partyLoaded:) name:@"partyLoaded" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voteReorder:) name:@"voteReorder" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songAdded:) name:@"songAdded" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songPooled:) name:@"songPooled" object:nil];
+    
+    [self fetchParty:^{
+        [self fetchQueue:nil];
+        [self fetchPool:^{
+            [self populatePool];
+        }];
+    }];
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        Party *oldParty = self.party;
+        Party *lastParty = self.party;
         [self fetchParty:^{
-            if (!self.searching && oldParty.pool.count != self.party.pool.count) {
+            if (self.searching) {
+                [self fetchQueue:nil];
+                [self fetchPool:nil];
+            } else if (!self.searching && !self.animating && self.party.pool.count != lastParty.pool.count) {
                 [self populatePool];
             }
         }];
@@ -57,16 +74,25 @@
     }];
 }
 
+-(void)songPooled:(NSNotification *) notification {
+    if ([notification.name isEqualToString:@"songPooled"]) {
+        [self.justPooled addObject:((SearchCell *)notification.object).song];
+    }
+}
+
 -(void)songAdded:(NSNotification *) notification{
     if ([[notification name] isEqualToString:@"songAdded"]){
+        self.animating = true;
         NSLog (@"song added!!");
         NSLog(@"%@", ((PoolCell *)notification.object).song.songId);
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             NSIndexPath *indexPath = [self.tableView indexPathForCell:notification.object];
             [self.songs removeObjectAtIndex:indexPath.row];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self fetchQueue:^{}];
-            [self populatePool];
+            [self fetchParty:^{
+                [self populatePool];
+                self.animating = false;
+            }];
         });
     }
 }
@@ -171,6 +197,7 @@
     self.searching = NO;
     [self.view endEditing:YES];
     self.searchBar.text = @"";
+    self.justPooled = [NSMutableArray new];
     [self populatePool];
 }
 
@@ -192,7 +219,7 @@
         Song * track = self.songs[indexPath.row];
         [searchCell setAttributes:track];
         
-        [searchCell setAddedButton:track addedSongs:[self.pool arrayByAddingObjectsFromArray:self.queue]];
+        [searchCell setAddedButton:track addedSongs:[[self.pool arrayByAddingObjectsFromArray:self.queue] arrayByAddingObjectsFromArray:self.justPooled]];
         return searchCell;
     }
 }
