@@ -34,6 +34,10 @@
         [self.editButton setEnabled:NO];
     }
     
+    [self fetchParty:^{
+        [self populateQueue];
+    }];
+    
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         Party *oldParty = self.party;
         [self fetchParty:^{
