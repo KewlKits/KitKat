@@ -61,6 +61,17 @@
             
                 }];
         currVoteVal += 1;
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val + currVoteVal];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                NSLog(@"%@", self.song.ownerId);
+            }];
+            
+        }];
+        
+        
     }
     
     
@@ -75,6 +86,17 @@
         }];
         currVoteVal -= 1;
            self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
+        
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val - .5*currVoteVal];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                NSLog(@"%@", self.song.ownerId);
+            }];
+            
+        }];
+        
     }
     
     else{
