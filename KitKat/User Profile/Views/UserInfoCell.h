@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "Party.h"
 
 @interface UserInfoCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
@@ -16,6 +17,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *poolNum;
 @property (weak, nonatomic) IBOutlet UILabel *queueNum;
 @property (weak, nonatomic) IBOutlet UILabel *currentParty;
+
+@property Party *party;
+@property NSMutableArray<Song *> *pool;
+@property NSMutableArray<Song *> *queue;
+@property int numQ;
+@property int numP; 
 
 -(void)setAttributes:(User*) currentUser;
 

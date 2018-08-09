@@ -9,10 +9,18 @@
 #import "UserInfoCell.h"
 #import "BackendAPIManager.h"
 
+
+
 @implementation UserInfoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+  //  NSString *thisID = [[BackendAPIManager shared].currentProtoParty partyId];
+//    [[BackendAPIManager shared] getAParty: thisID withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+//        self.party = [[Party alloc] initWithDictionary:response.body.object];
+//
+//    }];
+     [self fetchParty:^{}];
     // Initialization code
 }
 
@@ -23,51 +31,71 @@
 }
 
 -(void)setAttributes:(User*) currentUser{
-    self.usernameLabel.text = currentUser.name;
- //   self.usernameLabel.text = [NSString stringWithFormat:@"Username: %@", currentUser.name];
-    [currentUser calcScore];
-    self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
-        
-    //self.poolNum.text= [NSString stringWithFormat:@"%f", [self numSongsPool]];
-    //self.queueNum.text= [NSString stringWithFormat:@"%f", [self numSongsQ]];
-    self.currentParty.text = [NSString stringWithFormat:@"Partying in: %@",  [[BackendAPIManager shared].currentProtoParty name] ];
+    [self fetchParty:^{
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        self.usernameLabel.text = currentUser.name;
+        [currentUser calcScore];
+        self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
+        [self numSongsPool];
+        [self numSongsQ];
+        self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
+        self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
+        self.currentParty.text = [NSString stringWithFormat:@"Partying in: %@",  [[BackendAPIManager shared].currentProtoParty name] ];
+        });
+    }];
+    
     
 }
-     
-//-(float)numSongsPool{
-//    __block NSArray <Song*> *songList;
-//    __block NSMutableArray <Song*> *usersSongList;
-//    //__block long counter;
-//    __block float counter;
-//    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-//        songList = [Song songsWithArray:response.body.array];
-//        for(int i = 0; i < [songList count]; i++){
-//            if((songList[i].ownerId == [BackendAPIManager shared].currentUser.userId)){
-//                [usersSongList addObject:(songList[i])];
-//            }
-//        }
-//        counter = (float)[usersSongList count];
-//        }];
-//    NSLog(@"sungs in pool %f", counter);
-//    return counter;
-//     }
-//
-//-(float)numSongsQ{
-//    __block NSArray <Song*> *songList;
-//    __block NSMutableArray <Song*> *usersSongList;
-//   // __block long counter;
-//    __block float counter;
-//    [[BackendAPIManager shared] getSongArray:[BackendAPIManager shared].party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-//        songList = [Song songsWithArray:response.body.array];
-//        for(int i = 0; i < [songList count]; i++){
-//            if((songList[i].ownerId == [BackendAPIManager shared].currentUser.userId)){
-//                [usersSongList addObject:(songList[i])];
-//            }
-//        }
-//        counter = (float)[usersSongList count];
-//    }];
-//    NSLog(@"sungs in queue %f", counter);
-//    return counter;
-//}
+
+-(void)numSongsPool{
+    [self fetchP:^{}];
+     }
+
+
+-(void)numSongsQ{
+        [self fetchQ:^{}];
+}
+
+-(void)fetchP:(void (^_Nullable)(void))completion {
+    [[BackendAPIManager shared] getSongArray:self.party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.numP = 0;
+        self.pool = [Song songsWithArray:response.body.array];
+        for(int i = 0; i < self.pool.count; i++){
+            if([self.pool[i].ownerId isEqualToString: [BackendAPIManager shared].currentProtoUser.userId]){
+
+                self.numP += 1;
+            }
+            if(completion) {
+                completion();
+            }
+        }
+    }];
+}
+
+-(void)fetchQ:(void (^_Nullable)(void))completion {
+    [[BackendAPIManager shared] getSongArray:self.party.queue withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.numQ = 0;
+        self.queue = [Song songsWithArray:response.body.array];
+        for(int i = 0; i < self.queue.count; i++){
+            if([self.queue[i].ownerId isEqualToString: [BackendAPIManager shared].currentProtoUser.userId]){
+                self.numQ += 1;
+            }
+            if(completion) {
+                completion();
+            }
+        }
+    }];
+
+}
+
+
+-(void)fetchParty:(void (^_Nullable)(void))completion{
+    [[BackendAPIManager shared] getAParty:[BackendAPIManager shared].currentProtoParty.partyId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+        self.party = [[Party alloc] initWithDictionary:response.body.object];
+        if(completion) {
+            completion();
+        }
+    }];
+}
 
 @end
