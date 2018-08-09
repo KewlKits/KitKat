@@ -47,15 +47,18 @@
     
     [self fetchParty:^{
         [self fetchQueue:nil];
-        [self fetchPool:nil];
+        [self fetchPool:^{
+            [self populatePool];
+        }];
     }];
     
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        Party *lastParty = self.party;
         [self fetchParty:^{
             if (self.searching) {
                 [self fetchQueue:nil];
                 [self fetchPool:nil];
-            } else if (!self.searching && !self.animating) {
+            } else if (!self.searching && !self.animating && self.party.pool.count != lastParty.pool.count) {
                 [self populatePool];
             }
         }];
