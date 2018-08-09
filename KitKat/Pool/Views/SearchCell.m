@@ -26,6 +26,7 @@
     [[BackendAPIManager shared] addSongToPool:[BackendAPIManager shared].currentProtoParty.partyId uri:self.song.songUri title:self.song.songTitle artist:self.song.songArtist album:self.song.songAlbum albumArtUrlString:self.song.songAlbumArt withCompletion:^(UNIHTTPJsonResponse * response, NSError * error) {
     }];
     [self.addCheckButton setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"songPooled" object:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
