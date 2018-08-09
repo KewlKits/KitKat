@@ -7,9 +7,8 @@
 //
 
 #import "UserInfoCell.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "BackendAPIManager.h"
-
-
 
 @implementation UserInfoCell
 
@@ -33,18 +32,17 @@
 -(void)setAttributes:(User*) currentUser{
     [self fetchParty:^{
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-        self.usernameLabel.text = currentUser.name;
-        [currentUser calcScore];
-        self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
-        [self numSongsPool];
-        [self numSongsQ];
-        self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
-        self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
-        self.currentParty.text = [NSString stringWithFormat:@"Partying in: %@",  [[BackendAPIManager shared].currentProtoParty name] ];
+            self.usernameLabel.text = currentUser.name;
+            [self.profileImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.adorable.io/avatars/285/%@.png", currentUser.name]]];
+            [currentUser calcScore];
+            self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
+            [self numSongsPool];
+            [self numSongsQ];
+            self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
+            self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
+            self.currentParty.text = [NSString stringWithFormat:@"Partying in: %@",  [[BackendAPIManager shared].currentProtoParty name]];
         });
     }];
-    
-    
 }
 
 -(void)numSongsPool{
