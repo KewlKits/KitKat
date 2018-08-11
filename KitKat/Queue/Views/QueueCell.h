@@ -10,5 +10,5 @@
 #import "AbstractSongCell.h"
 
 @interface QueueCell : AbstractSongCell
-
+-(void)setAttributes:(Song *)song nowPlayingId:(NSString *) nowPlayingId;
 @end

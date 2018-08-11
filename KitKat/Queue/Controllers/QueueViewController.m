@@ -34,11 +34,15 @@
         [self.editButton setEnabled:NO];
     }
     
+    [self fetchParty:^{
+        [self populateQueue];
+    }];
+    
     [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        Party *oldParty = self.party;
+//        Party *oldParty = self.party;
         [self fetchParty:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                if(!self.tableView.isEditing && oldParty.queue.count != self.party.queue.count) {
+                if(!self.tableView.isEditing /*&& oldParty.queue.count != self.party.queue.count*/) {
                     [self populateQueue];
                 }
             });
@@ -98,7 +102,8 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     QueueCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QueueCell"];
-    [cell setAttributes:self.queue[indexPath.row]];
+//    [cell setAttributes:self.queue[indexPath.row]];
+    [cell setAttributes:self.queue[indexPath.row] nowPlayingId:self.party.nowPlayingId];
     return cell;
 }
 

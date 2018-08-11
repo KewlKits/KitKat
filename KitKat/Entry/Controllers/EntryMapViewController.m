@@ -91,6 +91,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]){
+        ((MKUserLocation *)annotation).title = @"";
         return nil;
     }
     else {

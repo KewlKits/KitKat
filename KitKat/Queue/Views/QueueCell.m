@@ -21,4 +21,15 @@
     // Configure the view for the selected state
 }
 
+-(void)setAttributes:(Song *)song nowPlayingId:(NSString *) nowPlayingId {
+    [super setAttributes:song];
+    if ([song.songUri isEqualToString:nowPlayingId]) {
+        [self.songTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
+    }
+    else {
+        [self.songTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]];
+    }
+}
+
+
 @end
