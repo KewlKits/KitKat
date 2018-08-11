@@ -91,7 +91,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="oo9-HP-6Wz" secondAttribute="trailing" constant="10" id="gUg-M1-K02"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.90822461889999995" green="0.5919614768" blue="0.98955970999999998" alpha="0.21858494719999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.9367421923" green="0.76109576860000006" blue="0.97699336039999995" alpha="0.20207966550000001" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="albumCover" destination="ePk-Wp-QUz" id="Tq8-Tp-kmo"/>
                                             <outlet property="artistAlbumLabel" destination="oo9-HP-6Wz" id="Sor-fB-bha"/>

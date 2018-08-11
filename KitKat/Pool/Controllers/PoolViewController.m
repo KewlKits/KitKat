@@ -264,7 +264,7 @@
         ageOn = NO;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
-        [self.sorterButton setTintColor:[UIColor whiteColor]];
+     //   [self.sorterButton setTintColor:[UIColor whiteColor]];
         [self.sorterButton setTitle:@"Sort by New"];
         [self populatePool];
        
@@ -274,7 +274,8 @@
         ageOn = YES;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setBool:ageOn forKey:@"isAgeOn"];
-        [self.sorterButton setTintColor:[UIColor redColor]];
+       // [self.sorterButton setTintColor:[UIColor redColor]];
+       // [self.sorterButton setTintColor:[UIColor pinkColor]];
         [self.sorterButton setTitle:@"Sort by Popular"];
         [self populatePool];
     }

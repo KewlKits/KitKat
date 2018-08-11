@@ -46,10 +46,12 @@
     }];
 }
 
+
 - (IBAction)upvoteButtonClicked:(id)sender {
-    long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
     
-    //eliminate existing downvote if you upvote a song
+    long currVoteVal = (long)self.song.upvotedBy.count - (long)self.song.downvotedBy.count;
+
+    // revert a down to up
     if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -61,21 +63,19 @@
             
                 }];
         currVoteVal += 1;
+      //  NSLog(@"WE REACHED HERE ");
+        
         [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
             User *thisUser = [[User alloc] initWithDictionary:response.body.object];
             long val = [thisUser.score longValue];
-            NSNumber *sum = [NSNumber numberWithLong: val + currVoteVal];
+            NSNumber *sum = [NSNumber numberWithLong: val + 1 ];
             [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                NSLog(@"%@", self.song.ownerId);
             }];
-            
         }];
-        
-        
     }
     
-    
-    if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
+    // unlike
+     if([self.song.upvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.upvoteButton.selected = NO;
         [[BackendAPIManager shared] unUpvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
             self.song = [[Song alloc] initWithDictionary:response.body.object];
@@ -90,15 +90,16 @@
         [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
             User *thisUser = [[User alloc] initWithDictionary:response.body.object];
             long val = [thisUser.score longValue];
-            NSNumber *sum = [NSNumber numberWithLong: val - .5*currVoteVal];
+            NSNumber *sum = [NSNumber numberWithLong: val - 1 ];
             [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
-                NSLog(@"%@", self.song.ownerId);
+             //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
             }];
             
         }];
         
     }
     
+    // new like
     else{
         self.upvoteButton.selected = YES;
         [[BackendAPIManager shared] upvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -111,7 +112,20 @@
         }];
         currVoteVal += 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal ];
+        
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val + 1 ];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
+            }];
+            
+        }];
     }
+    
+
+    
 }
 
 
@@ -129,8 +143,20 @@
              object:self];
         }];
         currVoteVal -= 1;
+        
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val - 1 ];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
+            }];
+            
+        }];
     }
     
+    
+    // undownvote
     if([self.song.downvotedBy containsObject: [BackendAPIManager shared].currentProtoUser.userId]){
         self.downvoteButton.selected = NO;
         [[BackendAPIManager shared] unDownvote:self.song.songId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -142,7 +168,18 @@
         }];
         currVoteVal += 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
+        
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val + 1 ];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
+            }];
+            
+        }];
     }
+    
     
     else{
         self.downvoteButton.selected = YES;
@@ -155,6 +192,16 @@
         }];
         currVoteVal -= 1;
         self.songVotesLabel.text = [NSString stringWithFormat:@"%ld", currVoteVal];
+        
+        [[BackendAPIManager shared] getAUser:self.song.ownerId withCompletion:^(UNIHTTPJsonResponse *response, NSError *error ) {
+            User *thisUser = [[User alloc] initWithDictionary:response.body.object];
+            long val = [thisUser.score longValue];
+            NSNumber *sum = [NSNumber numberWithLong: val - 1 ];
+            [[BackendAPIManager shared] updateScore: self.song.ownerId score: sum withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
+                //   NSLog(@"WE ARE CHANGING %@", self.song.ownerId);
+            }];
+            
+        }];
     }
 }
 
