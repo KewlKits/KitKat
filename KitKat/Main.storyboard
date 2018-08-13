@@ -79,6 +79,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.98955970999999998" green="0.97899948560000005" blue="0.92360184619999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="zKU-Sl-p89" firstAttribute="leading" secondItem="ePk-Wp-QUz" secondAttribute="trailing" constant="25" id="0Jm-Dl-uoB"/>
                                                 <constraint firstItem="ePk-Wp-QUz" firstAttribute="centerY" secondItem="Ig5-Lv-ae9" secondAttribute="centerY" id="37M-3Y-Coc"/>
@@ -298,7 +299,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.9367421923" green="0.76109576860000006" blue="0.97699336039999995" alpha="0.20207966550000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.93725490196078431" green="0.76109576860000006" blue="0.97699336039999995" alpha="0.20207966550000001" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="lKm-dY-TGa" firstAttribute="leading" secondItem="wju-DW-5N0" secondAttribute="trailing" constant="10" id="9TH-lE-3nt"/>
                                                 <constraint firstItem="eEE-Lm-yBk" firstAttribute="centerY" secondItem="NCp-cY-BRt" secondAttribute="centerY" id="DGR-0s-FIt"/>
