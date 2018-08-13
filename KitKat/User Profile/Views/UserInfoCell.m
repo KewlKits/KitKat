@@ -36,23 +36,13 @@
             [self.profileImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.adorable.io/avatars/285/%@.png", currentUser.name]]];
             [currentUser calcScore];
             self.rankLabel.text = [NSString stringWithFormat:@"Score: %@", currentUser.score];
-            [self numSongsPool];
-            [self numSongsQ];
-            self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
-            self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
+            [self fetchP:^{}];
+            [self fetchQ:^{}];
             self.currentParty.text = [NSString stringWithFormat:@"Partying in: %@",  [[BackendAPIManager shared].currentProtoParty name]];
         });
     }];
 }
 
--(void)numSongsPool{
-    [self fetchP:^{}];
-     }
-
-
--(void)numSongsQ{
-        [self fetchQ:^{}];
-}
 
 -(void)fetchP:(void (^_Nullable)(void))completion {
     [[BackendAPIManager shared] getSongArray:self.party.pool withCompletion:^(UNIHTTPJsonResponse *response, NSError *error) {
@@ -67,7 +57,13 @@
                 completion();
             }
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
+        });
+        
     }];
+    self.poolNum.text= [NSString stringWithFormat:@"%i", self.numP];
 }
 
 -(void)fetchQ:(void (^_Nullable)(void))completion {
@@ -82,7 +78,13 @@
                 completion();
             }
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
+        });
+        
     }];
+     self.queueNum.text= [NSString stringWithFormat:@"%i", self.numQ];
 
 }
 
