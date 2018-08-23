@@ -1,36 +1,18 @@
 # Project: __KITKAT__
 
-## Problem statement
-There is no convenient way for event attendees to suggest music to the DJ.
+KitKat is a collaborative DJing platform for iOS that allows partygoers to nominate and vote on songs for a DJ to play. Users interact in real time and the DJ is able to play music in-app. KitKat uses a [custom backend](https://github.com/KewlKits/kk-backend) as well as a combination of both the Spotify SDK and web API to make this possible.
 
-## Epics
-- User can join a session specific to their party
-- User can add songs to a pool
-- DJ can select songs from the pool and move them into a queue
-- Users can express their opinions on songs in the pool
-- The queue can be played
+## Joining a Party
+Upon launch users are greeted with a map of their current area populated with pins repesenting local parties. A user can tap a pin to view information about the event (host, address, etc.) as well as the current _Queue_. A user may also host a party with the _Create_ button, which will spawn a new party at their current location of which they are the DJ.
 
-## Timeline
-### Week 1
-- __Grab users' spotify api key__
-- Join/host flow (placeholder)
-- __Backend model/endpoints (except voting)__
-- Users can search Spotify songs
-### Week 2
-- Users can add searched songs to pool
-- DJ can move songs from pool to queue
-- Join/host flow (real, location based)
-  - DJ can pick name
-  - Store the name
-  - Parties have a location property
-  - Users can join a specific party based on their location and the party name
-### Week 3
-- DJ can manipulate queue
-  - DJ can add songs to the queue
-  - DJ can edit the order of the queue.
-- Voting/sorting
-  - Sort by age and popularity
-  - Upvoting and downvoting like reddit
-- Push queue to Spotify playlist
-   - When the song playing finishes we push the first song in the queue to spotify
-- A e s t h e t i c
+## The Pool
+When a user enters a party they are sent to the _Pool_, a collection of songs other partygoers have nominated. Here users are able to upvote and downvote songs, as well as add songs of there own through the search flow, who's results are pulled directly from Spotify. If the user is the party's DJ, a plus button appears next to each song and they are able to add songs from the _Pool_ to the _Queue_. The _Pool_ is live updated so any change a user makes is immediately reflected on all other user's apps.
+
+## The Queue
+The _Queue_ tab shows a list of all songs that will be played. If the user is the party's DJ, an edit button is visible and the user can move and delete songs. The _Queue_ is also mirrored in the DJ's Spotify account as a playlist bearing the same name as the party so the DJ can review the songs played after the party has finished. Like the _Pool_, the _Queue_ is live updated.
+
+## Now Playing
+The now playing tab shows information about the currently playing track, as well as allows the DJ to pause, go back, and skip through the _Queue_.
+
+## User
+The user tab shows all songs a user has added throughout the party as well as counts how many remain in the pool and how many have been selected to move into the queue. These heuristics, along with the number of upvotes each song accrued, are combined to generate a score for the user.
